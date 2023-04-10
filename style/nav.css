@@ -1,0 +1,16 @@
+.navbar{
+    background-color: #1C2833 !important;
+}
+
+.navbar-toggler{
+    color: #FDFEFE !important;
+}
+
+.navbar-nav li a{
+    color: #FDFEFE !important;
+}
+
+.dropdown-menu {
+   background-color: #1C2833 !important;
+}
+  
