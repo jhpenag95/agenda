@@ -1,0 +1,40 @@
+.contBtnTiempos {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    margin: auto auto;
+    padding: 8px;
+    width: 100%;
+}
+.btn-desplazamiento, .btn-traslado{
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    cursor: pointer;
+    padding: 8px;
+    margin-left: 2px;
+}
+
+.btn-desplazamiento {
+    background: #246DFF;
+    font-size: 8px;
+    transition: all .5s;
+    padding: 8px;
+    width: 100px;
+}
+
+.btn-desplazamiento:hover{
+    background: #FFBA24;
+}
+
+.btn-traslado {
+    background: #33A64C;
+    font-size: 8px;
+    transition: all .5s;
+    padding: 8px;
+    width: 100px;
+}
+
+.btn-traslado:hover{
+    background: #F54538;
+}

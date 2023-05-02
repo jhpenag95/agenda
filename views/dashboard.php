@@ -1,69 +1,32 @@
-<!doctype html>
+<?php
+//crea o reanuda una sesión existente, lo que permite al servidor almacenar información específica del usuario en la sesión
+session_start();
+?>
+
+<!DOCTYPE html>
 <html lang="es">
 
 <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | Agenda</title>
 
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+  
 
-    <link rel="stylesheet" href="../style/nav.css">
-    <link rel="stylesheet" href="../style/datosDahsboard.css">
-
-    <title>Hello, world!</title>
+    <!-- Estilos CSS -->
+    <?php include "../views/styles.php" ?>
 </head>
 
 <body>
-    <header>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="#">
-                    <img src="../assets/images/LogoTreintaAzulMetal.png" alt="" class="logo" width="200px">
-                </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon" style="filter: invert(100%)"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <div class="row w-100">
-                        <div class="col-lg-6">
-                            <ul class="navbar-nav">
-                                <li class="nav-item">
-                                    <a class="nav-link active" href="#">Inicio</a>
-                                </li>
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
-                                        aria-expanded="false">Usuario</a>
-                                    <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="#">Crear usuarios</a></li>
-                                        <li><a class="dropdown-item" href="#">Lista de usuarios</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="col-lg-6">
-                            <ul class="navbar-nav d-flex justify-content-end">
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#">Johan</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#">Cerrar sesión</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </nav>
-    </header>
+    <!--Inicio barra de gavegación-->
+        <?php include "header.php" ?>
+    <!--Fin barra de gavegación-->
     <main>
+        <!--Inicio contenedores datos informativos-->
         <section class="info">
             <div class="info-cont">
-                <p class="info-cont__title">Técnico</p>
+                <p class="info-cont__title">Técnicos</p>
                 <span class="info-cont__cont">100</span>
             </div>
             <div class="info-cont">
@@ -75,29 +38,44 @@
                 <span class="info-cont__cont">100</span>
             </div>
         </section>
+        <!--fin contenedores datos informativos-->
+
+
         <section>
             <div class="container my-5">
                 <h1 class="mb-4">Tabla de solicitudes</h1>
                 <div class="mb-4">
+                    <!--Fromulario de busquedas-->
                     <form>
                         <div class="row">
                             <div class="col-md-4 mb-3">
                                 <label for="fechaInicio" class="form-label">Fecha de inicio:</label>
-                                <input type="date" class="form-control" id="fechaInicio">
+                                <input type="date" class="form-control" id="fechaInicio" />
                             </div>
                             <div class="col-md-4 mb-3">
                                 <label for="fechaFin" class="form-label">Fecha de fin:</label>
-                                <input type="date" class="form-control" id="fechaFin">
-                                <div class="col-md-4 mb-2 mt-3">
-                                    <button type="submit" class="btn btn-primary w-50">Filtrar</button>
-                                </div>
+                                <input type="date" class="form-control" id="fechaFin" />
                             </div>
-                            <div class="col-md-6 mb-3">
-                                <button type="button" class="btn btn-primary w-50">Exportar a Excel</button>
+                            <div class="col-md-2 mb-1 d-flex flex-column justify-content-end align-items-center">
+                                <button type="submit" class="btn btn-primary mb-2 w-100">
+                                    <i class="bi bi-search"></i>
+                                </button>
+                            </div>
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Buscar orden..." />
+                                <button class="btn btn-primary" type="button">
+                                    Buscar
+                                </button>
                             </div>
                         </div>
                     </form>
+                    <div class="col-md-4 mb-3 d-flex justify-content-start">
+                        <button type="button" class="btn btn-success w-50">
+                            Exportar a Excel
+                        </button>
+                    </div>
                 </div>
+                <!--Inicio tabla de solicitudes-->
                 <div class="table-responsive">
                     <table class="table table-striped table-hover">
                         <thead>
@@ -106,6 +84,8 @@
                                 <th>Cableador</th>
                                 <th>Fusionador</th>
                                 <th>Dirección</th>
+                                <th>Zona</th>
+                                <th>Dirección zona</th>
                                 <th>Hora de solicitud</th>
                                 <th>Tiempo traslado</th>
                                 <th>Tiempo de tarea</th>
@@ -117,14 +97,7 @@
                                 <td>Jose Antonio Andujar</td>
                                 <td>Aleix Chen</td>
                                 <td>Calle 12 # 24 34</td>
-                                <td>10/04/2023 12:09</td>
-                                <td>27/03/2023 8:56 am</td>
-                                <td>27/03/2023 8:56 am</td>
-                            </tr>
-                            <tr>
-                                <td>MDS-123466</td>
-                                <td>Jose Antonio Andujar</td>
-                                <td>Aleix Chen</td>
+                                <td>Fontibón</td>
                                 <td>Calle 12 # 24 34</td>
                                 <td>10/04/2023 12:09</td>
                                 <td>27/03/2023 8:56 am</td>
@@ -135,6 +108,8 @@
                                 <td>Jose Antonio Andujar</td>
                                 <td>Aleix Chen</td>
                                 <td>Calle 12 # 24 34</td>
+                                <td>Fontibón</td>
+                                <td>Calle 12 # 24 34</td>
                                 <td>10/04/2023 12:09</td>
                                 <td>27/03/2023 8:56 am</td>
                                 <td>27/03/2023 8:56 am</td>
@@ -143,6 +118,19 @@
                                 <td>MDS-123466</td>
                                 <td>Jose Antonio Andujar</td>
                                 <td>Aleix Chen</td>
+                                <td>Calle 12 # 24 34</td>
+                                <td>Fontibón</td>
+                                <td>Calle 12 # 24 34</td>
+                                <td>10/04/2023 12:09</td>
+                                <td>27/03/2023 8:56 am</td>
+                                <td>27/03/2023 8:56 am</td>
+                            </tr>
+                            <tr>
+                                <td>MDS-123466</td>
+                                <td>Jose Antonio Andujar</td>
+                                <td>Aleix Chen</td>
+                                <td>Calle 12 # 24 34</td>
+                                <td>Fontibón</td>
                                 <td>Calle 12 # 24 34</td>
                                 <td>10/04/2023 12:09</td>
                                 <td>27/03/2023 8:56 am</td>
@@ -178,11 +166,12 @@
                 </div>
             </div>
         </section>
+        <!--fin tabla de solicitudes-->
     </main>
+
     <!-- Option 1: Bootstrap Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
 </body>
 
 </html>

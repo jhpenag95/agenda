@@ -1,0 +1,113 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+.contenerdor {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100vh;
+    width: 100vw;
+    margin-top: 4rem;
+}
+
+h1 {
+    padding: 12px;
+    margin-top: 12px;
+}
+.contenedor_usuario {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 400px;
+    width: 300px;
+}
+
+.contenerdor_usuario--datos {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 12px;
+    width: 100%;
+}
+
+.contenerdor_usuario--datos 
+.contenerdor_usuario--datos-input{
+    border-radius: 4px;
+    border: none;
+    margin: 4px;
+    padding: 8px;
+    width: 100%;
+}
+
+.contenerdor_usuario--opciones {
+    height: auto;
+    padding: 8px;
+    width: 100%;
+}
+
+.contenerdor_usuario--opciones 
+.contenerdor_usuario--opcionesRol, 
+.contenerdor_usuario--opcionesZona {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding: 8px;
+}
+.contenerdor_usuario--opcionesRol {
+    display: flex;
+}
+
+.opcionesRol,
+.opcionesZona {
+  height: 100%;
+  width: 100%;
+}
+
+.opcionesRol-opciones,
+.opcionesZona-opciones {
+  border: none;
+  border-radius: 4px;
+  margin-left: 4px;
+  height: 34px;
+  width: 100%;
+  overflow-y: auto; /* Utilizamos 'auto' en lugar de 'scroll' para mostrar la barra de scroll solo cuando sea necesario */
+  padding-right: 20px; /* Añadimos un padding derecho para evitar que la opción más larga se superponga con la barra de scroll */
+  background-color: #f0f0f0; /* Añadimos un fondo gris claro para distinguir el select del resto del contenido */
+  font-size: 16px;
+  color: #555;
+}
+
+.opcionesRol-opciones::-webkit-scrollbar,
+.opcionesZona-opciones::-webkit-scrollbar {
+  width: 8px; /* Establecemos el ancho de la barra de scroll */
+  background-color: #f0f0f0; /* Añadimos un fondo gris claro */
+}
+
+.opcionesRol-opciones::-webkit-scrollbar-thumb,
+.opcionesZona-opciones::-webkit-scrollbar-thumb {
+  background-color: #ccc; /* Establecemos el color del thumb (la parte que se mueve) */
+  border-radius: 10px; /* Le damos un borde redondeado */
+}
+
+.contenedor_usuario--btn {
+  cursor: pointer;
+  color: #fff;
+  background: #2471A3;
+  border: none;
+  border-radius: 4px;
+  padding: 8px;
+  width: 100px;
+  transition: all .5s;
+}
+
+.contenedor_usuario--btn:hover{
+  background: #5499C7;
+} 

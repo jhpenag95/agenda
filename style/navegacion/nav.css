@@ -13,4 +13,11 @@
 .dropdown-menu {
    background-color: #1C2833 !important;
 }
-  
+
+.cont-info {
+    display: flex;
+    color: white;
+    justify-content: center;
+    align-items: center;
+}
+
