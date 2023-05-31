@@ -2,5 +2,51 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Open Sans', sans-serif;
 }
   
+body {
+    background-color: #f2f2f2 !important;
+    font-family: 'Roboto', sans-serif;
+}
+
+
+/*==============paginador====================*/
+
+.pagination-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.pagination {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.pagination-item {
+    margin-right: 10px;
+}
+
+.pagination-item a {
+    display: block;
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    text-decoration: none;
+    color: #333;
+}
+
+.pagination-item.active a {
+    background-color: #2471A3;
+    color: #fff;
+    border-color: #2471A3;
+}
+
+.pagination-item.disabled a {
+    opacity: 0.5;
+    pointer-events: none;
+}

@@ -1,10 +1,10 @@
 <?php
-$host = "localhost";
-$usuario = "root";
-$contrasenia = "";
-$base_de_datos = "cableadores";
+define('BD_HOST', 'localhost');
+define('BD_USER', 'root');
+define('BD_PASSWORD', '');
+define('BD_NAME', 'cableadores');
 
-$conexion  = new mysqli ($host, $usuario, $contrasenia, $base_de_datos);
+$conexion = mysqli_connect(BD_HOST, BD_USER, BD_PASSWORD, BD_NAME);
 
 if ($conexion ->connect_errno) {
     echo "Falló la conexión a MySQL: (" . $conexion ->connect_errno . ") " . $conexion ->connect_error;

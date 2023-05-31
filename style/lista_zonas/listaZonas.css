@@ -1,0 +1,13 @@
+.container.my-5.cont-table {
+    background: #fff;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+}
+
+.container.my-5.cont-table h1{
+    text-align: center;
+}
+
+th ,td  {
+    text-align: center !important;
+}

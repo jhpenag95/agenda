@@ -1,0 +1,12 @@
+/* Estilos para los mensajes de error */
+.invalid {
+    box-shadow: 0 0 10px red;
+    outline: none;
+}
+
+span.error {
+    color: red;
+    display: block;
+    font-size: 12px;
+    margin-top: 4px;
+}

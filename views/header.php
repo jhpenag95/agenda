@@ -7,3 +7,4 @@ if (empty($_SESSION['active'])) {
 <header>
     <?php include "nav.php" ?>
 </header>
+

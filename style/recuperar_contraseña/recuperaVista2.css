@@ -33,6 +33,11 @@
     box-sizing: border-box;
 }
 
+.form-input:focus {
+    outline: none;
+    border: 2px solid #2471A3;
+}
+
 .form-button {
     display: block;
     width: 100%;

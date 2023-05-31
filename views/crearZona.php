@@ -1,6 +1,7 @@
 <?php
-    //crea o reanuda una sesión existente, lo que permite al servidor almacenar información específica del usuario en la sesión
-    session_start();
+//crea o reanuda una sesión existente, lo que permite al servidor almacenar información específica del usuario en la sesión
+session_start();
+require '../conexion.php';
 ?>
 
 <!DOCTYPE html>
@@ -13,8 +14,10 @@
     <title>Crear | Zona</title>
 
     <!-- Estilos CSS -->
+    <link rel="stylesheet" href="../style/zona/crearZona.css">
+    <link rel="stylesheet" href="../style/global.css">
     <?php include "../views/styles.php" ?>
-    
+
 </head>
 
 <body>
@@ -23,16 +26,28 @@
     <!--Fin barra de gavegación-->
     <main>
         <h1>Formulario de Zonas</h1>
-        <form>
+        <form action="../controller/crear_ZonaC.php" method="post">
             <label for="zona">Nombre de la zona:</label>
-            <input type="text" id="zona" name="zona">
+            <input type="text" id="zona" name="zona" required>
             <button type="submit">Crear</button>
+            <!-- Alertas -->
+            <?php if (isset($_SESSION['success'])) : ?>
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <strong>¡Éxito!</strong> <?php echo $_SESSION['success']; ?>
+                </div>
+                <?php unset($_SESSION['success']); ?>
+            <?php endif; ?>
+
+            <?php if (isset($_SESSION['error'])) : ?>
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong>¡Error!</strong> <?php echo $_SESSION['error']; ?>
+                </div>
+                <?php unset($_SESSION['error']); ?>
+            <?php endif; ?>
         </form>
     </main>
     <!-- Option 1: Bootstrap Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </body>
 
 </html>

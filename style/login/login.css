@@ -1,14 +1,3 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  font-family: Arial, sans-serif;
-  background-color: #f4f4f4;
-}
-
 .login-wrapper {
   width: 300px;
   margin: 50px auto;
@@ -22,7 +11,7 @@ body {
   font-size: 24px;
   margin-bottom: 10px;
   text-align: center;
-  color: #333;
+  color: #1c2833;
 }
 
 .login-header p {
@@ -49,11 +38,12 @@ body {
   border-radius: 5px;
   border: 1px solid #ccc;
   font-size: 16px;
+  transition: all 1s;
 }
 
 .input-group input:focus {
   outline: none;
-  border-color: #2471A3;
+  border: 2px solid #2471A3;
 }
 
 .input-group label i {
@@ -68,13 +58,13 @@ body {
 }
 
 .forgot-password a {
-  color: #2471A3;
+  color: #1c2833;
   text-decoration: underline;
 }
 
 .submit-btn {
   display: block;
-  background-color: #2471A3;
+  background-color: #1c2833;
   color: #fff;
   border: none;
   border-radius: 5px;
@@ -84,9 +74,7 @@ body {
   cursor: pointer;
 }
 
-.submit-btn:hover {
-  background-color: #2471A3;
-}
+
 
 .alert {
   background-color: #f44336;

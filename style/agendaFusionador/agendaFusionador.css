@@ -1,3 +1,25 @@
+.container.my-5.cont-table {
+    background: #fff;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+}
+
+.container.my-5.cont-table h1{
+    text-align: center;
+}
+
+th,td{
+    font-size: 12px;
+    text-align: center !important;
+}
+
+.descripcion-column {
+    word-wrap: break-word; 
+    word-break: break-all;
+    width: 300px;
+}
+
+
 .contBtnTiempos {
     align-items: center;
     display: flex;
@@ -6,35 +28,77 @@
     padding: 8px;
     width: 100%;
 }
-.btn-desplazamiento, .btn-traslado{
+
+.btn-desplazamiento,
+.btn-tarea {
     border: none;
     border-radius: 4px;
     color: #fff;
     cursor: pointer;
     padding: 8px;
+    
     margin-left: 2px;
 }
 
 .btn-desplazamiento {
     background: #246DFF;
-    font-size: 8px;
-    transition: all .5s;
+    font-size: 10px;
     padding: 8px;
-    width: 100px;
+    transition: all .5s;
+    text-decoration: none !important;
+    width: 100%;
 }
 
-.btn-desplazamiento:hover{
+.btn-desplazamiento:hover {
     background: #FFBA24;
+    color: #fff;
 }
 
-.btn-traslado {
+.btn-tarea {
     background: #33A64C;
-    font-size: 8px;
-    transition: all .5s;
+    font-size: 10px;
     padding: 8px;
-    width: 100px;
+    text-decoration: none !important;
+    transition: all .5s;
+    width: 100%;
 }
 
-.btn-traslado:hover{
+.btn-tarea:hover {
     background: #F54538;
+    color: #fff;
+}
+
+.form-btn{
+    margin: 8px auto;
+}
+
+
+.guardar {
+    background: #33A64C;
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    display: none;
+    font-size: 10px;
+    padding: 8px;
+    text-decoration: none !important;
+    transition: all .5s;
+    width: 100%;
+}
+
+.guardar2 {
+    background: #33A64C;
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    display: none;
+    font-size: 10px;
+    padding: 8px;
+    text-decoration: none !important;
+    transition: all .5s;
+    width: 100%;
+}
+
+.guardar2:hover {
+    background: #246DFF;
 }

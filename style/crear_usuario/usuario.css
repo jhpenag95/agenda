@@ -1,68 +1,96 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-
 .contenerdor {
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    height: 100vh;
-    width: 100vw;
-    margin-top: 4rem;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+  margin-top: 1rem;
 }
 
-h1 {
-    padding: 12px;
-    margin-top: 12px;
+.conInfouser {
+  background: #ffff;
+
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
+
+.titulo_user {
+  padding: 12px;
+  margin-top: 12px;
+  margin-bottom: 4px;
+  text-align: center;
+}
+
 .contenedor_usuario {
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    height: 400px;
-    width: 300px;
+  align-items: center;
+  background: #ffff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: auto;
+  width: 300px;
 }
 
 .contenerdor_usuario--datos {
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 12px;
-    width: 100%;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 12px;
+  width: 100%;
 }
 
-.contenerdor_usuario--datos 
-.contenerdor_usuario--datos-input{
-    border-radius: 4px;
-    border: none;
-    margin: 4px;
-    padding: 8px;
-    width: 100%;
+.contenerdor_usuario--datos label {
+  width: 100%;
 }
+
+.contenerdor_usuario--datos-input {
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 10px;
+  margin-bottom: 4px;
+  padding: 10px;
+  width: 100%;
+}
+
+
+.contenerdor_usuario--datos:focus {
+  outline: none;
+  border-color: #2471A3;
+}
+
+.contenerdor_usuario--datos-input:focus {
+  outline: none;
+  border-color: #2471A3;
+}
+
+
 
 .contenerdor_usuario--opciones {
-    height: auto;
-    padding: 8px;
-    width: 100%;
+  height: auto;
+  padding: 8px;
+  width: 100%;
 }
 
-.contenerdor_usuario--opciones 
-.contenerdor_usuario--opcionesRol, 
-.contenerdor_usuario--opcionesZona {
-    align-items: center;
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    padding: 8px;
+.contenerdor_usuario--opcionesZona,
+label {
+  width: 100%;
 }
+
+.contenerdor_usuario--opcionesRol label {
+  width: 100%;
+}
+
+.contenerdor_usuario--opciones .contenerdor_usuario--opcionesRol,
+.contenerdor_usuario--opcionesZona {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding: 8px;
+}
+
 .contenerdor_usuario--opcionesRol {
-    display: flex;
+  display: flex;
 }
 
 .opcionesRol,
@@ -73,41 +101,148 @@ h1 {
 
 .opcionesRol-opciones,
 .opcionesZona-opciones {
-  border: none;
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
   border-radius: 4px;
-  margin-left: 4px;
-  height: 34px;
-  width: 100%;
-  overflow-y: auto; /* Utilizamos 'auto' en lugar de 'scroll' para mostrar la barra de scroll solo cuando sea necesario */
-  padding-right: 20px; /* Añadimos un padding derecho para evitar que la opción más larga se superponga con la barra de scroll */
-  background-color: #f0f0f0; /* Añadimos un fondo gris claro para distinguir el select del resto del contenido */
-  font-size: 16px;
   color: #555;
+  height: 34px;
+  margin-left: 4px;
+  overflow-y: auto;
+  padding-right: 20px;
+  font-size: 16px;
+  width: 100%;
 }
 
-.opcionesRol-opciones::-webkit-scrollbar,
-.opcionesZona-opciones::-webkit-scrollbar {
-  width: 8px; /* Establecemos el ancho de la barra de scroll */
-  background-color: #f0f0f0; /* Añadimos un fondo gris claro */
+.opcionesRol-opciones:focus {
+  outline: none;
+  border-color: #2471A3;
 }
 
-.opcionesRol-opciones::-webkit-scrollbar-thumb,
-.opcionesZona-opciones::-webkit-scrollbar-thumb {
-  background-color: #ccc; /* Establecemos el color del thumb (la parte que se mueve) */
-  border-radius: 10px; /* Le damos un borde redondeado */
+.opcionesZona-opciones:focus {
+  outline: none;
+  border-color: #2471A3;
 }
+
 
 .contenedor_usuario--btn {
   cursor: pointer;
   color: #fff;
-  background: #2471A3;
+  background: #1c2833;
   border: none;
   border-radius: 4px;
+  font-size: 10px;
   padding: 8px;
-  width: 100px;
   transition: all .5s;
+  margin-bottom: 10px;
+  width: 100px;
+
 }
 
-.contenedor_usuario--btn:hover{
+.contenedor_usuario--btn:hover {
   background: #5499C7;
-} 
+}
+
+/*===============Alerta==================*/
+
+.alert-success {
+  background-color: #28a745;
+  color: #fff;
+  width: 400px;
+}
+
+.alert-danger {
+  background-color: #cf2929;
+  color: #fff;
+  width: 400px;
+}
+
+
+/*===============Paáginador==================*/
+.pagination-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.pagination {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.pagination-item {
+  margin-right: 5px;
+}
+
+.pagination-item a {
+  display: block;
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  text-decoration: none;
+  color: #333;
+  transition: background-color 0.3s ease;
+}
+
+.pagination-item a:hover {
+  background-color: #f5f5f5;
+}
+
+.pagination-item.active a {
+  background-color: #1c2833;
+  color: #fff;
+  border-color: #1c2833;
+}
+
+.pagination-item.disabled a {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.pagination-item:first-child a {
+  border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+
+.pagination-item:last-child a {
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+}
+
+
+
+/*===============Media Query==================*/
+
+@media (min-width: 600px) {
+  .contenedor_usuario {
+    height: auto;
+    width: 400px;
+  }
+}
+
+@media (min-width: 768px) {
+  .contenedor_usuario {
+    width: 600px;
+  }
+
+  .contenerdor_usuario--datos {
+    display: grid;
+    grid-template-columns: 50% 50%;
+  }
+
+  .contenerdor_usuario--datos label {
+    margin: 4px;
+    padding: 4px;
+  }
+
+  .contenerdor_usuario--datos-input {
+    font-size: 14px;
+  }
+
+  .contenedor_usuario--btn {
+    font-size: 14px;
+    width: 180px;
+  }  
+}

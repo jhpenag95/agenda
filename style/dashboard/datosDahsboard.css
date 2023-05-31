@@ -11,16 +11,16 @@
 }
 
 .info .info-cont {
-    padding: 14px;
-    margin: 20px 10px 10px 10px;
-    width: 200px;
-    height: 200px;
-    background-color: azure;
+    align-items: center;
+    background: white;
     border-radius: 12px;
     display: flex;
     flex-direction: column;
-    align-items: center;
     justify-content: center;
+    height: 200px;
+    margin: 20px 10px 10px 10px;
+    padding: 14px;
+    width: 200px;
 }
 
 .info-cont p {
@@ -33,6 +33,21 @@
     font-weight: bold;
 }
 
+.input-group {
+    height: 40px;
+    width: 16% !important;
+}
+
+.input-group .input-orden{
+    border: solid 1px #ced4da;
+    margin-bottom: 8px !important;
+    padding: 10px;
+}
+
+.input-group .input-orden:focus{
+    outline: none;
+    border: solid 1px #0d6efd;
+}
 
 @media (min-width: 768px) {
     .info{
