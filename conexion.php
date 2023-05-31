@@ -5,6 +5,7 @@ define('BD_PASSWORD', '');
 define('BD_NAME', 'cableadores');
 
 $conexion = mysqli_connect(BD_HOST, BD_USER, BD_PASSWORD, BD_NAME);
+mysqli_query($conexion,"SET SESSION collation_connection ='utf8_unicode_ci'");
 
 if ($conexion ->connect_errno) {
     echo "Falló la conexión a MySQL: (" . $conexion ->connect_errno . ") " . $conexion ->connect_error;
