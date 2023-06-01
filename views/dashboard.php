@@ -24,7 +24,7 @@ include '../conexion.php';
 
 <body>
     <!--Inicio barra de gavegación-->
-    <?php include "header.php" ?>
+    <?php include "header.php"; ?>
     <!--Fin barra de gavegación-->
     <main>
         <!--Inicio contenedores datos informativos-->
@@ -50,16 +50,16 @@ include '../conexion.php';
             <div class="container my-5">
                 <h1 class="mb-4">Tabla de solicitudes</h1>
                 <div class="col-md-12 text-center mt-5">
-                    <form action="DescargarReporte_x_fecha.php" method="post" accept-charset="utf-8">
+                    <form action="filtroFecha.php" method="post" accept-charset="utf-8">
                         <div class="row">
                             <div class="col">
-                                <input type="date" name="fecha_ingreso" class="form-control" placeholder="Fecha de Inicio" required>
+                                <input type="date" name="fecha_ingreso" class="form-control mb-4" placeholder="Fecha de Inicio" required>
                             </div>
                             <div class="col">
-                                <input type="date" name="fechaFin" class="form-control" placeholder="Fecha Final" required>
+                                <input type="date" name="fecha_Fin" class="form-control mb-4" placeholder="Fecha Final" required>
                             </div>
                             <div class="col">
-                                <span class="btn btn-dark mb-2" id="filtro">Filtrar</span>
+                                <button type="submit" class="btn btn-dark mb-2" id="filtro">Filtrar</button>
                             </div>
                         </div>
                     </form>
@@ -67,22 +67,18 @@ include '../conexion.php';
             </div>
             <!--Inicio tabla de solicitudes-->
             <div class="container">
+                <div class="contform">
+                    <form action="" class="contform_form">
+                        <input type="text" class="contform_form--input" placeholder="Buscar orden..">
+                        <button class="contform_form--search"><i class="bi bi-search"></i></button>
+                    </form>
+                    <form action="" class="contform_form">
+                        <input type="text" class="contform_form--input" placeholder="Buscar zona..">
+                        <button class="contform_form--search"><i class="bi bi-search"></i></button>
+                    </form>
+                </div>
+
                 <div class="table-responsive mt-5">
-                    <div class="mb-4">
-                        <!--Fromulario de busquedas-->
-                        <form action="buscar_orden.php">
-                            <div class="row" <div class="col-md-12 mb-1 d-flex align-items-end">
-                                <form action="buscar_orden.php" method="get">
-                                    <div class="input-group">
-                                        <input type="text" class="input-orden" name="busqueda" id="busqueda" placeholder="Buscar orden..." />
-                                        <button class="btn btn-primary" type="button">
-                                            Buscar
-                                        </button>
-                                    </div>
-                                </form>
-                            </div>
-                        </form>
-                    </div>
                     <div class="col-md-4 mb-3 mt-3 d-flex justify-content-start">
                         <button type="button" class="btn btn-success w-50" onclick="exportTable()">
                             Exportar a Excel
@@ -203,7 +199,7 @@ include '../conexion.php';
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
 
     <script src="../script/dashboard/exportarTabla.js"></script>
-    <script src="../script/dashboard/filtrarFecha.js"></script>
+    <!-- <script src="../script/dashboard/filtrarFecha.js"></script> -->
 
 </body>
 

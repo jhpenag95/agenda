@@ -1,4 +1,4 @@
-<!-- Estilos CSS --> <?php include "../views/styles.php"; ?>
+<!-- Estilos CSS --> <?php include "styles.php"; ?>
 <link rel="stylesheet" href="../style/navegacion/nav.css"> <!-- Menú -->
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">

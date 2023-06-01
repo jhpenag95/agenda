@@ -1,0 +1,27 @@
+<div class="container">
+    <div class="container">
+        <h1 class="mt-5">Búsqueda de Número de Orden</h1>
+        <form>
+            <div class="input-group mb-3">
+                <input type="text" class="form-control form-control-lg" list="datalistOptions" id="exampleDataList" placeholder="Ingrese el número de orden" aria-label="Número de Orden" aria-describedby="search-btn">
+                <?php
+                $query_ordenes = mysqli_query($conexion, "SELECT * FROM ordenes");
+                $result_ordenes = mysqli_num_rows($query_ordenes);
+                ?>
+                <datalist id="datalistOptions">
+                    <?php
+                    if ($result_ordenes > 0) {
+                        while ($ordenes = mysqli_fetch_array($query_ordenes)) {
+                    ?>
+                            <input type="hidden" value="<?php echo $ordenes['id_orden']; ?>">
+                            <option><?php echo $ordenes['N_orden']; ?></option>
+                    <?php
+                        }
+                    }
+                    ?>
+                </datalist>
+                <button class="btn btn-primary btn-search" type="button" id="search-btn"><i class="bi bi-search"></i></button>
+            </div>
+        </form>
+
+    </div>
