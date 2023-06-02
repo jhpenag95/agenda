@@ -2,6 +2,10 @@
 // Inicia o reanuda una sesión existente, lo que permite al servidor almacenar información específica del usuario en la sesión.
 session_start();
 
+if (isset($_SESSION['rol']) && $_SESSION['rol'] != 1) {
+    header(("location: agendaFusionador.php"));
+}
+
 // Se incluye el archivo de conexión a la base de datos.
 include '../conexion.php';
 

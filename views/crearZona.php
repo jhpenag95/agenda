@@ -1,6 +1,11 @@
 <?php
 //crea o reanuda una sesión existente, lo que permite al servidor almacenar información específica del usuario en la sesión
 session_start();
+
+if (isset($_SESSION['rol']) && $_SESSION['rol'] != 1) {
+    header(("location: agendaFusionador.php"));
+}
+
 require '../conexion.php';
 ?>
 

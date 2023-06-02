@@ -1,6 +1,10 @@
 <?php
 session_start();
 
+if (isset($_SESSION['rol']) && $_SESSION['rol'] != 1) {
+  header(("location: agendaFusionador.php"));
+}
+
 include_once '../conexion.php';
 
 
@@ -59,26 +63,7 @@ if (!empty($_REQUEST['fecha_ingreso']) && !empty($_REQUEST['fecha_Fin'])) {
   <?php include "header.php"; ?>
   <!--Fin barra de gavegación-->
   <main>
-    <!--Inicio contenedores datos informativos-->
-    <section class="info">
-
-      <div class="info-cont">
-        <p class="info-cont__title">Técnicos</p>
-        <span class="info-cont__cont">100</span>
-      </div>
-      <div class="info-cont">
-        <p class="info-cont__title">Fusionadores</p>
-        <span class="info-cont__cont">100</span>
-      </div>
-      <div class="info-cont">
-        <p class="info-cont__title">Ordenes</p>
-        <span class="info-cont__cont">100</span>
-      </div>
-    </section>
-    <!--fin contenedores datos informativos-->
-
-
-    <section>
+    <section class="container sectionTable pt-4 pb-4">
       <div class="container my-5">
         <h1 class="mb-4">Tabla de solicitudes</h1>
         <div class="col-md-12 text-center mt-5">
@@ -99,22 +84,10 @@ if (!empty($_REQUEST['fecha_ingreso']) && !empty($_REQUEST['fecha_Fin'])) {
       </div>
       <!--Inicio tabla de solicitudes-->
       <div class="container">
+        <div class="contform">
+          <a href="dashboard.php" class="btn btn-success">¿Buscar por Orden o Zona?..</a>
+        </div>
         <div class="table-responsive mt-5">
-          <div class="mb-4">
-            <!--Fromulario de busquedas-->
-            <form action="buscar_orden.php">
-              <div class="row" class="col-md-12 mb-1 d-flex align-items-end">
-                <form action="buscar_orden.php" method="get">
-                  <div class="input-group">
-                    <input type="text" class="input-orden" name="busqueda" id="busqueda" placeholder="Buscar orden..." />
-                    <button class="btn btn-primary" type="button">
-                      Buscar
-                    </button>
-                  </div>
-                </form>
-              </div>
-            </form>
-          </div>
           <div class="col-md-4 mb-3 mt-3 d-flex justify-content-start">
             <button type="button" class="btn btn-success w-50" onclick="exportTable()">
               Exportar a Excel
@@ -142,8 +115,8 @@ if (!empty($_REQUEST['fecha_ingreso']) && !empty($_REQUEST['fecha_Fin'])) {
                 <?php
                 //Se inicia el Paginador
                 $sql_register = mysqli_query($conexion, "SELECT COUNT(*) as total_registros FROM ordenes WHERE $where");
-                                $result_register = mysqli_fetch_array($sql_register);
-                                $total_registro = $result_register['total_registros'];
+                $result_register = mysqli_fetch_array($sql_register);
+                $total_registro = $result_register['total_registros'];
 
                 /* Este código implementa la paginación para la lista de usuarios mostrada en la página. */
                 $por_pagina = 5;

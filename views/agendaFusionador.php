@@ -2,6 +2,10 @@
 //crea o reanuda una sesión existente, lo que permite al servidor almacenar información específica del usuario en la sesión
 session_start();
 
+if (isset($_SESSION['rol']) && $_SESSION['rol'] != 1) {
+    header(("location: agendaFusionador.php"));
+}
+
 require_once  '../conexion.php';
 ?>
 
@@ -187,7 +191,7 @@ require_once  '../conexion.php';
 
     <script src="../script/agendaFusionador/tiempo_Tarea/cronometro.js"></script>
     <script src="../script/agendaFusionador/tiempo_Tarea/peticionAjax_saveTime.js"></script>
-    
+
     <script src="../script/agendaFusionador/tiempo_Traslado/cronometro.js"></script>
     <script src="../script/agendaFusionador/tiempo_Traslado/peticionAjax_saveTimeTraslado.js"></script>
 

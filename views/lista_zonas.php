@@ -1,9 +1,11 @@
 <?php
 //crea o reanuda una sesión existente, lo que permite al servidor almacenar información específica del usuario en la sesión
 session_start();
+
 if (isset($_SESSION['rol']) && $_SESSION['rol'] != 1) {
-    header(("location: dashboard.php"));
+    header(("location: agendaFusionador.php"));
 }
+
 require_once  '../conexion.php';
 
 ?>
@@ -78,7 +80,7 @@ require_once  '../conexion.php';
 
                                             <?php
                                             ?>
-                                                <a href="#" class="btn btn-danger" onclick="setUsuarioID('<?php echo $data['id_zona']; ?>', '<?php echo $data['nombre_zona']; ?>')" id="eliminarUsuarioLink" data-bs-toggle="modal" data-bs-target="#eliminarUsuarioModal"><i class="bi bi-trash-fill"></i></a>
+                                            <a href="#" class="btn btn-danger" onclick="setUsuarioID('<?php echo $data['id_zona']; ?>', '<?php echo $data['nombre_zona']; ?>')" id="eliminarUsuarioLink" data-bs-toggle="modal" data-bs-target="#eliminarUsuarioModal"><i class="bi bi-trash-fill"></i></a>
 
                                             <?php
                                             ?>

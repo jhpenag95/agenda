@@ -2,6 +2,10 @@
 <?php
 session_start(); // Iniciar sesión de PHP
 
+if (isset($_SESSION['rol']) && $_SESSION['rol'] != 1) {
+    header(("location: agendaFusionador.php"));
+}
+
 include_once '../conexion.php'; // Incluir el archivo de conexión a la base de datos
 
 $iduser = base64_decode($_REQUEST['id']); // Decodificar y obtener el ID del usuario
@@ -34,7 +38,7 @@ $resultado = $stmt->get_result(); // Obtener el resultado de la consulta
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Editar usuarios</title>
-    
+
     <!-- Estilos CSS -->
     <?php include "../views/styles.php" ?>
     <link rel="stylesheet" href="../style/editar_usuario/editar_usuario.css">

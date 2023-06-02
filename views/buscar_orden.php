@@ -2,6 +2,10 @@
 /* El código anterior es un script PHP que inicia una sesión e incluye un archivo para la conexión a la base de datos. A continuación, comprueba la entrada del usuario para los parámetros de búsqueda y rango de fechas. Si el parámetro de búsqueda no es numérico o vacío, o si el intervalo de fechas no está completo, el script redirige a la página principal. Si el parámetro de búsqueda es válido, establece una cláusula WHERE para que la consulta SQL busque un número de factura. Si el intervalo de fechas es válido, establece una cláusula WHERE para que la consulta SQL busque facturas dentro del intervalo de fechas especificado. El script también establece una variable para el parámetro de búsqueda*/
 session_start();
 
+if (isset($_SESSION['rol']) && $_SESSION['rol'] != 1) {
+    header(("location: agendaFusionador.php"));
+}
+
 include "../conexion.php";
 
 $busqueda = '';
@@ -100,11 +104,11 @@ if (!empty($_REQUEST['fechaInicio']) && !empty($_REQUEST['fechaFin'])) {
                         <div class="row">
                             <div class="col-md-5 mb-3">
                                 <label for="fechaInicio" class="form-label">Fecha de inicio:</label>
-                                <input type="date" class="form-control" name="fechaInicio" id="fechaInicio" value="<?php echo $fecha_de; ?>" required/>
+                                <input type="date" class="form-control" name="fechaInicio" id="fechaInicio" value="<?php echo $fecha_de; ?>" required />
                             </div>
                             <div class="col-md-5 mb-3">
                                 <label for="fechaFin" class="form-label">Fecha de fin:</label>
-                                <input type="date" class="form-control" name="fechaFin" id="fechaFin" value="<?php echo $fecha_a; ?>" required/>
+                                <input type="date" class="form-control" name="fechaFin" id="fechaFin" value="<?php echo $fecha_a; ?>" required />
                             </div>
                             <div class="col-md-2 mb-1 d-flex align-items-end">
                                 <button type="submit" class="btn btn-primary w-100">

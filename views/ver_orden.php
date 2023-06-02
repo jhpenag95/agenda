@@ -1,11 +1,33 @@
 <?php
 session_start();
-if (isset($_SESSION['rol']) && $_SESSION['rol'] != 1 && $_SESSION['rol'] != 2) {
+
+if (isset($_SESSION['rol']) && $_SESSION['rol'] != 1) {
     header(("location: agendaFusionador.php"));
 }
 
 include '../conexion.php';
 
+
+// Variable para almacenar el valor de búsqueda ingresado por el usuario.
+//busqueda orden
+$busqueda = '';
+
+// Verifica si se ha enviado una solicitud de búsqueda vacía y redirige a la página de creación de ordenes.
+if (isset($_REQUEST['busqueda']) && $_REQUEST['busqueda'] == '') {
+    $_SESSION['noExist'] = "El campo están vacío";
+    header("Location: dashboard.php");
+    exit();
+} else {
+
+    // Almacena el valor de búsqueda en mayusculas.
+    $busqueda = strtoupper($_REQUEST['busqueda']);
+
+    // Crea la cláusula WHERE para la consulta SQL.
+    $where = "N_orden = '$busqueda'";
+
+    // Almacena el valor de búsqueda en la variable de sesión 'buscar'.
+    $buscar = "busqueda = $busqueda";
+}
 
 ?>
 
@@ -30,55 +52,18 @@ include '../conexion.php';
     <?php include "header.php"; ?>
     <!--Fin barra de gavegación-->
     <main>
-        <!--Inicio contenedores datos informativos-->
-        <section class="info">
-
-            <div class="info-cont">
-                <p class="info-cont__title">Técnicos</p>
-                <span class="info-cont__cont">100</span>
-            </div>
-            <div class="info-cont">
-                <p class="info-cont__title">Fusionadores</p>
-                <span class="info-cont__cont">100</span>
-            </div>
-            <div class="info-cont">
-                <p class="info-cont__title">Ordenes</p>
-                <span class="info-cont__cont">100</span>
-            </div>
-        </section>
-        <!--fin contenedores datos informativos-->
-
-
         <section class="container sectionTable pt-4 pb-4">
             <div class="container my-5">
                 <h1 class="mb-4">Tabla de solicitudes</h1>
-                <div class="col-md-12 text-center mt-5">
-                    <form action="filtroFecha.php" method="post" accept-charset="utf-8">
-                        <div class="row">
-                            <div class="col">
-                                <input type="date" name="fecha_ingreso" class="form-control mb-4" placeholder="Fecha de Inicio" required>
-                            </div>
-                            <div class="col">
-                                <input type="date" name="fecha_Fin" class="form-control mb-4" placeholder="Fecha Final" required>
-                            </div>
-                            <div class="col">
-                                <button type="submit" class="btn btn-dark mb-2" id="filtro">Filtrar</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
             </div>
             <!--Inicio tabla de solicitudes-->
             <div class="container">
                 <div class="contform">
                     <form action="ver_orden.php" method="post" class="contform_form">
-                        <input name="busqueda" type="text" class="contform_form--input" placeholder="Buscar orden..">
+                        <input name="busqueda" type="text" class="contform_form--input" placeholder="Buscar orden.." value="<?php echo $busqueda; ?>">
                         <button type="submit" class="contform_form--search"><i class="bi bi-search"></i></button>
                     </form>
-                    <form action="ver_zonas.php" class="contform_form">
-                        <input name="busqueda2" type="text" class="contform_form--input" placeholder="Buscar zona..">
-                        <button type="submit" class="contform_form--search"><i class="bi bi-search"></i></button>
-                    </form>
+                    <a href="dashboard.php" class="btn btn-success">¿Buscar por Zona?</a>
                 </div>
 
                 <div class="table-responsive mt-5">
@@ -131,6 +116,7 @@ include '../conexion.php';
                                             INNER JOIN zonas z ON z.id_zona = ord.id_zona
                                             INNER JOIN tiempos_tarea tt ON tt.id_orden = ord.id_orden
                                             INNER JOIN tiempos_traslado trd ON trd.id_orden = ord.id_orden
+                                            WHERE $where AND ord.estado_orden
                                             GROUP BY ord.N_orden
                                             ORDER BY ord.N_orden ASC
                                         LIMIT $desde, $por_pagina";
