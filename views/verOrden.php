@@ -2,7 +2,11 @@
 // Inicia o reanuda una sesión existente, lo que permite al servidor almacenar información específica del usuario en la sesión.
 session_start();
 
-if (isset($_SESSION['rol']) && $_SESSION['rol'] != 1) {
+if (isset($_SESSION['rol']) && $_SESSION['rol'] != 1 && $_SESSION['rol'] != 3) {
+    header(("location: dashboard.php"));
+}
+
+if ($_SESSION['rol'] == 4) {
     header(("location: agendaFusionador.php"));
 }
 

@@ -2,9 +2,10 @@
 /* El código anterior es un script PHP que inicia una sesión e incluye un archivo para la conexión a la base de datos. A continuación, comprueba la entrada del usuario para los parámetros de búsqueda y rango de fechas. Si el parámetro de búsqueda no es numérico o vacío, o si el intervalo de fechas no está completo, el script redirige a la página principal. Si el parámetro de búsqueda es válido, establece una cláusula WHERE para que la consulta SQL busque un número de factura. Si el intervalo de fechas es válido, establece una cláusula WHERE para que la consulta SQL busque facturas dentro del intervalo de fechas especificado. El script también establece una variable para el parámetro de búsqueda*/
 session_start();
 
-if (isset($_SESSION['rol']) && $_SESSION['rol'] != 1) {
-    header(("location: agendaFusionador.php"));
+if (isset($_SESSION['rol']) && $_SESSION['rol'] != 1 && $_SESSION['rol'] != 2 && $_SESSION['rol'] != 3) {
+    header(("location: dashboard.php"));
 }
+
 
 include "../conexion.php";
 

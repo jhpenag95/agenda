@@ -1,8 +1,15 @@
 <!-- Inicio del script PHP -->
 <?php
 session_start(); // Iniciar sesión de PHP
+if (isset($_SESSION['rol']) && $_SESSION['rol'] != 1 && $_SESSION['rol'] != 2) {
+    header(("location: dashboard.php"));
+}
 
-if (isset($_SESSION['rol']) && $_SESSION['rol'] != 1) {
+if ($_SESSION['rol'] == 3) {
+    header(("location: crearOrden.php"));
+}
+
+if ($_SESSION['rol'] == 4) {
     header(("location: agendaFusionador.php"));
 }
 

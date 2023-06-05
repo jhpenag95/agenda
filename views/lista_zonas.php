@@ -2,9 +2,18 @@
 //crea o reanuda una sesión existente, lo que permite al servidor almacenar información específica del usuario en la sesión
 session_start();
 
-if (isset($_SESSION['rol']) && $_SESSION['rol'] != 1) {
+if (isset($_SESSION['rol']) && $_SESSION['rol'] != 1 && $_SESSION['rol'] != 2) {
+    header(("location: dashboard.php"));
+}
+
+if ($_SESSION['rol'] == 3) {
+    header(("location: crearOrden.php"));
+}
+
+if ($_SESSION['rol'] == 4) {
     header(("location: agendaFusionador.php"));
 }
+
 
 require_once  '../conexion.php';
 
@@ -79,10 +88,12 @@ require_once  '../conexion.php';
                                             <a href="editar_zona.php?id=<?php echo base64_encode($data['id_zona']); ?>" class="btn btn-success btn-editar"><i class="bi bi-pencil-square"></i></a>
 
                                             <?php
+                                            if (isset($_SESSION['rol']) && $_SESSION['rol'] == 1) {
                                             ?>
-                                            <a href="#" class="btn btn-danger" onclick="setUsuarioID('<?php echo $data['id_zona']; ?>', '<?php echo $data['nombre_zona']; ?>')" id="eliminarUsuarioLink" data-bs-toggle="modal" data-bs-target="#eliminarUsuarioModal"><i class="bi bi-trash-fill"></i></a>
+                                                <a href="#" class="btn btn-danger" onclick="setUsuarioID('<?php echo $data['id_zona']; ?>', '<?php echo $data['nombre_zona']; ?>')" id="eliminarUsuarioLink" data-bs-toggle="modal" data-bs-target="#eliminarUsuarioModal"><i class="bi bi-trash-fill"></i></a>
 
                                             <?php
+                                            }
                                             ?>
                                         </td>
                                     </tr>

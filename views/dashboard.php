@@ -1,11 +1,20 @@
 <?php
 session_start();
+
 if (isset($_SESSION['rol']) && $_SESSION['rol'] != 1 && $_SESSION['rol'] != 2) {
     header(("location: agendaFusionador.php"));
 }
 
-include '../conexion.php';
+if ($_SESSION['rol'] == 3) {
+    header(("location: crearOrden.php"));
+}
 
+if ($_SESSION['rol'] == 4) {
+    header(("location: agendaFusionador.php"));
+}
+
+
+include '../conexion.php';
 
 ?>
 
@@ -191,7 +200,6 @@ include '../conexion.php';
                     </li>
                 </ul>
             </div>
-            </div>
         </section>
         <!--fin tabla de solicitudes-->
     </main>
@@ -202,7 +210,6 @@ include '../conexion.php';
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
 
     <script src="../script/dashboard/exportarTabla.js"></script>
-    <!-- <script src="../script/dashboard/filtrarFecha.js"></script> -->
 
 </body>
 

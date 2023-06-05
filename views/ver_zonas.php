@@ -1,7 +1,16 @@
 <?php
 session_start();
 
-if (isset($_SESSION['rol']) && $_SESSION['rol'] != 1) {
+
+if (isset($_SESSION['rol']) && $_SESSION['rol'] != 1 && $_SESSION['rol'] != 2) {
+    header(("location: dashboard.php"));
+}
+
+if ($_SESSION['rol'] == 3) {
+    header(("location: crearOrden.php"));
+}
+
+if ($_SESSION['rol'] == 4) {
     header(("location: agendaFusionador.php"));
 }
 
@@ -53,7 +62,7 @@ if (isset($_REQUEST['busqueda2']) && $_REQUEST['busqueda2'] == '') {
     <?php include "header.php"; ?>
     <!--Fin barra de gavegación-->
     <main>
-    
+
 
         <section class="container sectionTable pt-4 pb-4">
             <div class="container my-5">
@@ -62,7 +71,7 @@ if (isset($_REQUEST['busqueda2']) && $_REQUEST['busqueda2'] == '') {
             <!--Inicio tabla de solicitudes-->
             <div class="container">
                 <div class="contform">
-                    
+
                     <form action="ver_zonas.php" class="contform_form">
                         <input type="text" name="busqueda2" class="contform_form--input" placeholder="Buscar zona.." value="<?php echo $busqueda2; ?>">
                         <button type="submit" class="contform_form--search"><i class="bi bi-search"></i></button>
