@@ -53,6 +53,13 @@ h1 {
     border: solid 1px #0d6efd;
 }
 
+/* ===============Validar formulario cambio contraseña============= */
+.invalid-feedback {
+    color: red;
+    margin-top: 5px;
+    font-size: 12px;
+}
+
 
 /*=========Btn buscar ordenes=======*/
 
@@ -93,7 +100,7 @@ h1 {
 
 @media (max-width: 768px) {
     .info {
-        flex-direction: column; 
+        flex-direction: column;
         display: grid;
         grid-template-columns: 3.33%, 3.33%, 3.33%;
     }

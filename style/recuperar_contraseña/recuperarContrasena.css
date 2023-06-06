@@ -1,10 +1,15 @@
 main {
-    max-width: 400px;
-    margin: 0 auto;
     padding: 50px 30px;
     background-color: #ffffff;
     border-radius: 10px;
     box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.1);
+    height: 400px;
+    margin: 100px auto;
+    width: 400px;
+}
+
+form.form {
+    height: 100%;
 }
 
 .form-title {
@@ -59,8 +64,17 @@ main {
     color: #1c2833 !important;
     text-decoration: underline;
     font-size: 16px;
+    margin-top: 20px;
 }
 
-a:hover {
-    text-decoration: underline;
+.linkInicio{
+    margin-top: 20px;
+    color: #1c2833;
+}
+
+
+@media (min-width: 768px) {
+    main {
+        margin: 160px auto;
+    }
 }

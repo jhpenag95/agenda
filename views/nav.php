@@ -60,7 +60,6 @@
           <ul class="navbar-nav d-flex justify-content-end">
             <div class="cont-info">
               <li class="nav-item"> <span><?php echo $_SESSION['nombre']; ?></span> </li>
-              <li class="nav-item"> <a class="nav-link"><i class="bi bi-pencil-square" data-bs-toggle="modal" data-bs-target="#exampleModal" data-id="<?php echo base64_encode($_SESSION['rol']); ?>"></i></a> </li>
               <li class="nav-item"> <a class="nav-link" href="cerrar_sesion.php"><i class="bi bi-arrow-left-square"></i></a> </li>
             </div>
           </ul>
@@ -69,4 +68,3 @@
     </div>
   </div>
 </nav> <!--Fin barra de gavegación-->
-

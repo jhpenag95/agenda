@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 02-06-2023 a las 00:35:12
--- Versión del servidor: 10.4.27-MariaDB
--- Versión de PHP: 8.2.0
+-- Tiempo de generación: 07-06-2023 a las 01:21:06
+-- Versión del servidor: 10.4.28-MariaDB
+-- Versión de PHP: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -25,19 +25,20 @@ DELIMITER $$
 --
 -- Procedimientos
 --
-CREATE DEFINER=`root`@`localhost` PROCEDURE `InsertarTiemposTarea` (IN `p_tiempo_tarea` VARCHAR(50), IN `p_id_user` INT)   BEGIN
- 
-  -- Actualizar la tabla usuarios
-    UPDATE usuarios SET id_estado = 1 WHERE id_usuario = p_id_user;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `obtener_estadisticas` ()   BEGIN
+    DECLARE despachadores INT;
+    DECLARE cableadores INT;
+    DECLARE fusionadores INT;
+    DECLARE ordenes_finalizadas INT;
+    DECLARE ordenes_en_tarea INT;
     
-    -- Actualizar la tabla ordenes
-    UPDATE ordenes SET estado_orden = 2 WHERE id_usuario_fusionador = p_id_user;
-
-   -- Insertar en la tabla tiempos_tarea
-    INSERT INTO tiempos_tarea (tiempo_tarea, id_user, id_orden)
-    VALUES (p_tiempo_tarea, p_id_user, id_orden);
-
-
+    SELECT COUNT(*) INTO despachadores FROM usuarios WHERE id_rol = 2;
+    SELECT COUNT(*) INTO cableadores FROM usuarios WHERE id_rol = 3;
+    SELECT COUNT(*) INTO fusionadores FROM usuarios WHERE id_rol = 4;
+    SELECT COUNT(*) INTO ordenes_finalizadas FROM ordenes WHERE estado_orden = 2;
+    SELECT COUNT(*) INTO ordenes_en_tarea FROM ordenes WHERE estado_orden = 1;
+    
+    SELECT despachadores, cableadores, fusionadores, ordenes_finalizadas, ordenes_en_tarea;
 END$$
 
 DELIMITER ;
@@ -85,11 +86,8 @@ CREATE TABLE `ordenes` (
 --
 
 INSERT INTO `ordenes` (`id_orden`, `N_orden`, `direccion`, `descripcion`, `id_usuario_cableador`, `id_usuario_fusionador`, `id_zona`, `fecha_registro`, `estado_orden`) VALUES
-(32, 'MDS-123466', 'Calle 70 112b 93', 'Prueba Daniel-1', 1, 9, 2, '2023-05-30 10:11:43', 2),
-(33, 'MDS-123467', 'Calle 70 112b 93', 'Prueba Jairo-1', 1, 13, 3, '2023-05-30 10:11:43', 2),
-(34, 'MDS-123468', 'Calle 70 112b 93', 'Prueba Daniel-2', 1, 9, 2, '2023-05-31 10:14:25', 2),
-(35, 'MDS-123469', 'Calle 70 112b 93', 'Prueba Jairo-2', 1, 13, 3, '2023-05-31 10:14:41', 2),
-(36, 'MDS-123470', 'carrera 100 # 13 65', 'Prueba', 1, 9, 2, '2023-06-01 14:01:06', 2);
+(39, 'MDS-123482', 'CL 70 #112B 93', 'Prueba', 28, 31, 3, '2023-06-06 16:25:26', 2),
+(40, 'MDS-123483', 'CL 70 #112B 93', 'fff', 28, 31, 3, '2023-06-06 16:28:06', 1);
 
 -- --------------------------------------------------------
 
@@ -132,11 +130,7 @@ CREATE TABLE `tiempos_tarea` (
 --
 
 INSERT INTO `tiempos_tarea` (`id`, `tiempo_tarea`, `id_user`, `fecha`, `estado`, `id_orden`) VALUES
-(72, '00:00:09', 13, '2023-05-31 10:12:30', 1, 33),
-(73, '00:00:09', 9, '2023-05-31 10:13:43', 1, 32),
-(74, '00:00:36', 9, '2023-05-31 10:15:40', 1, 34),
-(75, '00:00:23', 13, '2023-05-31 10:17:00', 1, 35),
-(76, '00:00:18', 9, '2023-06-01 15:01:46', 1, 36);
+(78, '00:00:06', 31, '2023-06-06 16:27:44', 1, 39);
 
 -- --------------------------------------------------------
 
@@ -158,11 +152,7 @@ CREATE TABLE `tiempos_traslado` (
 --
 
 INSERT INTO `tiempos_traslado` (`id`, `tiempo`, `id_user`, `fecha`, `estadoTrsa`, `id_orden`) VALUES
-(12, '00:00:07', 13, '2023-05-31 10:12:17', 1, 33),
-(13, '00:00:09', 9, '2023-05-31 10:13:30', 1, 32),
-(14, '00:00:10', 9, '2023-05-31 10:15:00', 1, 34),
-(15, '00:00:12', 13, '2023-05-31 10:16:34', 1, 35),
-(16, '00:00:29', 9, '2023-06-01 15:01:19', 1, 36);
+(19, '00:00:05', 31, '2023-06-06 16:27:37', 1, 39);
 
 -- --------------------------------------------------------
 
@@ -175,7 +165,7 @@ CREATE TABLE `usuarios` (
   `nombre` varchar(100) NOT NULL,
   `correo` varchar(100) NOT NULL,
   `telefono` varchar(100) NOT NULL,
-  `clave` varchar(100) NOT NULL,
+  `clave` varchar(1000) NOT NULL,
   `nombre_usuario` varchar(50) DEFAULT NULL,
   `estado` int(11) DEFAULT 1,
   `id_zona` int(11) DEFAULT NULL,
@@ -188,10 +178,9 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`id_usuario`, `nombre`, `correo`, `telefono`, `clave`, `nombre_usuario`, `estado`, `id_zona`, `id_rol`, `id_estado`) VALUES
-(1, 'Admin', 'johanpg14@hotmail.com', '0', 'c4ca4238a0b923820dcc509a6f75849b', 'admin', 1, NULL, 1, 1),
-(9, 'Daniel', 'd@hotmail.com', '3223291127', 'c4ca4238a0b923820dcc509a6f75849b', 'Daniel', 1, 2, 4, 1),
-(13, 'Jairo Orlando ', 'jairoorlandoguatama@gmail.com', '3058162244', 'c4ca4238a0b923820dcc509a6f75849b', 'Jairo', 1, 3, 4, 1),
-(15, 'Helver', 'helver248@hotmail.es', '3058162244', '72daa12eed01addc08e08f7a792e99b9', 'Helver', 1, 2, 2, 1);
+(28, 'Admin', 'helver248@hotmail.es', '3058162244', '$2y$10$N3ZnbAS8UKmjxxAblQxki.xQNJrjx9sivDoTmCXVAKQjtHoPSYwx2', 'admin', 1, 5, 1, 1),
+(31, 'Jairo Orlando Guatama Garzón', 'johanpg14@hotmail.com', '3058162244', '$2y$10$e/tfg2TZT.v3YcADpCNVRekRuyWXEHNCn4judkG3osrIANAz4AW7e', 'Jairo', 1, 3, 4, 2),
+(32, 'Daniel ', 'djohanpg14@hotmail.com', '3058162244', '$2y$10$A4FBvJEaR2LPsYYIlegkueJkbxxQybDPnpaGsIdF8k2xNOaEYo/9W', 'Daniel', 1, 2, 4, 1);
 
 -- --------------------------------------------------------
 
@@ -212,7 +201,8 @@ CREATE TABLE `zonas` (
 INSERT INTO `zonas` (`id_zona`, `nombre_zona`, `estado`) VALUES
 (2, 'Fontibón ', 1),
 (3, 'Engativa', 1),
-(4, 'Chapinero', 1);
+(4, 'Chapinero', 1),
+(5, 'N/A', 1);
 
 --
 -- Índices para tablas volcadas
@@ -280,7 +270,7 @@ ALTER TABLE `estado_tarea`
 -- AUTO_INCREMENT de la tabla `ordenes`
 --
 ALTER TABLE `ordenes`
-  MODIFY `id_orden` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `id_orden` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT de la tabla `roles`
@@ -292,25 +282,25 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT de la tabla `tiempos_tarea`
 --
 ALTER TABLE `tiempos_tarea`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=79;
 
 --
 -- AUTO_INCREMENT de la tabla `tiempos_traslado`
 --
 ALTER TABLE `tiempos_traslado`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT de la tabla `zonas`
 --
 ALTER TABLE `zonas`
-  MODIFY `id_zona` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_zona` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Restricciones para tablas volcadas

@@ -35,6 +35,73 @@ require_once  '../conexion.php';
     <!--Fin barra de gavegación-->
 
     <main>
+        <a href="#" class="newContrasena getUserData" data-bs-toggle="modal" data-bs-target="#exampleModal" data-rol="<?php echo $_SESSION['idUser']; ?>">
+            <i class="bi bi-gear-fill"></i>
+        </a>
+
+        <!-- =============Modal======= -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-3" id="exampleModalLabel">Actualizar contraseña</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <div class="modal-body">
+                        <div class="span">
+                            <label>Nombre:</label>
+                            <span><?php echo $_SESSION['nombre']; ?></span>
+                            <label>Correo:</label>
+                            <span><?php echo $_SESSION['email']; ?></span>
+                            <label>Rol:</label>
+                            <span><?php echo $_SESSION['rol_name']; ?></span>
+                            <label>Usuario:</label>
+                            <span><?php echo $_SESSION['user']; ?></span>
+                        </div>
+
+
+                        <form action="updateDatos_password.php" method="post" onsubmit="return validateForm()">
+                            <input type="hidden" name="id" value="<?php echo $_SESSION['idUser']; ?>">
+                            <div class="mb-3">
+                                <label for="password" class="col-form-label">Contraseña actual</label>
+                                <input type="password" class="form-control" name="password" id="password">
+                                <div class="invalid-feedback" id="passwordError"></div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="newPass" class="col-form-label">Nueva contraseña</label>
+                                <input type="password" class="form-control" name="newPass" id="newPass">
+                                <div class="invalid-feedback" id="newPassError"></div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="confirmPass" class="col-form-label">Confirmar contraseña</label>
+                                <input type="password" class="form-control" name="confirmPass" id="confirmPass">
+                                <div class="invalid-feedback" id="confirmPassError"></div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
+                                <button type="submit" class="btn btn-primary">Actualizar</button>
+                            </div>
+                        </form>
+
+
+                        <!-- Alertas -->
+                        <?php if (isset($_SESSION['success'])) : ?>
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                <strong>¡Éxito!</strong> <?php echo $_SESSION['success']; ?>
+                            </div>
+                            <?php unset($_SESSION['success']); ?>
+                        <?php endif; ?>
+                        <?php if (isset($_SESSION['error'])) : ?>
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                <strong>¡Error!</strong> <?php echo $_SESSION['error']; ?>
+                            </div>
+                            <?php unset($_SESSION['error']); ?>
+                        <?php endif; ?>
+                    </div>
+                </div>
+            </div>
+        </div>
         <!--Inicio tabla de solicitudes-->
         <section>
             <div class="container my-5 cont-table">

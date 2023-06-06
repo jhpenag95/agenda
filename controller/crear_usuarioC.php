@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-require_once '../models/crear_usuarioM.php';
+include_once '../models/crear_usuarioM.php';
 
 // Comprobamos si se ha enviado el formulario
 if (isset($_POST['name']) && isset($_POST['email']) && isset($_POST['tel']) && isset($_POST['mane_user']) && isset($_POST['clave']) && isset($_POST['rol'])) {
@@ -10,7 +10,8 @@ if (isset($_POST['name']) && isset($_POST['email']) && isset($_POST['tel']) && i
   $nombre = $_POST['name'];
   $email = $_POST['email'];
   $telefono = $_POST['tel'];
-  $clave = md5($_POST['clave']);
+  $clave = mysqli_real_escape_string($conexion, $_POST['clave']);
+  $hashedPass = password_hash($clave, PASSWORD_DEFAULT);
   $username = $_POST['mane_user'];
   $rol = $_POST['rol'];
 
@@ -18,20 +19,7 @@ if (isset($_POST['name']) && isset($_POST['email']) && isset($_POST['tel']) && i
   if (isset($_POST['zona'])) {
     $zona = $_POST['zona'];
   } else {
-    $zona = NULL; // O un valor predeterminado si es necesario
-  }
-
-
-  //validar nombre
-  if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    if (!empty($_POST['name'])) {
-      if (!preg_match("/^[a-zA-Z-' ]*$/", $nombre)) {
-        // Ha ocurrido un error al crear el usuario
-        $_SESSION['error'] = "Solo se permiten letras y espacios en blanco";
-        header("Location: ../views/crearUsuario.php");
-        exit();
-      }
-    }
+    $zona = 'N/A'; // O un valor predeterminado si es necesario
   }
 
   //validar correo
@@ -46,8 +34,6 @@ if (isset($_POST['name']) && isset($_POST['email']) && isset($_POST['tel']) && i
     }
   }
 
-
-
   $userModel = new UserModel();
   if ($userModel->usernameExists($username, $email, $nombre)) {
     // Ha ocurrido un error al crear el usuario
@@ -56,9 +42,8 @@ if (isset($_POST['name']) && isset($_POST['email']) && isset($_POST['tel']) && i
     exit();
   }
 
-
   // Creamos el usuario
-  $user_id = UserModel::createUser($nombre, $email, $telefono, $clave, $username, $zona, $rol);
+  $user_id = UserModel::createUser($nombre, $email, $telefono, $hashedPass, $username, $zona, $rol);
 
   if ($user_id) {
     // El usuario se ha creado correctamente

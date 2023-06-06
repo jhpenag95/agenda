@@ -4,12 +4,62 @@
     box-sizing: border-box;
     font-family: 'Open Sans', sans-serif;
 }
-  
+
 body {
     background-color: #f2f2f2 !important;
     font-family: 'Roboto', sans-serif;
+    position: relative;
 }
 
+
+/*==============BTN CONFIG====================*/
+
+.newContrasena {
+    align-items: center;
+    background: #fff;
+    box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+    border-radius: 50%;
+    display: flex;
+    color: rgb(42, 134, 138);
+    font-size: 30px;
+    justify-content: center;
+    height: 60px;
+    right: 10px;
+    top: 50%;
+    transition: all 1s;
+    position: absolute;
+    width: 60px;
+}
+
+.newContrasena:hover {
+    background: #0d6efd;
+    color: #fff;
+}
+
+/* =============span del modal=========== */
+
+h1#exampleModalLabel {
+    color: cadetblue;
+}
+
+.span {
+    display: flex;
+    flex-direction: column;
+}
+
+.span label {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 2px;
+}
+
+.span span {
+    color: cadetblue;
+    font-weight: bold;
+    margin-bottom: 4px;
+}
+
+/* ============table=========== */
 
 .sectionTable {
     background: #fff;

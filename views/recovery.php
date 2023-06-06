@@ -124,7 +124,7 @@ if ($result->num_rows > 0) {
                     Hemos recibido una solicitud para restablecer la contraseña de tu cuenta. Para continuar, haz clic en el siguiente botón:
                 </p>
                 <p>
-                    <a href="http://127.0.0.1/cableadores/agenda/views/actualizarContrasena.php?id='.htmlspecialchars($idUsuario).'" class="button">Restablecer contraseña</a>
+                    <a href="http://127.0.0.1/agenda/views/actualizarContrasena.php?id='.$row['id_usuario'].'" class="button">Restablecer contraseña</a>
                 </p>
                 <p>
                     Si no has solicitado un restablecimiento de contraseña, puedes ignorar este mensaje.

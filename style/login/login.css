@@ -1,10 +1,10 @@
 .login-wrapper {
-  width: 300px;
-  margin: 50px auto;
+  margin: 100px auto;
   background-color: #fff;
   padding: 30px;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 300px;
 }
 
 .login-header h2 {
@@ -74,14 +74,37 @@
   cursor: pointer;
 }
 
-
-
 .alert {
   background-color: #f44336;
   color: white;
-  padding: 10px;
   border-radius: 5px;
   font-size: 18px;
-  text-align: center;
+  padding: 10px;
   margin-bottom: 20px;
+  margin-top: 6px;
+  text-align: center;
+}
+
+.alert-success {
+  background-color: rgb(70, 172, 70);
+  color: white;
+}
+
+.alert-danger {
+  background-color: red;
+  color: white;
+}
+
+.alert-warning {
+  background-color: orange;
+  color: white;
+}
+
+
+@media (min-width: 768px) {
+  .login-wrapper {
+    margin: 150px auto;
+    width: 400px;
+
+  }
 }

@@ -45,9 +45,6 @@ const validateEmailFormat = e => {
     }
 }
 
-//validar contraseña
-claveFile.onbl
-
 // Se imprimen los mensajes
 nombreFile.addEventListener("blur", (e) => validateEmptyField("Ingresa por favor el nombre", e));
 emailFile.addEventListener("blur", (e) => validateEmptyField("Ingresa por favor el correo", e));

@@ -1,44 +1,50 @@
 <?php
-$alert = ''; // define la variable $alert
+$alert = '';
 session_start();
 
 if (!empty($_SESSION['active'])) {
-    header('location: views/dashboard.php'); // Redirige al dashboard si ya hay una sesión activa
+    header('location: views/dashboard.php');
 } else {
-    if (!empty($_POST)) { // Verifica si se recibieron datos del formulario
-        // empty define si los campos están vacíos, si están vacíos, genera una alerta
+    if (!empty($_POST)) {
         if (empty($_POST['usuario']) || empty($_POST['clave'])) {
-            $alert = 'Ingrese su usuario y su clave'; // Alerta de campos vacíos
+            $alert = 'Ingrese su usuario y su clave';
         } else {
-            require_once "conexion.php"; // Incluye el archivo de conexión a la base de datos
+            require_once "conexion.php";
 
-            $user = mysqli_real_escape_string($conexion, $_POST['usuario']); // Escapa y asigna el valor del campo usuario a la variable $user
-            $pass = md5(mysqli_real_escape_string($conexion, $_POST['clave'])); // Escapa y asigna el valor del campo clave a la variable $pass, aplicando el hash MD5
+            $user = mysqli_real_escape_string($conexion, $_POST['usuario']);
+            $pass = $_POST['clave'];
 
-            $query = mysqli_query($conexion, "SELECT u.id_usuario,u.nombre,u.correo,u.nombre_usuario,r.id_rol ,r.nombre_rol
+            $query = mysqli_query($conexion, "SELECT u.id_usuario,u.nombre,u.correo,u.nombre_usuario,u.clave,r.id_rol ,r.nombre_rol
                                                     FROM usuarios u 
                                                     INNER JOIN roles r
                                                     ON u.id_rol = r.id_rol
-                                                    WHERE u.nombre_usuario = '$user'  AND u.clave = '$pass'"); // Realiza la consulta SQL para buscar al usuario en la base de datos
-            mysqli_close($conexion); // Cierra la conexión a la base de datos
+                                                    WHERE u.nombre_usuario = '$user'");
+            mysqli_close($conexion);
 
-            $result = mysqli_num_rows($query); // Obtiene el número de filas resultantes de la consulta
+            $result = mysqli_num_rows($query);
+
             if ($result > 0) {
-                $data = mysqli_fetch_array($query); // Obtiene los datos del usuario encontrado
+                $data = mysqli_fetch_array($query);
+                $hashedPass = $data['clave'];
 
-                // Almacena los datos del usuario en variables de sesión
-                $_SESSION['active'] = true;
-                $_SESSION['idUser'] = $data['id_usuario'];
-                $_SESSION['nombre'] = $data['nombre'];
-                $_SESSION['email'] = $data['correo'];
-                $_SESSION['user'] = $data['nombre_usuario'];
-                $_SESSION['rol'] = $data['id_rol'];
-                $_SESSION['rol_name'] = $data['nombre_rol'];
 
-                header('location: views/dashboard.php'); // Redirige al dashboard si el inicio de sesión es exitoso
+                if (password_verify($pass, $hashedPass)) {
+                    $_SESSION['active'] = true;
+                    $_SESSION['idUser'] = $data['id_usuario'];
+                    $_SESSION['nombre'] = $data['nombre'];
+                    $_SESSION['email'] = $data['correo'];
+                    $_SESSION['user'] = $data['nombre_usuario'];
+                    $_SESSION['rol'] = $data['id_rol'];
+                    $_SESSION['rol_name'] = $data['nombre_rol'];
+
+                    header('location: views/dashboard.php');
+                } else {
+                    $alert = 'El usuario o la contraseña son incorrectos';
+                    session_destroy();
+                }
             } else {
-                $alert = 'El usuario con clave son incorrectas'; // Alerta de usuario o clave incorrectos
-                session_destroy(); // Destruye la sesión
+                $alert = 'El usuario o la contraseña son incorrectos';
+                session_destroy();
             }
         }
     }
@@ -86,7 +92,7 @@ if (!empty($_SESSION['active'])) {
             <!-- Muestra el mensaje de alerta si no se han llenado los campos -->
             <div class="col-12">
                 <?php if ($alert) : ?>
-                    <div class="alert alert-danger" role="alert">
+                    <div id="alertMessage" class="alert alert-danger" role="alert">
                         <?php echo $alert; ?>
                     </div>
                 <?php endif; ?>
@@ -94,7 +100,39 @@ if (!empty($_SESSION['active'])) {
             <!-- Botón para enviar el formulario -->
             <button type="submit" class="submit-btn">Iniciar sesión</button>
         </form>
+        <?php
+        if (isset($_GET['message'])) {
+            // Alerta de recuperación de contraseña
+            switch ($_GET['message']) {
+                case 'ok':
+                    $alert_class = 'alert-success';
+                    $message = 'Se se actualizó la contraseña de manera exitosa.';
+                    break;
+                case 'error':
+                    $alert_class = 'alert-danger';
+                    $message = 'Las contraseñas no son iguales, por favor revise.';
+                    break;
+                case 'invalidemail':
+                    $alert_class = 'alert-warning';
+                    $message = 'Todos los campos son obligatorios.';
+                    break;
+                default:
+                    $alert_class = '';
+                    $message = '';
+                    break;
+            }
+            if ($alert_class !== '') {
+        ?>
+                <div id="message" class="alert <?php echo $alert_class; ?>" role="alert">
+                    <?php echo $message; ?>
+                </div>
+        <?php
+            }
+        }
+        ?>
     </div>
+
+    <script src="script/login-alert/alertLogin.js"></script>
 </body>
 
 </html>

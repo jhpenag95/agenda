@@ -9,6 +9,7 @@
 
     <!-- Estilos CSS -->
     <link rel="stylesheet" href="style/recuperar_contraseña/recuperarContrasena.css">
+    <link rel="stylesheet" href="style/global.css">
     <?php include "views/styles.php" ?>
 
 </head>
@@ -22,8 +23,8 @@
                 <input type="email" name="email" id="email" class="form-input" required>
             </div>
             <button type="submit" class="form-button">Recuperar contraseña</button>
-            <a href="index.php">Iniciar sesión</a>
         </form>
+        <a  class="linkInicio" href="index.php">Iniciar sesión</a>
 
         <?php
         if (isset($_GET['message'])) {

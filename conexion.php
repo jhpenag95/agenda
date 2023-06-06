@@ -13,4 +13,5 @@ if ($conexion ->connect_errno) {
 }
 // retornar la conexión para su uso en otras partes del código
 return $conexion ;
+
 ?>
