@@ -168,41 +168,41 @@ require_once  '../conexion.php';
 
                             $result = mysqli_query($conexion, $query);
                             if ($result && mysqli_num_rows($result) > 0) {
-                                while ($data = mysqli_fetch_array($result)) {
+                                $data = mysqli_fetch_assoc($result);
                             ?>
 
-                                    <tr>
-                                        <input type="hidden" id="id_orden" value="<?php echo $data['id_orden']; ?>">
-                                        <td><?php echo $data['N_orden']; ?></td>
-                                        <td><?php echo $data['nombre_cableador']; ?></td>
-                                        <td><?php echo $data['nombre_fusionador']; ?></td>
-                                        <td class="descripcion-column"><?php echo  ucfirst(strtolower($data['descripcion'])); ?></td>
-                                        <td><?php echo $data['fecha_registro']; ?></td>
-                                        <td>
-                                            <div class="contBtnTiempos">
-                                                <button type="button" class="btn-desplazamiento" onclick="FbotonOn(this)" data-id="<?= $_SESSION['idUser']; ?>">Iniciar desplazamiento</button>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="contBtnTiempos">
-                                                <button type="button" class="btn-tarea" onclick="BbotonOn(this)" data-id="<?= $_SESSION['idUser']; ?>">Iniciar Tarea</button>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <form action="#" method="post" class="form-btn">
-                                                <span name="time" class="time" data-id="<?= $_SESSION['idUser']; ?>" id="iniciarCronometro_<?= $_SESSION['idUser']; ?>"></span>
-                                                <button type="submit" class="guardar" data-id="<?= $_SESSION['idUser']; ?>" id="iniciarCronometro_<?= $_SESSION['idUser']; ?>">Guardar</button>
-                                            </form>
-                                        </td>
-                                        <td id="tarea">
-                                            <form action="#" class="form-btn" id="formTarea" method="post">
-                                                <span name="timeTarea" class="timeTarea" data-id="<?= $_SESSION['idUser']; ?>" id="cronometroIniciar_<?= $_SESSION['idUser']; ?>"></span>
-                                                <button type="submit" class="guardar2" data-id="<?= $_SESSION['idUser']; ?>" id="cronometroIniciar_<?= $_SESSION['idUser']; ?>">Guardar</button>
-                                            </form>
-                                        </td>
-                                    </tr>
+                                <tr>
+                                    <input type="hidden" id="id_orden" value="<?php echo $data['id_orden']; ?>">
+                                    <td><?php echo $data['N_orden']; ?></td>
+                                    <td><?php echo $data['nombre_cableador']; ?></td>
+                                    <td><?php echo $data['nombre_fusionador']; ?></td>
+                                    <td class="descripcion-column"><?php echo  ucfirst(strtolower($data['descripcion'])); ?></td>
+                                    <td><?php echo $data['fecha_registro']; ?></td>
+                                    <td>
+                                        <div class="contBtnTiempos">
+                                            <button type="button" class="btn-desplazamiento" onclick="FbotonOn(this)" data-id="<?= $_SESSION['idUser']; ?>">Iniciar desplazamiento</button>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="contBtnTiempos">
+                                            <button type="button" class="btn-tarea" onclick="BbotonOn(this)" data-id="<?= $_SESSION['idUser']; ?>">Iniciar Tarea</button>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <form action="#" method="post" class="form-btn">
+                                            <span name="time" class="time" data-id="<?= $_SESSION['idUser']; ?>" id="iniciarCronometro_<?= $_SESSION['idUser']; ?>"></span>
+                                            <button type="submit" data-id-orden="1" class="guardar" data-id="<?= $_SESSION['idUser']; ?>" id="iniciarCronometro_<?= $_SESSION['idUser']; ?>">Guardar</button>
+                                        </form>
+                                    </td>
+                                    <td id="tarea">
+                                        <form action="#" class="form-btn" id="formTarea" method="post">
+                                            <span name="timeTarea" class="timeTarea" data-id="<?= $_SESSION['idUser']; ?>" id="cronometroIniciar_<?= $_SESSION['idUser']; ?>"></span>
+                                            <button type="submit" data-id-orden="1" class="guardar2" data-id="<?= $_SESSION['idUser']; ?>" id="cronometroIniciar_<?= $_SESSION['idUser']; ?>">Guardar</button>
+                                        </form>
+                                    </td>
+                                </tr>
                             <?php
-                                }
+
                             }
                             ?>
 

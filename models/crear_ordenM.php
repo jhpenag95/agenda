@@ -28,7 +28,7 @@ class ordenMolde
         $query_usuarios = "SELECT u.id_usuario, u.nombre, u.estado, u.id_zona, z.id_zona 
                     FROM usuarios u
                     INNER JOIN zonas z ON u.id_zona = z.id_zona
-                    WHERE u.estado = 1 AND u.id_rol = 4 AND u.id_estado = 1 AND z.id_zona = $zona";
+                    WHERE u.estado = 1 AND u.id_rol = 4 AND z.id_zona = $zona";
 
 
 
