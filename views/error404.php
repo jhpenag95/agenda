@@ -8,6 +8,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="../assets/iconos/logo.ico" />
+  
   <title>404 Error - Lost And Alone</title>
   <link rel="stylesheet" media="all" href="../style/error404.css" />
 </head>

@@ -9,6 +9,7 @@
     <title>Recuperar contraseña</title>
     <link rel="stylesheet" href="../style/recuperar_contraseña/recuperaVista2.css">
     <link rel="stylesheet" href="../style/global.css">
+    <link rel="shortcut icon" href="../assets/iconos/logo.ico" />
 
     <!-- Estilos CSS -->
     <?php include "../views/styles.php" ?>
