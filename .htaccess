@@ -1,0 +1,5 @@
+# Evitar el acceso directo a los archivos locales
+Options -Indexes
+
+# Redireccionar a la página de error 404
+ErrorDocument 404 /views/error404.php
