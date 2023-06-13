@@ -18,7 +18,7 @@ function FbotonOn(btn) {
         var cronometro = document.querySelector('span[name="time"][data-id="' + idUsuario + '"]');
         if (cronometro) {
           cronometro.textContent = tiempo;
-          cronometro.style.color = tiempo >= "00:10:00" ? "red" : "";
+          cronometro.style.color = tiempo >= "00:30:00" ? "red" : "";
         }
 
         // Guardar el estado en el LocalStorage
@@ -83,7 +83,7 @@ document.addEventListener("DOMContentLoaded", function () {
       // Mostrar el tiempo en el cronómetro y cambiar el color si es mayor o igual a 10 minutos
       if (cronometro) {
         cronometro.textContent = tiempo;
-        cronometro.style.color = tiempo >= "00:10:00" ? "red" : "";
+        cronometro.style.color = tiempo >= "00:30:00" ? "red" : "";
       }
 
       // Volver a iniciar el intervalo para actualizar el cronómetro cada segundo
@@ -94,7 +94,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         if (cronometro) {
           cronometro.textContent = tiempo;
-          cronometro.style.color = tiempo >= "00:10:00" ? "red" : "";
+          cronometro.style.color = tiempo >= "00:30:00" ? "red" : "";
         }
       }, 1000);
     } else if (buttonState == "Se detuvo") {

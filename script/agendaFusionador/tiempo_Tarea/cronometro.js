@@ -32,7 +32,7 @@ function BbotonOn(btn2) {
           cronometro2.textContent = tiempo2;
 
           // Cambiar el color del cronómetro a rojo si supera los 10 minutos
-          cronometro2.style.color = tiempo2 >= "00:10:00" ? "red" : "";
+          cronometro2.style.color = tiempo2 >= "00:30:00" ? "red" : "";
         }
 
         // Guardar el estado en el LocalStorage
@@ -134,7 +134,7 @@ window.onload = function () {
         cronometro2.textContent = tiempo2;
 
         // Cambiar el color del cronómetro a rojo si supera los 10 minutos
-        cronometro2.style.color = tiempo2 >= "00:10:00" ? "red" : "";
+        cronometro2.style.color = tiempo2 >= "00:30:00" ? "red" : "";
       }
 
       // Volver a iniciar el intervalo
@@ -150,7 +150,7 @@ window.onload = function () {
           cronometro2.textContent = tiempo2;
 
           // Cambiar el color del cronómetro a rojo si supera los 10 minutos
-          cronometro2.style.color = tiempo2 >= "00:10:00" ? "red" : "";
+          cronometro2.style.color = tiempo2 >= "00:30:00" ? "red" : "";
         }
       }, 1000); // Intervalo de 1 segundo
     } else if (buttonState2 == "Se detuvo") {

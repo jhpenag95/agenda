@@ -36,7 +36,7 @@ $resultado = $stmt->get_result(); // Obtener el resultado de la consulta
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="shortcut icon" href="../assets/iconos/logo.ico" />
 
-    <title>Editar usuarios</title>
+    <title>Editar zona</title>
 
     <!-- Estilos CSS -->
     <?php include "../views/styles.php" ?>
@@ -58,7 +58,7 @@ $resultado = $stmt->get_result(); // Obtener el resultado de la consulta
             <section class="container">
                 <div class="row">
                     <div class="col-12 ">
-                        <h1 class="titulo_user">Editar usuario</h1>
+                        <h1 class="titulo_user">Editar zona</h1>
                         <?php while ($datos = $resultado->fetch_object()) { ?>
                             <form action="../controller/editar_ZonasC.php" method="post" id="formulario">
                                 <input type="hidden" name="id" value="<?= $datos->id_zona; ?>">

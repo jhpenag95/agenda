@@ -8,7 +8,7 @@ class createZona
 
     public function zonaExists($zona)
     {
-        $conexion = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+        $conexion = mysqli_connect(BD_HOST, BD_USER, BD_PASSWORD, BD_NAME);
         $stmt = $conexion->prepare("SELECT * FROM zonas WHERE nombre_zona = ?");
         $stmt->bind_param("s", $zona);
         $stmt->execute();
@@ -19,7 +19,7 @@ class createZona
     public static  function crearZona($zona)
     {
         // Conexión a la base de datos
-        $conexion = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+        $conexion = mysqli_connect(BD_HOST, BD_USER, BD_PASSWORD, BD_NAME);
 
         // Comprobamos si se ha podido conectar a la base de datos
         if (!$conexion) {
