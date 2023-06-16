@@ -1,5 +1,18 @@
-# Evitar el acceso directo a los archivos locales
-Options -Indexes
+<IfModule mod_rewrite.c>
+    RewriteEngine On 
 
-# Redireccionar a la página de error 404
-ErrorDocument 404 /views/error404.php
+
+    RewriteRule ^([a-zA-Z0-9]+)$ index.php?pagina=$1
+
+    # Redirigir las solicitudes con extensión ".php" eliminada a la versión con extensión
+    RewriteCond %{REQUEST_FILENAME}.php -f
+    RewriteRule ^(.*)$ $1.php [L]
+
+    # Evitar el acceso directo a los archivos locales
+    Options -Indexes
+
+    # Redireccionar a la página de error 404
+    ErrorDocument 404 http://127.0.0.1/agenda/404.php
+</IfModule>
+
+

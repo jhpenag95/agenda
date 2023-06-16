@@ -10,7 +10,7 @@
             <?php
             if ($_SESSION['rol'] == 1 || $_SESSION['rol'] == 2) {
             ?>
-              <li class="nav-item"> <a class="nav-link active" href="dashboard.php">Inicio</a> </li>
+              <li class="nav-item"> <a class="nav-link active" href="dashboard">Inicio</a> </li>
             <?php } ?>
 
             <?php
@@ -18,8 +18,8 @@
             ?>
               <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Usuario</a>
                 <ul class="dropdown-menu">
-                  <li> <a class="dropdown-item" href="crearUsuario.php">Crear usuarios</a> </li>
-                  <li> <a class="dropdown-item" href="listadeUsuarios.php">Lista de usuarios</a> </li>
+                  <li> <a class="dropdown-item" href="crearUsuario">Crear usuarios</a> </li>
+                  <li> <a class="dropdown-item" href="listadeUsuarios">Lista de usuarios</a> </li>
                 </ul>
               </li>
             <?php } ?>
@@ -29,7 +29,7 @@
             ?>
               <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Orden</a>
                 <ul class="dropdown-menu">
-                  <li> <a class="dropdown-item" href="crearOrden.php">Crear orden</a> </li>
+                  <li> <a class="dropdown-item" href="crearOrden">Crear orden</a> </li>
                 </ul>
               </li>
             <?php } ?>
@@ -39,8 +39,8 @@
             ?>
               <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Zona</a>
                 <ul class="dropdown-menu">
-                  <li> <a class="dropdown-item" href="crearZona.php">Crear zonas</a> </li>
-                  <li> <a class="dropdown-item" href="lista_zonas.php">Lista de zonas</a> </li>
+                  <li> <a class="dropdown-item" href="crearZona">Crear zonas</a> </li>
+                  <li> <a class="dropdown-item" href="lista_zonas">Lista de zonas</a> </li>
                 </ul>
               </li>
             <?php } ?>
@@ -50,7 +50,7 @@
             ?>
               <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Ordenes Fusionador</a>
                 <ul class="dropdown-menu">
-                  <li> <a class="dropdown-item" href="agendaFusionador.php">Lista de ordenes asignadas</a> </li>
+                  <li> <a class="dropdown-item" href="agendaFusionador">Lista de ordenes asignadas</a> </li>
                 </ul>
               </li>
             <?php } ?>
@@ -60,7 +60,7 @@
           <ul class="navbar-nav d-flex justify-content-end">
             <div class="cont-info">
               <li class="nav-item"> <span><?php echo $_SESSION['nombre']; ?></span> </li>
-              <li class="nav-item"> <a class="nav-link" href="cerrar_sesion.php"><i class="bi bi-arrow-left-square"></i></a> </li>
+              <li class="nav-item"> <a class="nav-link" href="cerrar_sesion"><i class="bi bi-arrow-left-square"></i></a> </li>
             </div>
           </ul>
         </div>

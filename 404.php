@@ -8,10 +8,10 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="shortcut icon" href="../assets/iconos/logo.ico" />
+  <link rel="shortcut icon" href="assets/iconos/logo.ico" />
   
-  <title>404 Error - Lost And Alone</title>
-  <link rel="stylesheet" media="all" href="../style/error404.css" />
+  <title>404 Error</title>
+  <link rel="stylesheet" media="all" href="style/error404.css" />
 </head>
 <body>
 <div class="background">
@@ -21,7 +21,7 @@
 	<div class="left-section">
 		<div class="inner-content">
 			<h1 class="heading">404</h1>
-			<p class="subheading">Looks like the page you were looking for is no longer here.</p>
+			<p class="subheading">Ops!, no se ecnontro la página que buscas.</p>
 		</div>
 	</div>
 	<div class="right-section">

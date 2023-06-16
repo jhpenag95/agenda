@@ -90,7 +90,7 @@ require_once  '../conexion.php';
                                             <span class="estado <?php echo $data['Nombre_estado'] == 'En tarea' ? 'en-tarea' : ($data['Nombre_estado'] == 'Disponible' ? 'disponible' : 'no-disponible'); ?>"></span>
                                         </td>
                                         <td>
-                                            <a href="editar_usuario.php?id=<?php echo base64_encode($data['id_usuario']); ?>" class="btn btn-success btn-editar"><i class="bi bi-pencil-square"></i></a>
+                                            <a href="editar_usuario?id=<?php echo base64_encode($data['id_usuario']); ?>" class="btn btn-success btn-editar"><i class="bi bi-pencil-square"></i></a>
 
                                             <?php
                                             if (isset($_SESSION['rol']) && $_SESSION['rol'] == 1) {

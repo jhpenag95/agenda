@@ -3,7 +3,7 @@ $alert = '';
 session_start();
 
 if (!empty($_SESSION['active'])) {
-    header('location: views/dashboard.php');
+    header('location: views/dashboard');
 } else {
     if (!empty($_POST)) {
         if (empty($_POST['usuario']) || empty($_POST['clave'])) {
@@ -37,7 +37,7 @@ if (!empty($_SESSION['active'])) {
                     $_SESSION['rol'] = $data['id_rol'];
                     $_SESSION['rol_name'] = $data['nombre_rol'];
 
-                    header('location: views/dashboard.php');
+                    header('location: views/dashboard');
                 } else {
                     $alert = 'El usuario o la contraseña son incorrectos';
                     session_destroy();

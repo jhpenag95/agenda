@@ -87,7 +87,7 @@ require_once  '../conexion.php';
                                         <td><?php echo $data['id_zona']; ?></td>
                                         <td><?php echo $data['nombre_zona']; ?></td>
                                         <td>
-                                            <a href="editar_zona.php?id=<?php echo base64_encode($data['id_zona']); ?>" class="btn btn-success btn-editar"><i class="bi bi-pencil-square"></i></a>
+                                            <a href="editar_zona?id=<?php echo base64_encode($data['id_zona']); ?>" class="btn btn-success btn-editar"><i class="bi bi-pencil-square"></i></a>
 
                                             <?php
                                             if (isset($_SESSION['rol']) && $_SESSION['rol'] == 1) {
