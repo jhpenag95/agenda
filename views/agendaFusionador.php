@@ -66,17 +66,17 @@ require_once  '../conexion.php';
                             <input type="hidden" name="id" value="<?php echo $_SESSION['idUser']; ?>">
                             <div class="mb-3">
                                 <label for="password" class="col-form-label">Contraseña actual</label>
-                                <input type="password" class="form-control" name="password" id="password">
+                                <input type="password" class="form-control" name="password" id="password" required>
                                 <div class="invalid-feedback" id="passwordError"></div>
                             </div>
                             <div class="mb-3">
                                 <label for="newPass" class="col-form-label">Nueva contraseña</label>
-                                <input type="password" class="form-control" name="newPass" id="newPass">
+                                <input type="password" class="form-control" name="newPass" id="newPass" required>
                                 <div class="invalid-feedback" id="newPassError"></div>
                             </div>
                             <div class="mb-3">
                                 <label for="confirmPass" class="col-form-label">Confirmar contraseña</label>
-                                <input type="password" class="form-control" name="confirmPass" id="confirmPass">
+                                <input type="password" class="form-control" name="confirmPass" id="confirmPass" required>
                                 <div class="invalid-feedback" id="confirmPassError"></div>
                             </div>
                             <div class="modal-footer">

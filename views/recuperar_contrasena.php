@@ -2,7 +2,8 @@
 require_once('../conexion.php');
 
 if (isset($_POST['id']) && isset($_POST['new_password']) && isset($_POST['confirm-password'])) {
-    $id = $_POST['id'];
+    $encryptedId = $_POST['id'];
+    $id = base64_decode($encryptedId); // Desencriptar el ID
     $new_password = $_POST['new_password'];
     $confirm_password = $_POST['confirm-password'];
 
