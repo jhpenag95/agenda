@@ -95,7 +95,7 @@ require_once  '../conexion.php';
                                             <?php
                                             if (isset($_SESSION['rol']) && $_SESSION['rol'] == 1) {
                                             ?>
-                                                <a href="#" class="btn btn-danger" onclick="setUsuarioID('<?php echo $data['id_usuario']; ?>', '<?php echo $data['nombre']; ?>')" id="eliminarUsuarioLink" data-bs-toggle="modal" data-bs-target="#eliminarUsuarioModal"><i class="bi bi-trash-fill"></i></a>
+                                                <a href="#" class="btn btn-danger" onclick="setUsuarioID('<?php echo base64_encode($data['id_usuario']); ?>', '<?php echo $data['nombre']; ?>')" id="eliminarUsuarioLink" data-bs-toggle="modal" data-bs-target="#eliminarUsuarioModal"><i class="bi bi-trash-fill"></i></a>
                                             <?php
                                             }
                                             ?>

@@ -9,7 +9,8 @@ if (empty($_GET['id'])) {
     exit;
 }
 
-$id = $_GET['id'];
+$id_encode = $_GET['id'];
+$id = base64_decode($id_encode);
 
 $query_delete = "UPDATE usuarios SET estado = 0 WHERE id_usuario = ?";
 $stmt = $conexion->prepare($query_delete);
