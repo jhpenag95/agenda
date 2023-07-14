@@ -2,7 +2,7 @@
 <link rel="stylesheet" href="../style/navegacion/nav.css"> <!-- Menú -->
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <div class="container-fluid"> <a class="navbar-brand" href="#"> <img src="../assets/images/LogoTreintaAzulMetal.png" alt="" class="logo" width="200px" /> </a> <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon" style="filter: invert(100%)"></span> </button>
+  <div class="container-fluid"> <a class="navbar-brand" href="dashboard"> <img src="../assets/images/LogoAzulMetal 1.png" alt="" class="logo" width="200px" /> </a> <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon" style="filter: invert(100%)"></span> </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <div class="row w-100">
         <div class="col-lg-6">

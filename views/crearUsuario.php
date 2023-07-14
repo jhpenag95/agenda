@@ -102,7 +102,7 @@ require '../conexion.php';
             <!--Selecionar zona-->
             <div class="contenerdor_usuario--opcionesZona">
               <?php
-              $query_zona = mysqli_query($conexion, "SELECT * FROM zonas");
+              $query_zona = mysqli_query($conexion, "SELECT * FROM zonas WHERE estado=1");
               $result_zona = mysqli_num_rows($query_zona);
               ?>
               <div class="opcionesZona">

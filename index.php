@@ -19,7 +19,7 @@ if (!empty($_SESSION['active'])) {
                                                     INNER JOIN roles r
                                                     ON u.id_rol = r.id_rol
                                                     WHERE u.nombre_usuario = '$user'");
-            mysqli_close($conexion);
+            //mysqli_close($conexion);
 
             $result = mysqli_num_rows($query);
 

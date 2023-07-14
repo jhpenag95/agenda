@@ -116,6 +116,7 @@ require_once  '../conexion.php';
                                 <th>Cableador</th>
                                 <th>Fusionador</th>
                                 <th>Dirección</th>
+                                <th>Descripción</th>
                                 <th>Hora de solicitud</th>
                                 <th>Acciones</th>
                                 <th>Acciones</th>
@@ -177,6 +178,7 @@ require_once  '../conexion.php';
                                     <td><?php echo $data['N_orden']; ?></td>
                                     <td><?php echo $data['nombre_cableador']; ?></td>
                                     <td><?php echo $data['nombre_fusionador']; ?></td>
+                                    <td><?php echo $data['Dirección']; ?></td>
                                     <td class="descripcion-column"><?php echo  ucfirst(strtolower($data['descripcion'])); ?></td>
                                     <td><?php echo $data['fecha_registro']; ?></td>
                                     <td>

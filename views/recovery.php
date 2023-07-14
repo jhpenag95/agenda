@@ -18,8 +18,6 @@ if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
     exit;
 }
 
-
-
 $query = "SELECT * FROM usuarios WHERE correo = '$email' AND estado = 1";
 $result = $conexion->query($query);
 
