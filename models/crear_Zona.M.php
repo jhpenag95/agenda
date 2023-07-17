@@ -9,7 +9,7 @@ class createZona
     public function zonaExists($zona)
     {
         $conexion = mysqli_connect(BD_HOST, BD_USER, BD_PASSWORD, BD_NAME);
-        $stmt = $conexion->prepare("SELECT * FROM zonas WHERE nombre_zona = ?");
+        $stmt = $conexion->prepare("SELECT * FROM zonas WHERE (nombre_zona = ?) AND estado = 1");
         $stmt->bind_param("s", $zona);
         $stmt->execute();
         $result = $stmt->get_result();

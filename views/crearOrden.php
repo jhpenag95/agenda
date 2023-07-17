@@ -64,7 +64,7 @@ include '../conexion.php';
                         <label for="zona" class="label-zona">Zona:</label>
                         <div class="opciones-zona">
                             <?php
-                            $query_zona = mysqli_query($conexion, "SELECT * FROM zonas");
+                            $query_zona = mysqli_query($conexion, "SELECT * FROM zonas WHERE estado = 1");
                             $result_zona = mysqli_num_rows($query_zona);
                             ?>
                             <select name="zona" id="zona" class="select-zona" required>
@@ -201,7 +201,7 @@ include '../conexion.php';
                                         <td><?php echo $data['nombre_fusionador'] ?></td>
                                         <td><?php echo $data['direccion'] ?></td>
                                         <td><?php echo $data['fecha_registro'] ?></td>
-                                        <td><a href="#" class="btn btn-danger" onclick="setUsuarioID('<?php echo $data['id_orden']; ?>', '<?php echo $data['N_orden']; ?>')" id="eliminarOrdenesLink" data-bs-toggle="modal" data-bs-target="#eliminarOrdenModal"><i class="bi bi-trash-fill"></i></a></td>
+                                        <td><a href="#" class="btn btn-danger" onclick="setOrdenID('<?php echo $data['id_orden']; ?>', '<?php echo $data['N_orden']; ?>')" id="eliminarOrdenesLink" data-bs-toggle="modal" data-bs-target="#eliminarOrdenModal"><i class="bi bi-trash-fill"></i></a></td>
                                     </tr>
                             <?php
                                 }
@@ -257,7 +257,7 @@ include '../conexion.php';
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                <button type="button" class="btn btn-danger" onclick="eliminarUsuario()">Eliminar</button>
+                                <button type="button" class="btn btn-danger" onclick="eliminarOrden()">Eliminar</button>
                             </div>
                         </div>
                     </div>

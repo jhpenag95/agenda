@@ -1,8 +1,8 @@
 <?php
-define('BD_HOST', 'srv820.hstgr.io');
-define('BD_USER', 'u798029657_agenda');
-define('BD_PASSWORD', 'Colvatel$2023*');
-define('BD_NAME', 'u798029657_agenda');
+define('BD_HOST', 'localhost');
+define('BD_USER', 'root');
+define('BD_PASSWORD', '');
+define('BD_NAME', 'cableadores');
 
 $conexion = mysqli_connect(BD_HOST, BD_USER, BD_PASSWORD, BD_NAME);
 mysqli_query($conexion,"SET SESSION collation_connection ='utf8_unicode_ci'");

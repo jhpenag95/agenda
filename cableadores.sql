@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 09-06-2023 a las 23:14:09
+-- Tiempo de generación: 17-07-2023 a las 16:39:20
 -- Versión del servidor: 10.4.27-MariaDB
 -- Versión de PHP: 8.2.0
 
@@ -156,10 +156,7 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`id_usuario`, `nombre`, `correo`, `telefono`, `clave`, `nombre_usuario`, `estado`, `id_zona`, `id_rol`, `id_estado`) VALUES
-(28, 'Admin', 'helver248@hotmail.es', '3058162244', '$2y$10$N3ZnbAS8UKmjxxAblQxki.xQNJrjx9sivDoTmCXVAKQjtHoPSYwx2', 'admin', 1, 5, 1, 1),
-(33, 'Helver', 'helver24@hotmail.es', '3058162244', '$2y$10$.og/DqzXqzb/WS4lc5aI1eusIW0McFZJ4t/z.zdbpN4KURxa0vvZa', 'Johan', 1, 2, 3, 1),
-(34, 'Brando', 'br@hotmail.com', '3058162244', '$2y$10$NI09rXbKQv4t70qk74WsIuQF3SkSSUS6FeJXYbsqannxwPyYlFToa', 'Brandon', 1, 3, 4, 1),
-(35, 'Jairo', 'johanpg14@hotmail.com', '3058162244', '$2y$10$.og/DqzXqzb/WS4lc5aI1eusIW0McFZJ4t/z.zdbpN4KURxa0vvZa', 'Jairo', 1, 2, 4, 1);
+(1, 'Admin', 'helver248@hotmail.es', '3058162244', '$2y$10$N3ZnbAS8UKmjxxAblQxki.xQNJrjx9sivDoTmCXVAKQjtHoPSYwx2', 'admin', 1, 1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -178,10 +175,7 @@ CREATE TABLE `zonas` (
 --
 
 INSERT INTO `zonas` (`id_zona`, `nombre_zona`, `estado`) VALUES
-(2, 'Fontibón ', 1),
-(3, 'Engativa', 1),
-(4, 'Chapinero', 1),
-(5, 'N/A', 1);
+(1, 'N/A', 1);
 
 --
 -- Índices para tablas volcadas
@@ -273,13 +267,13 @@ ALTER TABLE `tiempos_traslado`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `zonas`
 --
 ALTER TABLE `zonas`
-  MODIFY `id_zona` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_zona` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Restricciones para tablas volcadas

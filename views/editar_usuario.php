@@ -113,7 +113,7 @@ $resultado = $stmt->get_result(); // Obtener el resultado de la consulta
                                             <select name="id_zona" id="id_zona" class="form-select">
                                                 <option value="">Seleccione la zona</option>
                                                 <?php
-                                                $zonasQuery = mysqli_query($conexion, "SELECT id_zona, nombre_zona FROM zonas");
+                                                $zonasQuery = mysqli_query($conexion, "SELECT id_zona, nombre_zona FROM zonas WHERE estado =1");
                                                 while ($zona = mysqli_fetch_assoc($zonasQuery)) {
                                                     $id_zona = $zona['id_zona'];
                                                     $nombre_zona = $zona['nombre_zona'];

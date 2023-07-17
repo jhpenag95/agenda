@@ -23,7 +23,6 @@ $(document).ready(function () {
 
     // Convertir el tiempo transcurrido a formato HH:MM:SS
     var tiempoFormatted1 = new Date(elapsedTime1).toISOString().substr(11, 8);
-    console.log(tiempoFormatted1);
 
     // Crear un objeto de datos para enviar al servidor
     var data = {
@@ -39,33 +38,37 @@ $(document).ready(function () {
       data: data,
       success: function (response) {
         // Mostrar el mensaje de éxito con SweetAlert2
-        if (response == true) {
+        if (response) {
+          //console.log("Datos guardados");
           Swal.fire({
-            position: 'top-end',
-            icon: 'success',
-            title: 'Tiempo guardado correctamente',
-            showConfirmButton: false,
-            timer: 1500
+            title: "Tiempo guardado correctamente",
+            icon: "success",
+            confirmButtonText: "Aceptar"
+          });
+          //Borrar los datos del localStorage después de 2 segundos
+          setTimeout(function () {
+            localStorage.removeItem('idUsuario');
+            localStorage.removeItem('lastTime4');
+            localStorage.removeItem('startTime');
+            localStorage.removeItem('id_orden');
+          }, 2000);
+
+          // Almacenar el indicador para ocultar los elementos en el localStorage
+          localStorage.setItem('shouldHideElements', 'true');
+
+          // Ocultar los elementos inmediatamente
+          $('.btn-desplazamiento').css("display", "none");
+          $('.time').css("display", "none");
+          $('.guardar').css("display", "none");
+
+
+        } else {
+          Swal.fire({
+            title: "Error",
+            icon: "error",
+            confirmButtonText: "Aceptar"
           });
         }
-
-        //Borrar los datos del localStorage después de 2 segundos
-        setTimeout(function () {
-          localStorage.removeItem('idUsuario');
-          localStorage.removeItem('lastTime4');
-          localStorage.removeItem('startTime');
-          localStorage.removeItem('id_orden');
-        }, 2000);
-
-        // Almacenar el indicador para ocultar los elementos en el localStorage
-        localStorage.setItem('shouldHideElements', 'true');
-
-        // Ocultar los elementos inmediatamente
-        $('.btn-desplazamiento').css("display", "none");
-        $('.time').css("display", "none");
-        $('.guardar').css("display", "none");
-
-
       },
       error: function (xhr, status, error) {
         // Manejar el error si ocurre alguno

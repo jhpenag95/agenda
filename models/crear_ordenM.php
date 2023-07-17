@@ -7,7 +7,7 @@ class ordenMolde
     public function ordenExists($nOrden)
     {
         $conexion = mysqli_connect(BD_HOST, BD_USER, BD_PASSWORD, BD_NAME);
-        $stmt = $conexion->prepare("SELECT * FROM ordenes WHERE N_orden = ?");
+        $stmt = $conexion->prepare("SELECT * FROM ordenes WHERE (N_orden = ?) AND estado_orden = 1");
         $stmt->bind_param("s", $nOrden);
         $stmt->execute();
         $result = $stmt->get_result();

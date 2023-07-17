@@ -32,12 +32,19 @@ $(document).ready(function () {
       success: function (response) {
         // Mostrar el mensaje de éxito con SweetAlert2
         if (response == true) {
+          // Swal.fire({
+          //   position: 'top-end',
+          //   icon: 'success',
+          //   title: 'Tiempo guardado correctamente',
+          //   showConfirmButton: false,
+          //   timer: 1500
+          // });
+
           Swal.fire({
-            position: 'top-end',
-            icon: 'success',
-            title: 'Tiempo guardado correctamente',
-            showConfirmButton: false,
-            timer: 1500
+            title: "Tiempo guardado correctamente",
+            text: response,
+            icon: "success",
+            confirmButtonText: "Aceptar"
           });
         }
 

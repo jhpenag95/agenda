@@ -39,7 +39,6 @@ require_once  '../conexion.php';
         <a href="#" class="newContrasena getUserData" data-bs-toggle="modal" data-bs-target="#exampleModal" data-rol="<?php echo $_SESSION['idUser']; ?>">
             <i class="bi bi-gear-fill"></i>
         </a>
-
         <!-- =============Modal======= -->
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
@@ -116,7 +115,7 @@ require_once  '../conexion.php';
                                 <th>Cableador</th>
                                 <th>Fusionador</th>
                                 <th>Dirección</th>
-                                <th>Descripción</th>
+                                <th>Observaciones</th>
                                 <th>Hora de solicitud</th>
                                 <th>Acciones</th>
                                 <th>Acciones</th>
@@ -157,7 +156,7 @@ require_once  '../conexion.php';
                                           ORDER BY ord.id_orden ASC LIMIT $desde,$por_pagina";
                             } elseif ($_SESSION['idUser'] != 1) {
                                 // Mostrar solo las órdenes asignadas al usuario fusionador
-                                $query = "SELECT ord.id_orden, ord.N_orden, u1.nombre AS nombre_cableador, u2.nombre AS nombre_fusionador, ord.descripcion, ord.fecha_registro, z.nombre_zona
+                                $query = "SELECT ord.id_orden, ord.N_orden, u1.nombre AS nombre_cableador, u2.nombre AS nombre_fusionador,ord.direccion, ord.descripcion, ord.fecha_registro, z.nombre_zona
                                           FROM ordenes ord
                                           INNER JOIN usuarios u1 ON u1.id_usuario = ord.id_usuario_cableador
                                           INNER JOIN usuarios u2 ON u2.id_usuario = ord.id_usuario_fusionador
@@ -178,7 +177,7 @@ require_once  '../conexion.php';
                                     <td><?php echo $data['N_orden']; ?></td>
                                     <td><?php echo $data['nombre_cableador']; ?></td>
                                     <td><?php echo $data['nombre_fusionador']; ?></td>
-                                    <td><?php echo $data['Dirección']; ?></td>
+                                    <td><?php echo $data['direccion']; ?></td>
                                     <td class="descripcion-column"><?php echo  ucfirst(strtolower($data['descripcion'])); ?></td>
                                     <td><?php echo $data['fecha_registro']; ?></td>
                                     <td>
@@ -270,7 +269,8 @@ require_once  '../conexion.php';
     <script src="../script/agendaFusionador/tiempo_Traslado/cronometro.js"></script>
     <script src="../script/agendaFusionador/tiempo_Traslado/peticionAjax_saveTimeTraslado.js"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
 
 
 

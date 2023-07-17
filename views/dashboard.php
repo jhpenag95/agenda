@@ -19,10 +19,6 @@ if ($_SESSION['rol'] == 4) {
     exit();
 }
 
-
-
-
-
 ?>
 
 
@@ -121,12 +117,10 @@ if ($_SESSION['rol'] == 4) {
         <!--Inicio contenedores datos informativos-->
         <section class="info">
             <?php
-            $mysqli = new mysqli("localhost", "root", "", "cableadores");
-
-            if ($mysqli->connect_errno) {
-                echo "Error al conectar a la base de datos: " . $mysqli->connect_error;
+            if ($conexion->connect_errno) {
+                echo "Error al conectar a la base de datos: " . $conexion->connect_error;
             } else {
-                $query_dash = $mysqli->query("CALL obtener_estadisticas();");
+                $query_dash = $conexion->query("CALL obtener_estadisticas();");
 
                 if ($query_dash) {
                     $result_dash = $query_dash->num_rows;
@@ -136,32 +130,29 @@ if ($_SESSION['rol'] == 4) {
                     }
 
                     $query_dash->free_result(); // Liberar los resultados de la consulta
-                    $mysqli->next_result(); // Avanzar al siguiente conjunto de resultados si hubiera alguno
+                    $conexion->next_result(); // Avanzar al siguiente conjunto de resultados si hubiera alguno
                 } else {
-                    echo "Error al ejecutar la consulta: " . $mysqli->error;
+                    echo "Error al ejecutar la consulta: " . $conexion->error;
                 }
-
-                $mysqli->close(); // Cerrar la conexión después de utilizar los datos
             }
             ?>
             <div class="info-cont">
                 <p class="info-cont__title">Cableadores</p>
-                <span class="info-cont__cont"><?php echo $data_dash['cableadores'] ?></span>
+                <span class="info-cont__cont"><?php echo $data_dash['cableadores']; ?></span>
             </div>
             <div class="info-cont">
                 <p class="info-cont__title">Fusionadores</p>
-                <span class="info-cont__cont"><?php echo $data_dash['fusionadores'] ?></span>
+                <span class="info-cont__cont"><?php echo $data_dash['fusionadores']; ?></span>
             </div>
             <div class="info-cont">
                 <p class="info-cont__title">Ordenes en tarea</p>
-                <span class="info-cont__cont"><?php echo $data_dash['ordenes_en_tarea'] ?></span>
+                <span class="info-cont__cont"><?php echo $data_dash['ordenes_en_tarea']; ?></span>
             </div>
             <div class="info-cont">
                 <p class="info-cont__title">Ordenes finalizadas</p>
-                <span class="info-cont__cont"><?php echo $data_dash['ordenes_finalizadas'] ?></span>
+                <span class="info-cont__cont"><?php echo $data_dash['ordenes_finalizadas']; ?></span>
             </div>
         </section>
-
 
         <!--fin contenedores datos informativos-->
         <section class="container sectionTable pt-4 pb-4">

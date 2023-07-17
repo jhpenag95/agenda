@@ -14,7 +14,7 @@ class UserModel
       die("Error de conexión: " . mysqli_connect_error());
     }
 
-    $stmt = $conexion->prepare("SELECT * FROM usuarios WHERE nombre_usuario = ? OR correo = ? OR nombre = ?");
+    $stmt = $conexion->prepare("SELECT * FROM usuarios WHERE (nombre_usuario = ? OR correo = ? OR nombre = ?) AND estado = 1");
     $stmt->bind_param("sss", $username, $email, $nombre);
     $stmt->execute();
     $result = $stmt->get_result();
