@@ -15,7 +15,7 @@ class ordenMolde
     }
 
     // Función para crear una orden
-    public function createOrden($idUser, $nOrden, $direccion, $descrip, $zona)
+    public function createOrden($idUser, $nOrden, $direccion, $descrip, $zona, $fechaactual)
     {
         $conexion = mysqli_connect(BD_HOST, BD_USER, BD_PASSWORD, BD_NAME);
 
@@ -25,7 +25,7 @@ class ordenMolde
         }
 
         // Obtener todos los usuarios que cumplan con las condiciones
-        $query_usuarios = "SELECT u.id_usuario, u.nombre, u.estado, u.id_zona, z.id_zona 
+        $query_usuarios = "SELECT u.id_usuario, u.nombre, u.estado, u.id_zona, z.id_zona
                     FROM usuarios u
                     INNER JOIN zonas z ON u.id_zona = z.id_zona
                     WHERE u.estado = 1 AND u.id_rol = 4 AND z.id_zona = $zona";
@@ -51,9 +51,9 @@ class ordenMolde
         $usuario_seleccionado = $usuarios_disponibles[array_rand($usuarios_disponibles)];
 
         // Asignarle la orden al usuario seleccionado
-        $query_asignar_orden = "INSERT INTO ordenes (N_orden, direccion, descripcion, id_usuario_cableador, id_usuario_fusionador, id_zona) VALUES (?, ?, ?, ?, ?, ?)";
+        $query_asignar_orden = "INSERT INTO ordenes (N_orden, direccion, descripcion, id_usuario_cableador, id_usuario_fusionador, id_zona, fecha_registro) VALUES (?, ?, ?, ?, ?, ?, ?)";
         $stmt_asignar_orden = $conexion->prepare($query_asignar_orden);
-        $stmt_asignar_orden->bind_param("sssiii", $nOrden, $direccion, $descrip, $idUser, $usuario_seleccionado['id_usuario'], $zona);
+        $stmt_asignar_orden->bind_param("sssiiis", $nOrden, $direccion, $descrip, $idUser, $usuario_seleccionado['id_usuario'], $zona, $fechaactual);
 
         if ($stmt_asignar_orden->execute()) {
             // Actualizar el estado del usuario

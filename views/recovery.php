@@ -39,14 +39,14 @@ if ($result->num_rows > 0) {
 
     try {
         $mail->isSMTP();                                            //Send using SMTP
-        $mail->Host       = 'smtp-mail.outlook.com';                     //Set the SMTP server to send through
+        $mail->Host       = '';                     //Set the SMTP server to send through
         $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
-        $mail->Username   = 'helver248@hotmail.es';                     //SMTP username
-        $mail->Password   = 'NAcho199502$&';                               //SMTP password
+        $mail->Username   = '';                     //SMTP username
+        $mail->Password   = '';                               //SMTP password
         $mail->Port       = 587;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
         //Recipients
-        $mail->setFrom('helver248@hotmail.es', 'Se te olvido la contrasea?');
+        $mail->setFrom('', 'Se te olvido la contrasea?');
         $mail->addAddress($email);     //Add a recipient
 
         //Content

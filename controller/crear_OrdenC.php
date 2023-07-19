@@ -13,6 +13,9 @@ if (isset($_POST['id_usuario']) && isset($_POST['orden']) && isset($_POST['direc
     $descrip = $_POST['descrip'];
     $zona = $_POST['zona'];
 
+    date_default_timezone_set('America/Bogota');
+    $fechaactual = date('Y-m-d h:i:s');
+
     // Validamos si la orden ya se encuentra creada
     $ordenModel = new ordenMolde();
     if ($ordenModel->ordenExists($nOrden)) {
@@ -23,7 +26,7 @@ if (isset($_POST['id_usuario']) && isset($_POST['orden']) && isset($_POST['direc
     }
 
     // Creamos la orden
-    $ordenCreada = $ordenModel->createOrden($idUser, $nOrden, $direccion, $descrip, $zona);
+    $ordenCreada = $ordenModel->createOrden($idUser, $nOrden, $direccion, $descrip, $zona, $fechaactual);
 
     if ($ordenCreada) {
         // La orden se ha creado correctamente

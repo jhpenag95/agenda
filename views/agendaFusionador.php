@@ -147,7 +147,7 @@ require_once  '../conexion.php';
                             //consultar usuario
                             if ($_SESSION['idUser'] == 1) {
                                 // Consulta para usuarios fusionadores
-                                $query = "SELECT ord.id_orden, ord.N_orden,u2.id_usuario AS id_fusionador, u1.nombre AS nombre_cableador, u2.nombre AS nombre_fusionador, ord.descripcion, ord.fecha_registro, z.nombre_zona
+                                $query = "SELECT ord.id_orden, ord.N_orden,u2.id_usuario AS id_fusionador, u1.nombre AS nombre_cableador, u2.nombre AS nombre_fusionador,ord.direccion, ord.descripcion, ord.fecha_registro, z.nombre_zona
                                           FROM ordenes ord
                                           INNER JOIN usuarios u1 ON u1.id_usuario = ord.id_usuario_cableador
                                           INNER JOIN usuarios u2 ON u2.id_usuario = ord.id_usuario_fusionador

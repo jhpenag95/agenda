@@ -9,19 +9,23 @@ $nombreDeLaClave = $_POST['nombreDeLaClave2'];
 // Convertir el tiempo a formato HH:MM:SS
 $tiempoFormatted = date('H:i:s', strtotime($lastTime));
 
+
+date_default_timezone_set('America/Bogota');
+$fechaactual = date('Y-m-d h:i:s');
+
 // Verificar si la conexión fue exitosa
 if ($conexion->connect_error) {
     die("Error de conexión: " . $conexion->connect_error);
 }
 
 // Preparar la llamada al procedimiento almacenado
-$sql = "INSERT INTO tiempos_tarea(tiempo_tarea, id_user, id_orden) VALUES (?, ?, ?)";
+$sql = "INSERT INTO tiempos_tarea(tiempo_tarea, id_user, fecha, id_orden) VALUES (?, ?, ?, ?)";
 $sql2 = "UPDATE ordenes SET estado_orden = 2 WHERE id_orden = ?";
 $sql3 = "UPDATE usuarios SET id_estado = 1 WHERE id_usuario = ?";
 
 // Preparar la sentencia SQL
 $stmt = $conexion->prepare($sql);
-$stmt->bind_param("sss", $tiempoFormatted, $idUsuario, $nombreDeLaClave);
+$stmt->bind_param("ssss", $tiempoFormatted, $idUsuario,$fechaactual, $nombreDeLaClave);
 
 // Ejecutar la inserción en la tabla tiempos_tarea
 if ($stmt->execute()) {

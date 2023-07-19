@@ -15,7 +15,7 @@ h1 {
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 	padding: 20px;
 	border-radius: 5px;
-	height: 420px;
+	height: auto;
 	margin: 20px auto;
 	max-width: 600px;
 	display: block;
@@ -153,7 +153,6 @@ button[type="submit"] {
 
 @media (max-width: 768px) {
 	form {
-		height: 500px !important;
 		margin: 10px auto;
 		max-width: 90%;
 	}
