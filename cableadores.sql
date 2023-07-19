@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 17-07-2023 a las 16:39:20
+-- Tiempo de generación: 19-07-2023 a las 18:53:48
 -- Versión del servidor: 10.4.27-MariaDB
 -- Versión de PHP: 8.2.0
 
@@ -18,30 +18,8 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `cableadores`
+-- Base de datos: `cableadores-2`
 --
-
-DELIMITER $$
---
--- Procedimientos
---
-CREATE DEFINER=`root`@`localhost` PROCEDURE `obtener_estadisticas` ()   BEGIN
-    DECLARE despachadores INT;
-    DECLARE cableadores INT;
-    DECLARE fusionadores INT;
-    DECLARE ordenes_finalizadas INT;
-    DECLARE ordenes_en_tarea INT;
-    
-    SELECT COUNT(*) INTO despachadores FROM usuarios WHERE id_rol = 2;
-    SELECT COUNT(*) INTO cableadores FROM usuarios WHERE id_rol = 3;
-    SELECT COUNT(*) INTO fusionadores FROM usuarios WHERE id_rol = 4;
-    SELECT COUNT(*) INTO ordenes_finalizadas FROM ordenes WHERE estado_orden = 2;
-    SELECT COUNT(*) INTO ordenes_en_tarea FROM ordenes WHERE estado_orden = 1;
-    
-    SELECT despachadores, cableadores, fusionadores, ordenes_finalizadas, ordenes_en_tarea;
-END$$
-
-DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -77,7 +55,7 @@ CREATE TABLE `ordenes` (
   `id_usuario_cableador` int(11) DEFAULT NULL,
   `id_usuario_fusionador` int(11) DEFAULT NULL,
   `id_zona` int(11) DEFAULT NULL,
-  `fecha_registro` datetime NOT NULL DEFAULT current_timestamp(),
+  `fecha_registro` datetime NOT NULL,
   `estado_orden` int(11) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -112,7 +90,7 @@ CREATE TABLE `tiempos_tarea` (
   `id` int(100) NOT NULL,
   `tiempo_tarea` varchar(100) NOT NULL,
   `id_user` int(100) NOT NULL,
-  `fecha` datetime NOT NULL DEFAULT current_timestamp(),
+  `fecha` datetime NOT NULL,
   `estado` int(11) NOT NULL DEFAULT 1,
   `id_orden` int(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -127,7 +105,7 @@ CREATE TABLE `tiempos_traslado` (
   `id` int(100) NOT NULL,
   `tiempo` varchar(100) NOT NULL,
   `id_user` int(100) NOT NULL,
-  `fecha` datetime NOT NULL DEFAULT current_timestamp(),
+  `fecha` datetime NOT NULL,
   `estadoTrsa` int(100) NOT NULL DEFAULT 1,
   `id_orden` int(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
