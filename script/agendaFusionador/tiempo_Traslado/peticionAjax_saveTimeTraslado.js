@@ -60,15 +60,7 @@ $(document).ready(function () {
           $('.btn-desplazamiento').css("display", "none");
           $('.time').css("display", "none");
           $('.guardar').css("display", "none");
-
-
-        } else {
-          Swal.fire({
-            title: "Error",
-            icon: "error",
-            confirmButtonText: "Aceptar"
-          });
-        }
+        } 
       },
       error: function (xhr, status, error) {
         // Manejar el error si ocurre alguno

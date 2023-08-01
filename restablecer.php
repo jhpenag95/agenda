@@ -9,7 +9,7 @@
     <title>Restaurar | Contraseña</title>
 
     <!-- Estilos CSS -->
-    <link rel="stylesheet" href="style/recuperar_contraseña/recuperarContrasena.css">
+    <link rel="stylesheet" href="style/recuperar_contrasena/recuperarContrasena.css">
     <link rel="stylesheet" href="style/global.css">
     <?php include "views/styles.php" ?>
 

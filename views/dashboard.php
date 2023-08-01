@@ -222,7 +222,6 @@ if ($_SESSION['rol'] == 4) {
                                 mysqli_free_result($sql_register);
 
 
-
                                 /* Este código implementa la paginación para la lista de usuarios mostrada en la página.*/
                                 $por_pagina = 5;
 
@@ -242,7 +241,6 @@ if ($_SESSION['rol'] == 4) {
                                             INNER JOIN zonas z ON z.id_zona = ord.id_zona
                                             INNER JOIN tiempos_tarea tt ON tt.id_orden = ord.id_orden
                                             INNER JOIN tiempos_traslado trd ON trd.id_orden = ord.id_orden
-                                            GROUP BY ord.N_orden
                                             ORDER BY ord.N_orden ASC
                                         LIMIT $desde, $por_pagina";
 
