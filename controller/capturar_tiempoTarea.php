@@ -18,9 +18,8 @@ if ($conexion->connect_error) {
     die("Error de conexión: " . $conexion->connect_error);
 }
 
-// Preparar la llamada al procedimiento almacenado
 $sql = "INSERT INTO tiempos_tarea(tiempo_tarea, id_user, fecha, id_orden) VALUES (?, ?, ?, ?)";
-$sql2 = "UPDATE ordenes SET estado_orden = 2 WHERE id_orden = ?";
+$sql2 = "UPDATE ordenes SET estado_orden = 3 WHERE id_orden = ?";
 $sql3 = "UPDATE usuarios SET id_estado = 1 WHERE id_usuario = ?";
 
 // Preparar la sentencia SQL

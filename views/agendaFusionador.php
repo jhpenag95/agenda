@@ -156,14 +156,15 @@ require_once  '../conexion.php';
                                           ORDER BY ord.id_orden ASC LIMIT $desde,$por_pagina";
                             } elseif ($_SESSION['idUser'] != 1) {
                                 // Mostrar solo las órdenes asignadas al usuario fusionador
-                                $query = "SELECT ord.id_orden, ord.N_orden, u1.nombre AS nombre_cableador, u2.nombre AS nombre_fusionador,ord.direccion, ord.descripcion, ord.fecha_registro, z.nombre_zona
-                                          FROM ordenes ord
-                                          INNER JOIN usuarios u1 ON u1.id_usuario = ord.id_usuario_cableador
-                                          INNER JOIN usuarios u2 ON u2.id_usuario = ord.id_usuario_fusionador
-                                          INNER JOIN zonas z ON z.id_zona = ord.id_zona
-                                          WHERE ord.estado_orden = 1 AND u2.id_usuario = " . $_SESSION['idUser'] . "
-                                          ORDER BY ord.id_orden ASC
-                                          LIMIT $desde, $por_pagina";
+                                $query = "SELECT ord.id_orden, ord.N_orden, u1.nombre AS nombre_cableador, u2.nombre AS nombre_fusionador, ord.direccion, ord.descripcion, ord.fecha_registro, z.nombre_zona
+                                FROM ordenes ord
+                                INNER JOIN usuarios u1 ON u1.id_usuario = ord.id_usuario_cableador
+                                INNER JOIN usuarios u2 ON u2.id_usuario = ord.id_usuario_fusionador
+                                INNER JOIN zonas z ON z.id_zona = ord.id_zona
+                                WHERE ord.estado_orden IN (1, 2)
+                                AND ord.fecha_registro = (SELECT MAX(fecha_registro) FROM ordenes WHERE id_orden = ord.id_orden)
+                                AND u2.id_usuario = " . $_SESSION['idUser'] . "
+                                ORDER BY ord.id_orden ASC LIMIT $desde, $por_pagina";
                             }
 
 
@@ -267,6 +268,7 @@ require_once  '../conexion.php';
     <script src="../script/agendaFusionador/tiempo_Tarea/peticionAjax_saveTime.js"></script>
 
     <script src="../script/agendaFusionador/tiempo_Traslado/cronometro.js"></script>
+    <script src="../script/agendaFusionador/tiempo_Traslado/cambioEstadoEnProceso.js"></script>
     <script src="../script/agendaFusionador/tiempo_Traslado/peticionAjax_saveTimeTraslado.js"></script>
 
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>

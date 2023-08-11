@@ -241,6 +241,7 @@ if ($_SESSION['rol'] == 4) {
                                             INNER JOIN zonas z ON z.id_zona = ord.id_zona
                                             INNER JOIN tiempos_tarea tt ON tt.id_orden = ord.id_orden
                                             INNER JOIN tiempos_traslado trd ON trd.id_orden = ord.id_orden
+                                            WHERE ord.estado_orden = 3
                                             ORDER BY ord.N_orden ASC
                                         LIMIT $desde, $por_pagina";
 
@@ -257,8 +258,8 @@ if ($_SESSION['rol'] == 4) {
                                             <td><?php echo $data['nombre_zona']; ?></td>
                                             <td><?php echo $data['descripcion']; ?></td>
                                             <td><?php echo $data['fecha_registro']; ?></td>
-                                            <td><?php echo $data['tiempo_tarea']; ?></td>
                                             <td><?php echo $data['tiempo']; ?></td>
+                                            <td><?php echo $data['tiempo_tarea']; ?></td>
                                         </tr>
                                 <?php
                                     }

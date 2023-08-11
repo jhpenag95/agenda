@@ -83,7 +83,7 @@ function BbotonOn(btn2) {
         localStorage.setItem("idUsuario2", idUsuario2.toString());
         localStorage.setItem("lastTime2", Date.now().toString());
 
-        // Mostrar el siguiente botón
+        // Mostrar el siguiente botn
         $('.guardar2').css("display", "block");
 
         // Mostrar un mensaje de éxito
@@ -144,7 +144,7 @@ window.onload = function () {
           .toISOString()
           .substr(11, 8);
 
-        // Verificar si se encontró el cronómetro
+        // Verificar si se encontr el cronómetro
         if (cronometro2) {
           // Actualizar el texto del cronómetro con el tiempo transcurrido
           cronometro2.textContent = tiempo2;
@@ -166,7 +166,7 @@ window.onload = function () {
         var tiempoFormatted = new Date(elapsedTime).toISOString().substr(11, 8);
         cronometro2.textContent = tiempoFormatted;
 
-        // Mostrar el siguiente botón
+        // Mostrar el siguiente botn
         $('.guardar2').css("display", "block");
       }
     }

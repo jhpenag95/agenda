@@ -1,11 +1,13 @@
 // Objeto para almacenar los intervalos de tiempo
 var intervalos = {};
 
+
 // Función que se ejecuta al hacer clic en el botón
 function FbotonOn(btn) {
   // Verificar si el texto del botón es "Iniciar desplazamiento"
   if ($(btn).text() == "Iniciar desplazamiento") {
     $(btn).text("En desplazamiento").css("background-color", "#138D75");
+
     var startTime = Date.now();
 
     if ($(btn).text() == "En desplazamiento") {
@@ -34,9 +36,9 @@ function FbotonOn(btn) {
 
         // Guardar el valor en el localStorage
         localStorage.setItem('id_orden', idOrden);
-
-
+        location.reload();
       }, 1000);
+      
     }
   } else if ($(btn).text() == "En desplazamiento") {
     $(btn).text("Se detuvo").css("background-color", "#B71C1C");
@@ -53,6 +55,7 @@ function FbotonOn(btn) {
 
     // Mostrar el siguiente botón
     $('.guardar').css("display", "block");
+
   }
 }
 

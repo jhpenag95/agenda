@@ -58,23 +58,23 @@ require_once  '../conexion.php';
                             $total_registro = $result_register['total_registros'];
 
                             /* Este código implementa la paginación para la lista de usuarios mostrada en la página. */
-                            $por_pagina = 5;
+                            // $por_pagina = 5;
 
-                            if (empty($_GET['pagina'])) {
-                                $pagina = 1;
-                            } else {
-                                $pagina = $_GET['pagina'];
-                            }
+                            // if (empty($_GET['pagina'])) {
+                            //     $pagina = 1;
+                            // } else {
+                            //     $pagina = $_GET['pagina'];
+                            // }
 
-                            $desde = ($pagina - 1) * $por_pagina;
-                            $total_paginas = ceil($total_registro / $por_pagina);
+                            // $desde = ($pagina - 1) * $por_pagina;
+                            // $total_paginas = ceil($total_registro / $por_pagina);
 
                             //consultar usuario
                             $query = "SELECT u.id_usuario, u.nombre, u.correo, u.telefono, u.nombre_usuario, u.estado, r.nombre_rol, z.nombre_zona, e.Nombre_estado FROM usuarios u
                                                     LEFT JOIN roles r ON r.id_rol  = u.id_rol
                                                     LEFT JOIN zonas z ON z.id_zona = u.id_zona
                                                     LEFT JOIN estado_tarea e ON e.id_estado_tarea = u.id_estado 
-                                                    WHERE u.estado = 1 ORDER BY u.nombre ASC LIMIT $desde,$por_pagina";
+                                                    WHERE u.estado = 1 ORDER BY u.nombre ASC";
 
                             $result = mysqli_query($conexion, $query);
                             if ($result && mysqli_num_rows($result) > 0) {
@@ -111,35 +111,7 @@ require_once  '../conexion.php';
                 </div>
 
                 <!--===============Páginador==============-->
-                <div class="pagination-container">
-                    <ul class="pagination">
-                        <li class="pagination-item <?php if ($pagina <= 1) {
-                                                        echo 'disabled';
-                                                    } ?>">
-                            <a href="<?php if ($pagina <= 1) {
-                                            echo '#';
-                                        } else {
-                                            echo '?pagina=' . ($pagina - 1);
-                                        } ?>">Anterior</a>
-                        </li>
-                        <?php for ($i = 1; $i <= $total_paginas; $i++) { ?>
-                            <li class="pagination-item <?php if ($pagina == $i) {
-                                                            echo 'active';
-                                                        } ?>">
-                                <a href="<?php echo '?pagina=' . $i; ?>"><?php echo $i; ?></a>
-                            </li>
-                        <?php } ?>
-                        <li class="pagination-item <?php if ($pagina >= $total_paginas) {
-                                                        echo 'disabled';
-                                                    } ?>">
-                            <a href="<?php if ($pagina >= $total_paginas) {
-                                            echo '#';
-                                        } else {
-                                            echo '?pagina=' . ($pagina + 1);
-                                        } ?>">Siguiente</a>
-                        </li>
-                    </ul>
-                </div>
+                
             </div>
         </section>
         <!--=====================fin tabla de solicitudes=====================-->
