@@ -269,7 +269,7 @@ require_once  '../conexion.php';
     <script src="../script/agendaFusionador/tiempo_Tarea/peticionAjax_saveTime.js"></script>
 
     <script src="../script/agendaFusionador/tiempo_Traslado/cronometro.js"></script>
-    <script src="../script/agendaFusionador/tiempo_Traslado/cambioEstadoEnProceso.js"></script>
+    <!-- <script src="../script/agendaFusionador/tiempo_Traslado/cambioEstadoEnProceso.js"></script> -->
     <script src="../script/agendaFusionador/tiempo_Traslado/peticionAjax_saveTimeTraslado.js"></script>
 
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
