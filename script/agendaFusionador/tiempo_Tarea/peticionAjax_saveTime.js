@@ -1,35 +1,37 @@
 $(document).ready(function () {
-  // Verificar si se debe ocultar los elementos al cargar la pgina
-  var shouldHideElements = localStorage.getItem('shouldHideElements');
-  if (shouldHideElements === 'true') {
-    $('.btn-desplazamiento').css("display", "none");
-    $('.time').css("display", "none");
-    $('.guardar2').css("display", "none");
-  }
-
   $('.guardar2').click(function (e) {
     e.preventDefault();
 
     // Obtener los datos del localStorage
-    var idUsuario2 = localStorage.getItem('idUsuario2');
-    var startTime2 = localStorage.getItem('startTime2');
-    var nombreDeLaClave2 = localStorage.getItem("id_orden");
+    var idUsuario = localStorage.getItem('idUsuario2');
+    var startTime = parseInt(localStorage.getItem('startTime2'));
+    var lastTime = parseInt(localStorage.getItem('lastTime2'));
+    var nombreDeLaClave = localStorage.getItem("id_orden");
 
     // Obtener el tiempo actual
     //var currentTime = Date.now();
-    var currentTime = localStorage.getItem('lastTime2');
 
     // Calcular el tiempo transcurrido en milisegundos
-    var elapsedTime2 = currentTime - parseInt(startTime2);
+    var elapsedTime = lastTime - startTime;
 
-    // Convertir el tiempo transcurrido a formato HH:MM:SS
-    var tiempoFormatted2 = new Date(elapsedTime2).toISOString().substr(11, 8);
+    // Calcular el número de horas completas
+    var hours = Math.floor(elapsedTime / (1000 * 60 * 60));
+
+    // Calcular el número de minutos completos restantes después de restar las horas
+    var minutes = Math.floor((elapsedTime - (hours * 1000 * 60 * 60)) / (1000 * 60));
+
+    // Calcular el número de segundos completos restantes después de restar las horas y los minutos
+    var seconds = Math.floor((elapsedTime - (hours * 1000 * 60 * 60) - (minutes * 1000 * 60)) / 1000);
+
+    // Formatear el tiempo transcurrido como una cadena de texto en formato HH:MM:SS
+    var tiempoFormatted = hours.toString().padStart(2, '0') + ':' + minutes.toString().padStart(2, '0') + ':' + seconds.toString().padStart(2, '0');
+    
 
     // Crear un objeto de datos para enviar al servidor
     var data = {
-      idUsuario2: idUsuario2,
-      lastTime2: tiempoFormatted2,
-      nombreDeLaClave2: nombreDeLaClave2
+      idUsuario2: idUsuario,
+      tiempoFormatted2: tiempoFormatted,
+      nombreDeLaClave2: nombreDeLaClave
     };
 
     // Enviar la solicitud AJAX al servidor
@@ -39,30 +41,31 @@ $(document).ready(function () {
       data: data,
       success: function (response) {
         // Mostrar el mensaje de éxito con SweetAlert2
-        if (response) {
-          //console.log("Datos guardados");
+        if (response == true) {
           Swal.fire({
-            title: "Tiempo guardado correctamente",
-            icon: "success",
-            confirmButtonText: "Aceptar"
+            position: 'top-end',
+            icon: 'success',
+            title: 'Tiempo guardado correctamente',
+            showConfirmButton: false,
+            timer: 1500
           });
-          //Borrar los datos del localStorage después de 2 segundos
-          //Borrar los datos del localStorage despus de 1 segundos
-          setTimeout(function () {
-            localStorage.removeItem('idUsuario2');
-            localStorage.removeItem('lastTime3');
-            localStorage.removeItem('startTime2');
-            localStorage.removeItem('id_orden');
-
-            //localstorage de Tiempo traslado
-            localStorage.removeItem('buttonState');
-            localStorage.removeItem('shouldHideElements');
-            localStorage.removeItem('buttonState2');
-            localStorage.removeItem('lastTime2');
-
-            location.reload();
-          }, 1000);
         }
+
+        //Borrar los datos del localStorage después de 1 segundos
+        setTimeout(function () {
+          localStorage.removeItem('idUsuario2');
+          localStorage.removeItem('lastTime3');
+          localStorage.removeItem('startTime2');
+          localStorage.removeItem('id_orden');
+
+          //localstorage de Tiempo traslado
+          localStorage.removeItem('buttonState');
+          localStorage.removeItem('shouldHideElements');
+          localStorage.removeItem('buttonState2');
+          localStorage.removeItem('lastTime2');
+
+          location.reload();
+        }, 1000);
       },
       error: function (xhr, status, error) {
         // Manejar el error si ocurre alguno

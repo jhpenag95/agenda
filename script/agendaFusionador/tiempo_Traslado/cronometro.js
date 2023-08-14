@@ -1,7 +1,6 @@
 // Objeto para almacenar los intervalos de tiempo
 var intervalos = {};
 
-
 // Función que se ejecuta al hacer clic en el botón
 function FbotonOn(btn) {
   // Verificar si el texto del botón es "Iniciar desplazamiento"
