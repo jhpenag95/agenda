@@ -39,27 +39,27 @@ if ($result->num_rows > 0) {
 
     try {
         $mail->isSMTP();                                            //Send using SMTP
-        $mail->Host       = '';                     //Set the SMTP server to send through
+        $mail->Host       = 'smtp-mail.outlook.com';                     //Set the SMTP server to send through
         $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
-        $mail->Username   = '';                     //SMTP username
-        $mail->Password   = '';                               //SMTP password
+        $mail->Username   = 'pruebasWebHj@outlook.com';                     //SMTP username
+        $mail->Password   = 'mcf2023**';                               //SMTP password
         $mail->Port       = 587;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
         //Recipients
-        $mail->setFrom('', 'Se te olvido la contrasea?');
+        $mail->setFrom('pruebasWebHj@outlook.com', 'Se te olvido la contrasea?');
         $mail->addAddress($email);     //Add a recipient
 
         //Content
         $mail->isHTML(true);
         $mail->CharSet = 'UTF-8';                                //Set email format to HTML
-        $mail->Subject = 'Recuperación contraseña';
+        $mail->Subject = 'Recuperacin contraseña';
         $mail->Body = '
         <!DOCTYPE html>
             <html>
             <head>
                 <meta charset="utf-8">
                 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                <title>Restablecimiento de contraseña</title>
+                <title>Restablecimiento de contrasea</title>
                 <style>
                 * {
                     box-sizing: border-box;
@@ -126,7 +126,7 @@ if ($result->num_rows > 0) {
                     Hemos recibido una solicitud para restablecer la contraseña de tu cuenta. Para continuar, haz clic en el siguiente botón:
                 </p>
                 <p>
-                     <a href="http://127.0.0.1/agenda/views/actualizarContrasena.php?id=' . $encryptedId . '" class="button">Restablecer contraseña</a>
+                     <a href="https://hjpgproyect.com/views/actualizarContrasena.php?id=' . $encryptedId . '" class="button">Restablecer contraseña</a>
                 </p>
                 <p>
                     Si no has solicitado un restablecimiento de contraseña, puedes ignorar este mensaje.

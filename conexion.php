@@ -11,7 +11,7 @@ if ($conexion ->connect_errno) {
     echo "Falló la conexión a MySQL: (" . $conexion ->connect_errno . ") " . $conexion ->connect_error;
     exit(); // detener el script en caso de falla en la conexión
 }
-// retornar la conexión para su uso en otras partes del código
+// retornar la conexión para su uso en otras partes del cdigo
 return $conexion ;
 
 ?>

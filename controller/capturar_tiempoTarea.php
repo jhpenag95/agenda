@@ -3,7 +3,7 @@ require '../conexion.php';
 
 // Recuperar los datos enviados por AJAX
 $idUsuario = $_POST['idUsuario2'];
-$lastTime = $_POST['lastTime2'];
+$lastTime = $_POST['tiempoFormatted2'];
 $nombreDeLaClave = $_POST['nombreDeLaClave2'];
 
 // Convertir el tiempo a formato HH:MM:SS

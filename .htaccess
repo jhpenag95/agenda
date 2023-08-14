@@ -12,7 +12,7 @@
     Options -Indexes
 
     # Redireccionar a la página de error 404
-    ErrorDocument 404 http://127.0.0.1/agenda/404.php
+    ErrorDocument 404 62.72.0.107/404.php
 </IfModule>
 
 

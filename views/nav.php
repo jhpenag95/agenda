@@ -46,7 +46,7 @@
             <?php } ?>
 
             <?php
-            if ($_SESSION['rol'] == 4) {
+            if ($_SESSION['rol'] == 1 || $_SESSION['rol'] == 4) {
             ?>
               <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Ordenes Fusionador</a>
                 <ul class="dropdown-menu">
@@ -54,20 +54,7 @@
                 </ul>
               </li>
             <?php } ?>
-
-
-            <?php
-            if ($_SESSION['rol'] == 1) {
-            ?>
-              <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Informe Ordenes</a>
-                <ul class="dropdown-menu">
-                  <li> <a class="dropdown-item" href="ordenesActivas">Lista de ordenes Activas</a> </li>
-                  <li> <a class="dropdown-item" href="ordenesProceso">Lista de ordenes proceso</a> </li>
-                </ul>
-              </li>
-            <?php } ?>
           </ul>
-
         </div>
         <div class="col-lg-6">
           <ul class="navbar-nav d-flex justify-content-end">

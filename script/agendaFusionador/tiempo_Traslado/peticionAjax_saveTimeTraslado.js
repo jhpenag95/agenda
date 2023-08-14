@@ -1,5 +1,5 @@
 $(document).ready(function () {
-  // Verificar si se debe ocultar los elementos al cargar la pgina
+  // Verificar si se debe ocultar los elementos al cargar la página
   var shouldHideElements = localStorage.getItem('shouldHideElements');
   if (shouldHideElements === 'true') {
     $('.btn-desplazamiento').css("display", "none");
