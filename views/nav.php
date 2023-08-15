@@ -46,7 +46,7 @@
             <?php } ?>
 
             <?php
-            if ($_SESSION['rol'] == 1 || $_SESSION['rol'] == 4) {
+            if ($_SESSION['rol'] == 4) {
             ?>
               <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Ordenes Fusionador</a>
                 <ul class="dropdown-menu">

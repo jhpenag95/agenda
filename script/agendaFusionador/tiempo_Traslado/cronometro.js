@@ -78,7 +78,7 @@ document.addEventListener("DOMContentLoaded", function () {
     type: 'POST',
     data: data,
     success: function (response) {
-      console.log(response);
+      //console.log(response);
     },
     error: function (xhr, status, error) {
       console.log("Error en la solicitud AJAX:", error);
