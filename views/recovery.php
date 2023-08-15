@@ -46,7 +46,7 @@ if ($result->num_rows > 0) {
         $mail->Port       = 587;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
         //Recipients
-        $mail->setFrom('pruebasWebHj@outlook.com', 'Se te olvido la contrasea?');
+        $mail->setFrom('pruebasWebHj@outlook.com', 'Se te olvido la contraseña?');
         $mail->addAddress($email);     //Add a recipient
 
         //Content
