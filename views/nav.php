@@ -54,6 +54,17 @@
                 </ul>
               </li>
             <?php } ?>
+
+            <?php
+            if ($_SESSION['rol'] == 1 || $_SESSION['rol'] == 2) {
+            ?>
+              <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Ordenes</a>
+                <ul class="dropdown-menu">
+                  <li> <a class="dropdown-item" href="ordenesActivas">Ordenes activas</a></li>
+                  <li> <a class="dropdown-item" href="ordenesenProceso">Ordenes en proceso</a></li>
+                </ul>
+              </li>
+            <?php } ?>
           </ul>
         </div>
         <div class="col-lg-6">

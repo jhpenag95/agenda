@@ -48,7 +48,7 @@ if ($_SESSION['rol'] == 4) {
         <!--fin contenedores datos informativos-->
         <section class="container sectionTable pt-4 pb-4">
             <div class="container my-5">
-                <h1 class="mb-4">Ordenes Activas</h1>
+                <h1 class="mb-4">Ordenes en proceso</h1>
             </div>
             <!--Inicio tabla de solicitudes-->
             <div class="container">
@@ -72,6 +72,7 @@ if ($_SESSION['rol'] == 4) {
                                     <th>Zona</th>
                                     <th>Descripción</th>
                                     <th>Hora de solicitud</th>
+                                    <th>Tiempo</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -97,12 +98,12 @@ if ($_SESSION['rol'] == 4) {
                                 $desde = ($pagina - 1) * $por_pagina;
                                 $total_paginas = ceil($total_registro / $por_pagina);
 
-                                $query = "SELECT ord.N_orden, u1.nombre AS nombre_cableador, u2.nombre AS nombre_fusionador, ord.direccion, z.nombre_zona, ord.descripcion, ord.fecha_registro
+                                $query = "SELECT ord.id_orden, ord.N_orden, u1.nombre AS nombre_cableador, u2.nombre AS nombre_fusionador, ord.direccion, z.nombre_zona, ord.descripcion, ord.fecha_registro
                                             FROM ordenes ord
                                             INNER JOIN usuarios u1 ON u1.id_usuario = ord.id_usuario_cableador
                                             INNER JOIN usuarios u2 ON u2.id_usuario = ord.id_usuario_fusionador 
                                             INNER JOIN zonas z ON z.id_zona = ord.id_zona
-                                            WHERE ord.estado_orden = 1
+                                            WHERE ord.estado_orden = 2
                                             ORDER BY ord.N_orden ASC
                                         LIMIT $desde, $por_pagina";
 
@@ -119,6 +120,7 @@ if ($_SESSION['rol'] == 4) {
                                             <td><?php echo $data['nombre_zona']; ?></td>
                                             <td><?php echo $data['descripcion']; ?></td>
                                             <td><?php echo $data['fecha_registro']; ?></td>
+                                            <td><span class="cronometro" data-orden="<?php echo $data['id_orden']; ?>">00:00:00</span></td>
                                         </tr>
                                 <?php
                                     }
@@ -169,7 +171,9 @@ if ($_SESSION['rol'] == 4) {
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
     <script src="../script/dashboard/exportarTabla.js"></script>
-    <script src="../script/ordenenProceso/reload.js"></script>
+    <script src="../script/ordenenProceso/cronometro.js"></script>
+    <script src="../script/ordenenProceso/ordenenProceso.js"></script>
+    <script src="../script/ordenEnProceso/reload.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     
 </body>

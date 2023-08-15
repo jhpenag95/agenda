@@ -78,7 +78,7 @@ document.addEventListener("DOMContentLoaded", function () {
     type: 'POST',
     data: data,
     success: function (response) {
-      //console.log(response);
+      console.log(response);
     },
     error: function (xhr, status, error) {
       console.log("Error en la solicitud AJAX:", error);
@@ -87,7 +87,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Verificar si los datos existen en el LocalStorage
   if (buttonState && startTime && idUsuario && nombreDeLaClave1) {
-    // Obtener el botón y el cronómetro correspondientes al usuario
+    // Obtener el botón y el cronmetro correspondientes al usuario
     var btn = document.querySelector('button[data-id="' + idUsuario + '"]');
     var cronometro = document.querySelector('span[name="time"][data-id="' + idUsuario + '"]');
 
