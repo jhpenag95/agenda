@@ -120,7 +120,7 @@ if ($_SESSION['rol'] == 4) {
                                             <td><?php echo $data['nombre_zona']; ?></td>
                                             <td><?php echo $data['descripcion']; ?></td>
                                             <td><?php echo $data['fecha_registro']; ?></td>
-                                            <td><span class="cronometro" data-orden="<?php echo $data['id_orden']; ?>">00:00:00</span></td>
+                                            <td><span class="cronometro" id="idOrden" data-orden="<?php echo $data['id_orden']; ?>">00:00:00</span></td>
                                         </tr>
                                 <?php
                                     }
@@ -173,7 +173,8 @@ if ($_SESSION['rol'] == 4) {
     <script src="../script/dashboard/exportarTabla.js"></script>
     <script src="../script/ordenenProceso/cronometro.js"></script>
     <script src="../script/ordenenProceso/ordenenProceso.js"></script>
-    <script src="../script/ordenEnProceso/reload.js"></script>
+    <script src="../script/ordenenProceso/validarOrden.js"></script>
+    <!-- <script src="../script/ordenEnProceso/reload.js"></script> -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     
 </body>
