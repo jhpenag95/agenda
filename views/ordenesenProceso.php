@@ -171,11 +171,11 @@ if ($_SESSION['rol'] == 4) {
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
     <script src="../script/dashboard/exportarTabla.js"></script>
+    <script src="../script/ordenenProceso/reload.js"></script>
     <script src="../script/ordenenProceso/cronometro.js"></script>
     <script src="../script/ordenenProceso/ordenenProceso.js"></script>
     <script src="../script/ordenenProceso/validarOrden.js"></script>
     <script src="../script/ordenenProceso/borrarLocalTorage.js"></script>
-    <script src="../script/ordenEnProceso/reload.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     
 </body>

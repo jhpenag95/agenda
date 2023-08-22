@@ -33,7 +33,7 @@ $(document).ready(function() {
           var responseData = JSON.parse(response);
           // Verificar si la respuesta indica éxito
           if (responseData.status === "success") {
-            console.log("Tiempo actualizado en el servidor para orden " + ordenId + ".");
+            //console.log("Tiempo actualizado en el servidor para orden " + ordenId + ".");
           }
         },
         error: function(error) {            // Función a ejecutar en caso de error
