@@ -55,6 +55,10 @@ if (isset($_REQUEST['busqueda2']) && $_REQUEST['busqueda2'] == '') {
     <?php include "../views/styles.php" ?>
     <link rel="stylesheet" href="../style/dashboard/datosDahsboard.css">
     <link rel="stylesheet" href="../style/global.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
+
+
 
 </head>
 
@@ -64,7 +68,6 @@ if (isset($_REQUEST['busqueda2']) && $_REQUEST['busqueda2'] == '') {
     <!--Fin barra de gavegación-->
     <main>
 
-
         <section class="container sectionTable pt-4 pb-4">
             <div class="container my-5">
                 <h1 class="mb-4">Tabla de solicitudes</h1>
@@ -72,25 +75,12 @@ if (isset($_REQUEST['busqueda2']) && $_REQUEST['busqueda2'] == '') {
             <!--Inicio tabla de solicitudes-->
             <div class="container">
                 <div class="contform">
-
-                    <form action="ver_zonas.php" class="contform_form">
-                        <input type="text" name="busqueda2" class="contform_form--input" placeholder="Buscar zona.." value="<?php echo $busqueda2; ?>">
-                        <button type="submit" class="contform_form--search"><i class="bi bi-search"></i></button>
-                    </form>
                     <a href="dashboard.php" class="btn btn-success">¿Buscar por No. Orden?</a>
                 </div>
 
                 <div class="table-responsive mt-5">
-                    <div class="col-md-4 mb-3 mt-3 d-flex justify-content-start">
-                        <button type="button" class="btn btn-success w-50" onclick="exportTable()">
-                            Exportar a Excel
-                        </button>
-                    </div>
-                    <div class="col-md-12 text-center mt-5">
-                        <span id="loaderFiltro"> </span>
-                    </div>
                     <div class="resultadoFiltro">
-                        <table class="table table-striped table-hover" id="tabla">
+                        <table id="example" class="table table-striped" style="width:100%">
                             <thead>
                                 <tr>
                                     <th>No. orden</th>
@@ -112,7 +102,7 @@ if (isset($_REQUEST['busqueda2']) && $_REQUEST['busqueda2'] == '') {
                                 $total_registro = $result_register['total_registros'];
 
                                 /* Este código implementa la paginación para la lista de usuarios mostrada en la página. */
-                                $por_pagina = 5;
+                                $por_pagina = isset($_GET['por_pagina']) ? $_GET['por_pagina'] : 100;
 
                                 if (empty($_GET['pagina'])) {
                                     $pagina = 1;
@@ -123,17 +113,20 @@ if (isset($_REQUEST['busqueda2']) && $_REQUEST['busqueda2'] == '') {
                                 $desde = ($pagina - 1) * $por_pagina;
                                 $total_paginas = ceil($total_registro / $por_pagina);
 
+                                // Valor por defecto si no se selecciona nada.
+
+                                // Luego, en tu consulta SQL, usa $por_pagina para limitar el número de registros a mostrar.
                                 $query = "SELECT ord.N_orden, u1.nombre AS nombre_cableador, u2.nombre AS nombre_fusionador, ord.direccion, z.nombre_zona, ord.descripcion, ord.fecha_registro, tt.tiempo_tarea, trd.tiempo
-                                            FROM ordenes ord
-                                            INNER JOIN usuarios u1 ON u1.id_usuario = ord.id_usuario_cableador
-                                            INNER JOIN usuarios u2 ON u2.id_usuario = ord.id_usuario_fusionador 
-                                            INNER JOIN zonas z ON z.id_zona = ord.id_zona
-                                            INNER JOIN tiempos_tarea tt ON tt.id_orden = ord.id_orden
-                                            INNER JOIN tiempos_traslado trd ON trd.id_orden = ord.id_orden
-                                            WHERE $where2 AND ord.estado_orden
-                                            GROUP BY ord.N_orden
-                                            ORDER BY ord.N_orden ASC
-                                        LIMIT $desde, $por_pagina";
+                                                FROM ordenes ord
+                                                INNER JOIN usuarios u1 ON u1.id_usuario = ord.id_usuario_cableador
+                                                INNER JOIN usuarios u2 ON u2.id_usuario = ord.id_usuario_fusionador 
+                                                INNER JOIN zonas z ON z.id_zona = ord.id_zona
+                                                INNER JOIN tiempos_tarea tt ON tt.id_orden = ord.id_orden
+                                                INNER JOIN tiempos_traslado trd ON trd.id_orden = ord.id_orden
+                                                WHERE $where2 AND ord.estado_orden
+                                                GROUP BY ord.N_orden
+                                                ORDER BY ord.N_orden ASC
+                                                LIMIT $desde, $por_pagina";
 
                                 $result = mysqli_query($conexion, $query);
 
@@ -151,46 +144,20 @@ if (isset($_REQUEST['busqueda2']) && $_REQUEST['busqueda2'] == '') {
                                             <td><?php echo $data['tiempo_tarea']; ?></td>
                                             <td><?php echo $data['tiempo']; ?></td>
                                         </tr>
-                                <?php
+                                    <?php
                                     }
+                                } else {
+                                    ?>
+                                    <tr>
+                                        <td colspan="9" class="text-center">No se encontraron registros.</td>
+                                    </tr>
+                                <?php
                                 }
                                 ?>
                             </tbody>
-
                         </table>
                     </div>
                 </div>
-            </div>
-            <!--===============Páginador==============-->
-            <div class="pagination-container">
-                <ul class="pagination">
-                    <li class="pagination-item <?php if ($pagina <= 1) {
-                                                    echo 'disabled';
-                                                } ?>">
-                        <a href="<?php if ($pagina <= 1) {
-                                        echo '#';
-                                    } else {
-                                        echo '?pagina=' . ($pagina - 1);
-                                    } ?>">Anterior</a>
-                    </li>
-                    <?php for ($i = 1; $i <= $total_paginas; $i++) { ?>
-                        <li class="pagination-item <?php if ($pagina == $i) {
-                                                        echo 'active';
-                                                    } ?>">
-                            <a href="<?php echo '?pagina=' . $i; ?>"><?php echo $i; ?></a>
-                        </li>
-                    <?php } ?>
-                    <li class="pagination-item <?php if ($pagina >= $total_paginas) {
-                                                    echo 'disabled';
-                                                } ?>">
-                        <a href="<?php if ($pagina >= $total_paginas) {
-                                        echo '#';
-                                    } else {
-                                        echo '?pagina=' . ($pagina + 1);
-                                    } ?>">Siguiente</a>
-                    </li>
-                </ul>
-            </div>
             </div>
         </section>
         <!--fin tabla de solicitudes-->
@@ -203,6 +170,38 @@ if (isset($_REQUEST['busqueda2']) && $_REQUEST['busqueda2'] == '') {
 
     <script src="../script/dashboard/exportarTabla.js"></script>
     <!-- <script src="../script/dashboard/filtrarFecha.js"></script> -->
+
+
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <link href="https://cdn.datatables.net/v/bs5/jszip-3.10.1/dt-1.13.6/b-2.4.2/b-html5-2.4.2/datatables.min.css" rel="stylesheet">
+
+    
+    <script src="https://cdn.datatables.net/v/bs5/jszip-3.10.1/dt-1.13.6/b-2.4.2/b-html5-2.4.2/datatables.min.js"></script>
+
+    <!-- ===============Font Awesome================ -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script>
+        // Inicializa DataTable en tu tabla con el ID 'example'
+        $(document).ready(function() {
+            $('#example').DataTable({
+                
+                language: {
+                    url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json',
+                },
+                dom: "Blfrtip",
+                buttons: [{
+                    extend: 'excelHtml5',
+                    text: "<i class='fa-regular fa-file-excel'></i>",
+                    titleAttr: "Exportar Excel",
+                    className: "btn btn-success"
+                }],
+            });
+        });
+    </script>
 
 </body>
 

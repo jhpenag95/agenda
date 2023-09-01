@@ -18,6 +18,7 @@ include_once '../conexion.php';
 
 $fecha_de = '';
 $fecha_a = '';
+$where = ''; // Inicializar $where
 
 
 if (isset($_REQUEST['fecha_ingreso']) || isset($_REQUEST['fecha_Fin'])) {
@@ -56,7 +57,7 @@ if (!empty($_REQUEST['fecha_ingreso']) && !empty($_REQUEST['fecha_Fin'])) {
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
+
   <title>Dashboard | Agenda</title>
 
   <!-- Estilos CSS -->
@@ -84,8 +85,29 @@ if (!empty($_REQUEST['fecha_ingreso']) && !empty($_REQUEST['fecha_Fin'])) {
               <div class="col">
                 <input type="date" name="fecha_Fin" class="form-control" placeholder="Fecha Final" value="<?php echo $fecha_a; ?>" required>
               </div>
+
+
               <div class="col">
                 <button type="submit" class="btn btn-dark mb-2" id="filtro">Filtrar</button>
+              </div>
+
+              <div class="col">
+                <?php
+                $por_pagina = isset($_GET['por_pagina']) ? $_GET['por_pagina'] : 10;
+                ?>
+                <form action="" method="get" class="formCont">
+                  <label for="por_pagina">Mostrar:</label>
+                  <select name="por_pagina" id="por_pagina" class="formCont-select">
+                    <option value="10" <?php if ($por_pagina == 10) echo 'selected'; ?>>10 Registros</option>
+                    <option value="20" <?php if ($por_pagina == 20) echo 'selected'; ?>>20 Registros</option>
+                    <option value="50" <?php if ($por_pagina == 50) echo 'selected'; ?>>50 Registros</option>
+                    <option value="80" <?php if ($por_pagina == 80) echo 'selected'; ?>>80 Registros</option>
+                    <option value="100" <?php if ($por_pagina == 100) echo 'selected'; ?>>100 Registros</option>
+                    <option value="150" <?php if ($por_pagina == 150) echo 'selected'; ?>>150 Registros</option>
+                    <option value="200" <?php if ($por_pagina == 200) echo 'selected'; ?>>200 Registros</option>
+                  </select>
+                  <button type="submit" class="formCont-btn">Aplicar</button>
+                </form>
               </div>
             </div>
           </form>
@@ -105,6 +127,8 @@ if (!empty($_REQUEST['fecha_ingreso']) && !empty($_REQUEST['fecha_Fin'])) {
           <div class="col-md-12 text-center mt-5">
             <span id="loaderFiltro"> </span>
           </div>
+          <!-- Agrega el select para la cantidad de registros por página -->
+          </form>
           <div class="resultadoFiltro">
             <table class="table table-striped table-hover" id="tabla">
               <thead>
@@ -128,7 +152,7 @@ if (!empty($_REQUEST['fecha_ingreso']) && !empty($_REQUEST['fecha_Fin'])) {
                 $total_registro = $result_register['total_registros'];
 
                 /* Este código implementa la paginación para la lista de usuarios mostrada en la página. */
-                $por_pagina = 5;
+                $por_pagina = isset($_GET['por_pagina']) ? $_GET['por_pagina'] : 10;
 
                 if (empty($_GET['pagina'])) {
                   $pagina = 1;
@@ -166,8 +190,14 @@ if (!empty($_REQUEST['fecha_ingreso']) && !empty($_REQUEST['fecha_Fin'])) {
                       <td><?php echo $data['tiempo_tarea']; ?></td>
                       <td><?php echo $data['tiempo']; ?></td>
                     </tr>
-                <?php
+                  <?php
                   }
+                } else {
+                  ?>
+                  <tr>
+                    <td colspan="9" class="text-center">No se encontraron registros.</td>
+                  </tr>
+                <?php
                 }
                 ?>
               </tbody>

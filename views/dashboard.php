@@ -99,7 +99,7 @@ if ($_SESSION['rol'] == 4) {
                         <!-- Alertas -->
                         <?php if (isset($_SESSION['success'])) : ?>
                             <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                <strong>¡Éxito!</strong> <?php echo $_SESSION['success']; ?>
+                                <strong>xito!</strong> <?php echo $_SESSION['success']; ?>
                             </div>
                             <?php unset($_SESSION['success']); ?>
                         <?php endif; ?>
@@ -193,9 +193,30 @@ if ($_SESSION['rol'] == 4) {
                             Exportar a Excel
                         </button>
                     </div>
+
                     <div class="col-md-12 text-center mt-5">
                         <span id="loaderFiltro"> </span>
                     </div>
+                    <!-- Agrega el select para la cantidad de registros por página -->
+                    <?php
+                    $por_pagina = isset($_GET['por_pagina']) ? $_GET['por_pagina'] : 10;
+                    ?>
+
+                    <form action="" method="get" class="formCont">
+                        <label for="por_pagina">Mostrar:</label>
+                        <select name="por_pagina" id="por_pagina" class="formCont-select">
+                            <option value="10" <?php if ($por_pagina == 10) echo 'selected'; ?>>10 Registros</option>
+                            <option value="20" <?php if ($por_pagina == 20) echo 'selected'; ?>>20 Registros</option>
+                            <option value="50" <?php if ($por_pagina == 50) echo 'selected'; ?>>50 Registros</option>
+                            <option value="80" <?php if ($por_pagina == 80) echo 'selected'; ?>>80 Registros</option>
+                            <option value="100" <?php if ($por_pagina == 100) echo 'selected'; ?>>100 Registros</option>
+                            <option value="150" <?php if ($por_pagina == 150) echo 'selected'; ?>>150 Registros</option>
+                            <option value="200" <?php if ($por_pagina == 200) echo 'selected'; ?>>200 Registros</option>
+                        </select>
+                        <button type="submit" class="formCont-btn">Aplicar</button>
+                    </form>
+
+
                     <div class="resultadoFiltro">
                         <table class="table table-striped table-hover" id="tabla">
                             <thead>
@@ -222,8 +243,9 @@ if ($_SESSION['rol'] == 4) {
                                 mysqli_free_result($sql_register);
 
 
+
                                 /* Este código implementa la paginación para la lista de usuarios mostrada en la página.*/
-                                $por_pagina = 5;
+                                $por_pagina = isset($_GET['por_pagina']) ? $_GET['por_pagina'] : 10;
 
                                 if (empty($_GET['pagina'])) {
                                     $pagina = 1;
@@ -261,8 +283,14 @@ if ($_SESSION['rol'] == 4) {
                                             <td><?php echo $data['tiempo']; ?></td>
                                             <td><?php echo $data['tiempo_tarea']; ?></td>
                                         </tr>
-                                <?php
+                                    <?php
                                     }
+                                } else {
+                                    ?>
+                                    <tr>
+                                        <td colspan="9" class="text-center">No se encontraron registros.</td>
+                                    </tr>
+                                <?php
                                 }
                                 ?>
                             </tbody>
@@ -271,7 +299,7 @@ if ($_SESSION['rol'] == 4) {
                     </div>
                 </div>
             </div>
-            <!--===============Páginador==============-->
+            <!--===============Pginador==============-->
             <div class="pagination-container">
                 <ul class="pagination">
                     <li class="pagination-item <?php if ($pagina <= 1) {
@@ -306,10 +334,8 @@ if ($_SESSION['rol'] == 4) {
     </main>
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <script src="../script/dashboard/exportarTabla.js"></script>
     <script src="../script/dashboard/validacionFormCambiarPass.js"></script>
 
