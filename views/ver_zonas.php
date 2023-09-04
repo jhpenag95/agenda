@@ -177,7 +177,8 @@ if (isset($_REQUEST['busqueda2']) && $_REQUEST['busqueda2'] == '') {
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
     <link href="https://cdn.datatables.net/v/bs5/jszip-3.10.1/dt-1.13.6/b-2.4.2/b-html5-2.4.2/datatables.min.css" rel="stylesheet">
 
-    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
     <script src="https://cdn.datatables.net/v/bs5/jszip-3.10.1/dt-1.13.6/b-2.4.2/b-html5-2.4.2/datatables.min.js"></script>
 
     <!-- ===============Font Awesome================ -->
@@ -188,7 +189,6 @@ if (isset($_REQUEST['busqueda2']) && $_REQUEST['busqueda2'] == '') {
         // Inicializa DataTable en tu tabla con el ID 'example'
         $(document).ready(function() {
             $('#example').DataTable({
-                
                 language: {
                     url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json',
                 },

@@ -38,6 +38,19 @@ if ($_SESSION['rol'] == 4) {
     <link rel="stylesheet" href="../style/dashboard/datosDahsboard.css">
     <link rel="stylesheet" href="../style/global.css">
 
+    <!-- Datepicker -->
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+    <!-- Tabla bulma -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/dataTables.bulma.min.css">
+    <link href="https://cdn.datatables.net/v/bm/jszip-3.10.1/dt-1.13.6/b-2.4.2/b-colvis-2.4.2/b-html5-2.4.2/datatables.min.css" rel="stylesheet">
+
+    <!-- Libreraias y estilos filtro fecha -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" class="css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/datetime/1.5.1/css/dataTables.dateTime.min.css" class="css">
+
+
 </head>
 
 <body>
@@ -155,108 +168,45 @@ if ($_SESSION['rol'] == 4) {
         </section>
 
         <!--fin contenedores datos informativos-->
-        <section class="container sectionTable pt-4 pb-4">
-            <div class="container my-5">
-                <h1 class="mb-4">Tabla de solicitudes</h1>
-                <div class="col-md-12 text-center mt-5">
-                    <form action="filtroFecha.php" method="post" accept-charset="utf-8">
-                        <div class="row">
-                            <div class="col">
-                                <input type="date" name="fecha_ingreso" class="form-control mb-4" placeholder="Fecha de Inicio" required>
-                            </div>
-                            <div class="col">
-                                <input type="date" name="fecha_Fin" class="form-control mb-4" placeholder="Fecha Final" required>
-                            </div>
-                            <div class="col">
-                                <button type="submit" class="btn btn-dark mb-2" id="filtro">Filtrar</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
+        <section class="sectionTable pt-4 pb-4">
             <!--Inicio tabla de solicitudes-->
             <div class="container">
-                <div class="contform">
-                    <form action="ver_orden.php" method="post" class="contform_form">
-                        <input name="busqueda" type="text" class="contform_form--input" placeholder="Buscar orden..">
-                        <button type="submit" class="contform_form--search"><i class="bi bi-search"></i></button>
-                    </form>
-                    <form action="ver_zonas.php" class="contform_form">
-                        <input name="busqueda2" type="text" class="contform_form--input" placeholder="Buscar zona..">
-                        <button type="submit" class="contform_form--search"><i class="bi bi-search"></i></button>
-                    </form>
+                <div class="row">
+                    <div class="col-md-12 mt5">
+                        <h1 class="text-center">Tabla de solicitudes</h1>
+                        <hr>
+                    </div>
                 </div>
+                <tbody>
+                    <tr>
+                        <td>Minimum date:</td>
+                        <td><input type="text" id="min" name="min"></td>
+                    </tr>
+                    <tr>
+                        <td>Maximum date:</td>
+                        <td><input type="text" id="max" name="max"></td>
+                    </tr>
+                </tbody>
+                </table>
 
-                <div class="table-responsive mt-5">
-                    <div class="col-md-4 mb-3 mt-3 d-flex justify-content-start">
-                        <button type="button" class="btn btn-success w-50" onclick="exportTable()">
-                            Exportar a Excel
-                        </button>
-                    </div>
+                <table id="example" class="table is-striped" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>No. orden</th>
+                            <th>Cableador</th>
+                            <th>Fusionador</th>
+                            <th>Dirección</th>
+                            <th>Zona</th>
+                            <th>Descripción</th>
+                            <th>Hora de solicitud</th>
+                            <th>Tiempo traslado</th>
+                            <th>Tiempo de tarea</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
 
-                    <div class="col-md-12 text-center mt-5">
-                        <span id="loaderFiltro"> </span>
-                    </div>
-                    <!-- Agrega el select para la cantidad de registros por página -->
-                    <?php
-                    $por_pagina = isset($_GET['por_pagina']) ? $_GET['por_pagina'] : 10;
-                    ?>
-
-                    <form action="" method="get" class="formCont">
-                        <label for="por_pagina">Mostrar:</label>
-                        <select name="por_pagina" id="por_pagina" class="formCont-select">
-                            <option value="10" <?php if ($por_pagina == 10) echo 'selected'; ?>>10 Registros</option>
-                            <option value="20" <?php if ($por_pagina == 20) echo 'selected'; ?>>20 Registros</option>
-                            <option value="50" <?php if ($por_pagina == 50) echo 'selected'; ?>>50 Registros</option>
-                            <option value="80" <?php if ($por_pagina == 80) echo 'selected'; ?>>80 Registros</option>
-                            <option value="100" <?php if ($por_pagina == 100) echo 'selected'; ?>>100 Registros</option>
-                            <option value="150" <?php if ($por_pagina == 150) echo 'selected'; ?>>150 Registros</option>
-                            <option value="200" <?php if ($por_pagina == 200) echo 'selected'; ?>>200 Registros</option>
-                        </select>
-                        <button type="submit" class="formCont-btn">Aplicar</button>
-                    </form>
-
-
-                    <div class="resultadoFiltro">
-                        <table class="table table-striped table-hover" id="tabla">
-                            <thead>
-                                <tr>
-                                    <th>No. orden</th>
-                                    <th>Cableador</th>
-                                    <th>Fusionador</th>
-                                    <th>Dirección</th>
-                                    <th>Zona</th>
-                                    <th>Descripción</th>
-                                    <th>Hora de solicitud</th>
-                                    <th>Tiempo traslado</th>
-                                    <th>Tiempo de tarea</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php
-                                //Se inicia el Paginador
-                                $sql_register = mysqli_query($conexion, "SELECT COUNT(*) as total_registros 
-                                                                            FROM ordenes");
-
-                                $result_register = mysqli_fetch_array($sql_register);
-                                $total_registro = $result_register['total_registros'];
-                                mysqli_free_result($sql_register);
-
-
-
-                                /* Este código implementa la paginación para la lista de usuarios mostrada en la página.*/
-                                $por_pagina = isset($_GET['por_pagina']) ? $_GET['por_pagina'] : 10;
-
-                                if (empty($_GET['pagina'])) {
-                                    $pagina = 1;
-                                } else {
-                                    $pagina = $_GET['pagina'];
-                                }
-
-                                $desde = ($pagina - 1) * $por_pagina;
-                                $total_paginas = ceil($total_registro / $por_pagina);
-
-                                $query = "SELECT ord.N_orden, u1.nombre AS nombre_cableador, u2.nombre AS nombre_fusionador, ord.direccion, z.nombre_zona, ord.descripcion, ord.fecha_registro, tt.tiempo_tarea, trd.tiempo
+                        $query = "SELECT ord.N_orden, u1.nombre AS nombre_cableador, u2.nombre AS nombre_fusionador, ord.direccion, z.nombre_zona, ord.descripcion, ord.fecha_registro, tt.tiempo_tarea, trd.tiempo
                                             FROM ordenes ord
                                             INNER JOIN usuarios u1 ON u1.id_usuario = ord.id_usuario_cableador
                                             INNER JOIN usuarios u2 ON u2.id_usuario = ord.id_usuario_fusionador 
@@ -264,80 +214,123 @@ if ($_SESSION['rol'] == 4) {
                                             INNER JOIN tiempos_tarea tt ON tt.id_orden = ord.id_orden
                                             INNER JOIN tiempos_traslado trd ON trd.id_orden = ord.id_orden
                                             WHERE ord.estado_orden = 3
-                                            ORDER BY ord.N_orden ASC
-                                        LIMIT $desde, $por_pagina";
+                                            ORDER BY ord.N_orden";
 
-                                $result = mysqli_query($conexion, $query);
+                        $result = mysqli_query($conexion, $query);
 
-                                if ($result && mysqli_num_rows($result) > 0) {
-                                    while ($data = mysqli_fetch_array($result)) {
-                                ?>
-                                        <tr>
-                                            <td><?php echo $data['N_orden']; ?></td>
-                                            <td><?php echo $data['nombre_cableador']; ?></td>
-                                            <td><?php echo $data['nombre_fusionador']; ?></td>
-                                            <td><?php echo $data['direccion']; ?></td>
-                                            <td><?php echo $data['nombre_zona']; ?></td>
-                                            <td><?php echo $data['descripcion']; ?></td>
-                                            <td><?php echo $data['fecha_registro']; ?></td>
-                                            <td><?php echo $data['tiempo']; ?></td>
-                                            <td><?php echo $data['tiempo_tarea']; ?></td>
-                                        </tr>
-                                    <?php
-                                    }
-                                } else {
-                                    ?>
-                                    <tr>
-                                        <td colspan="9" class="text-center">No se encontraron registros.</td>
-                                    </tr>
-                                <?php
-                                }
-                                ?>
-                            </tbody>
-
-                        </table>
-                    </div>
-                </div>
-            </div>
-            <!--===============Pginador==============-->
-            <div class="pagination-container">
-                <ul class="pagination">
-                    <li class="pagination-item <?php if ($pagina <= 1) {
-                                                    echo 'disabled';
-                                                } ?>">
-                        <a href="<?php if ($pagina <= 1) {
-                                        echo '#';
-                                    } else {
-                                        echo '?pagina=' . ($pagina - 1);
-                                    } ?>">Anterior</a>
-                    </li>
-                    <?php for ($i = 1; $i <= $total_paginas; $i++) { ?>
-                        <li class="pagination-item <?php if ($pagina == $i) {
-                                                        echo 'active';
-                                                    } ?>">
-                            <a href="<?php echo '?pagina=' . $i; ?>"><?php echo $i; ?></a>
-                        </li>
-                    <?php } ?>
-                    <li class="pagination-item <?php if ($pagina >= $total_paginas) {
-                                                    echo 'disabled';
-                                                } ?>">
-                        <a href="<?php if ($pagina >= $total_paginas) {
-                                        echo '#';
-                                    } else {
-                                        echo '?pagina=' . ($pagina + 1);
-                                    } ?>">Siguiente</a>
-                    </li>
-                </ul>
+                        if ($result && mysqli_num_rows($result) > 0) {
+                            while ($data = mysqli_fetch_array($result)) {
+                        ?>
+                                <tr>
+                                    <td><?php echo $data['N_orden']; ?></td>
+                                    <td><?php echo $data['nombre_cableador']; ?></td>
+                                    <td><?php echo $data['nombre_fusionador']; ?></td>
+                                    <td><?php echo $data['direccion']; ?></td>
+                                    <td><?php echo $data['nombre_zona']; ?></td>
+                                    <td><?php echo $data['descripcion']; ?></td>
+                                    <td><?php echo $data['fecha_registro']; ?></td>
+                                    <td><?php echo $data['tiempo']; ?></td>
+                                    <td><?php echo $data['tiempo_tarea']; ?></td>
+                                </tr>
+                        <?php
+                            }
+                        } else {
+                        }
+                        ?>
+                    </tbody>
+                </table>
             </div>
         </section>
         <!--fin tabla de solicitudes-->
     </main>
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-    <script src="../script/dashboard/exportarTabla.js"></script>
-    <script src="../script/dashboard/validacionFormCambiarPass.js"></script>
+
+    <!-- Datepicker -->
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="https://cdn.datatables.net/v/bm/jszip-3.10.1/dt-1.13.6/b-2.4.2/b-colvis-2.4.2/b-html5-2.4.2/datatables.min.js"></script>
+
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bulma.min.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.2/moment.min.js"></script> -->
+    <!-- <script src="https://cdn.datatables.net/datetime/1.5.1/js/dataTables.dateTime.min.js"></script> -->
+
+
+
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/dataTables.bulma.min.css">
+    <script src="https://cdn.datatables.net/v/bs5/jszip-3.10.1/dt-1.13.6/b-2.4.2/b-html5-2.4.2/datatables.min.js"></script>
+    <!-- <script src="../script/dashboard/datatable.js"></script> -->
+
+
+    <!-- ===============Font Awesome================ -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
+    <!-- libreraias para busqueda fecha -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.2/moment.min.js"></script>
+    <script src="https://cdn.datatables.net/datetime/1.5.1/js/dataTables.dateTime.min.js"></script>
+
+    <!-- Datepicker -->
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+    <!-- DataTables -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+
+
+    <script>
+        $(document).ready(function() {
+            let minDate, maxDate;
+            let table = $('#example').DataTable({
+                language: {
+                    url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json',
+                },
+                "buttons": [
+                    'copy', 'csv', 'excel', 'pdf', 'print'
+                ],
+            });
+
+            // Custom filtering function
+            $.fn.dataTable.ext.search.push(function(settings, data, dataIndex) {
+                let min = minDate.val();
+                let max = maxDate.val();
+                let date = new Date(data[7]); // Use the correct column index for the date
+
+                if (
+                    (min === '' && max === '') ||
+                    (min === '' && date <= max) ||
+                    (min <= date && max === '') ||
+                    (min <= date && date <= max)
+                ) {
+                    return true;
+                }
+                return false;
+            });
+
+            // Create date inputs
+            minDate = $('#min').datepicker({
+                dateFormat: 'yy-mm-dd',
+                onSelect: function() {
+                    table.draw();
+                }
+            });
+            maxDate = $('#max').datepicker({
+                dateFormat: 'yy-mm-dd',
+                onSelect: function() {
+                    table.draw();
+                }
+            });
+
+            // Refilter the table when date inputs change
+            $('#min, #max').on('change', function() {
+                table.draw();
+            });
+        });
+    </script>
 
 </body>
 

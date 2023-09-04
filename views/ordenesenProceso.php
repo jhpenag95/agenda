@@ -167,16 +167,16 @@ if ($_SESSION['rol'] == 4) {
     </main>
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="../script/dashboard/exportarTabla.js"></script>
-    <script src="../script/ordenenProceso/reload.js"></script>
+    <!-- <script src="../script/ordenenProceso/reload.js"></script> -->
     <script src="../script/ordenenProceso/cronometro.js"></script>
     <script src="../script/ordenenProceso/ordenenProceso.js"></script>
     <script src="../script/ordenenProceso/validarOrden.js"></script>
     <script src="../script/ordenenProceso/borrarLocalTorage.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     
 </body>
 

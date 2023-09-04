@@ -85,29 +85,28 @@ if (!empty($_REQUEST['fecha_ingreso']) && !empty($_REQUEST['fecha_Fin'])) {
               <div class="col">
                 <input type="date" name="fecha_Fin" class="form-control" placeholder="Fecha Final" value="<?php echo $fecha_a; ?>" required>
               </div>
-
+           
 
               <div class="col">
                 <button type="submit" class="btn btn-dark mb-2" id="filtro">Filtrar</button>
               </div>
-
+              <?php
+              $por_pagina = isset($_GET['por_pagina']) ? $_GET['por_pagina'] : 10;
+              ?>
               <div class="col">
-                <?php
-                $por_pagina = isset($_GET['por_pagina']) ? $_GET['por_pagina'] : 10;
-                ?>
-                <form action="" method="get" class="formCont">
-                  <label for="por_pagina">Mostrar:</label>
-                  <select name="por_pagina" id="por_pagina" class="formCont-select">
-                    <option value="10" <?php if ($por_pagina == 10) echo 'selected'; ?>>10 Registros</option>
-                    <option value="20" <?php if ($por_pagina == 20) echo 'selected'; ?>>20 Registros</option>
-                    <option value="50" <?php if ($por_pagina == 50) echo 'selected'; ?>>50 Registros</option>
-                    <option value="80" <?php if ($por_pagina == 80) echo 'selected'; ?>>80 Registros</option>
-                    <option value="100" <?php if ($por_pagina == 100) echo 'selected'; ?>>100 Registros</option>
-                    <option value="150" <?php if ($por_pagina == 150) echo 'selected'; ?>>150 Registros</option>
-                    <option value="200" <?php if ($por_pagina == 200) echo 'selected'; ?>>200 Registros</option>
-                  </select>
-                  <button type="submit" class="formCont-btn">Aplicar</button>
-                </form>
+              <form action="" method="get" class="formCont">
+                        <label for="por_pagina">Mostrar:</label>
+                        <select name="por_pagina" id="por_pagina" class="formCont-select">
+                            <option value="10" <?php if ($por_pagina == 10) echo 'selected'; ?>>10 Registros</option>
+                            <option value="20" <?php if ($por_pagina == 20) echo 'selected'; ?>>20 Registros</option>
+                            <option value="50" <?php if ($por_pagina == 50) echo 'selected'; ?>>50 Registros</option>
+                            <option value="80" <?php if ($por_pagina == 80) echo 'selected'; ?>>80 Registros</option>
+                            <option value="100" <?php if ($por_pagina == 100) echo 'selected'; ?>>100 Registros</option>
+                            <option value="150" <?php if ($por_pagina == 150) echo 'selected'; ?>>150 Registros</option>
+                            <option value="200" <?php if ($por_pagina == 200) echo 'selected'; ?>>200 Registros</option>
+                        </select>
+                        <button type="submit" class="formCont-btn">Aplicar</button>
+                    </form>
               </div>
             </div>
           </form>
