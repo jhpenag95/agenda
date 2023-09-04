@@ -177,16 +177,17 @@ if ($_SESSION['rol'] == 4) {
                         <hr>
                     </div>
                 </div>
-                <tbody>
-                    <tr>
-                        <td>Minimum date:</td>
-                        <td><input type="text" id="min" name="min"></td>
-                    </tr>
-                    <tr>
-                        <td>Maximum date:</td>
-                        <td><input type="text" id="max" name="max"></td>
-                    </tr>
-                </tbody>
+                <table border="0" cellspacing="5" cellpadding="5">
+                    <tbody>
+                        <tr>
+                            <td>Minimum date:</td>
+                            <td><input type="text" id="min" name="min"></td>
+                        </tr>
+                        <tr>
+                            <td>Maximum date:</td>
+                            <td><input type="text" id="max" name="max"></td>
+                        </tr>
+                    </tbody>
                 </table>
 
                 <table id="example" class="table is-striped" style="width:100%">
@@ -284,26 +285,28 @@ if ($_SESSION['rol'] == 4) {
 
     <script>
         $(document).ready(function() {
-            let minDate, maxDate;
-            let table = $('#example').DataTable({
+            $('#example').DataTable({
                 language: {
                     url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json',
                 },
+
                 "buttons": [
                     'copy', 'csv', 'excel', 'pdf', 'print'
                 ],
             });
 
-            // Custom filtering function
-            $.fn.dataTable.ext.search.push(function(settings, data, dataIndex) {
+            let minDate, maxDate;
+
+            // Custom filtering function which will search data in column four between two values
+            DataTable.ext.search.push(function(settings, data, dataIndex) {
                 let min = minDate.val();
                 let max = maxDate.val();
-                let date = new Date(data[7]); // Use the correct column index for the date
+                let date = new Date(data[7]);
 
                 if (
-                    (min === '' && max === '') ||
-                    (min === '' && date <= max) ||
-                    (min <= date && max === '') ||
+                    (min === null && max === null) ||
+                    (min === null && date <= max) ||
+                    (min <= date && max === null) ||
                     (min <= date && date <= max)
                 ) {
                     return true;
@@ -312,22 +315,16 @@ if ($_SESSION['rol'] == 4) {
             });
 
             // Create date inputs
-            minDate = $('#min').datepicker({
-                dateFormat: 'yy-mm-dd',
-                onSelect: function() {
-                    table.draw();
-                }
+            minDate = new DateTime('#min', {
+                format: 'YYYY MMMM Do'
             });
-            maxDate = $('#max').datepicker({
-                dateFormat: 'yy-mm-dd',
-                onSelect: function() {
-                    table.draw();
-                }
+            maxDate = new DateTime('#max', {
+                format: 'YYYY MMMM Do'
             });
 
-            // Refilter the table when date inputs change
-            $('#min, #max').on('change', function() {
-                table.draw();
+            // Refilter the table
+            document.querySelectorAll('#min, #max').forEach((el) => {
+                el.addEventListener('change', () => table.draw());
             });
         });
     </script>
