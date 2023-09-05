@@ -14,6 +14,7 @@ h1 {
 }
 
 
+
 .info .info-cont {
     align-items: center;
     background: white;
@@ -68,61 +69,6 @@ h1 {
 }
 
 
-/*=========Btn buscar ordenes=======*/
-
-.contform {
-    display: flex;
-    justify-content: space-between;
-    height: auto;
-    width: 100%;
-}
-
-.contform_form {
-    display: flex;
-    width: 200px;
-}
-
-.contform_form--input {
-    border-radius: 6px 0px 0px 6px;
-    border: solid 1px #ced4da;
-    height: 36px;
-    outline: none;
-    padding: 8px;
-    width: 100%;
-}
-
-.contform_form--search {
-    border: solid 1px #ced4da;
-    background-color: #0d6efd;
-    border-radius: 0px 6px 6px 0px;
-    color: #fff;
-    cursor: pointer;
-    outline: none;
-    padding: 4px;
-    width: 40px;
-}
-
-
-/* ==========selector de cantidad de registros============= */
-.formCont {
-    display: flex;
-    width: 260px;
-}
-
-
-.formCont .formCont-select {
-    border: solid 1px #a2a2a8 !important;
-    margin: 0px 12px;
-}
-
-
-.formCont .formCont-btn {
-    background: #0d6efd;
-    border: none;
-    border-radius: 4px;
-    color: white;
-    padding: 0px 8px;
-}
 
 
 @media (max-width: 768px) {

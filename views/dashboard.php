@@ -40,6 +40,7 @@ if ($_SESSION['rol'] == 4) {
 
     <!-- Datepicker -->
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
     <!-- Tabla bulma -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
@@ -49,6 +50,14 @@ if ($_SESSION['rol'] == 4) {
     <!-- Libreraias y estilos filtro fecha -->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" class="css">
     <link rel="stylesheet" href="https://cdn.datatables.net/datetime/1.5.1/css/dataTables.dateTime.min.css" class="css">
+
+    <!-- Responsive table-->
+    <link rel="stylesheet" href="https://cdn.datatables.net/rowreorder/1.4.1/css/rowReorder.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.5.0/css/responsive.dataTables.min.css">
+
+    <!-- ===============Font Awesome================ -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
 
 
 </head>
@@ -177,18 +186,17 @@ if ($_SESSION['rol'] == 4) {
                         <hr>
                     </div>
                 </div>
-                <table border="0" cellspacing="5" cellpadding="5">
-                    <tbody>
-                        <tr>
-                            <td>Minimum date:</td>
-                            <td><input type="text" id="min" name="min"></td>
-                        </tr>
-                        <tr>
-                            <td>Maximum date:</td>
-                            <td><input type="text" id="max" name="max"></td>
-                        </tr>
-                    </tbody>
-                </table>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="min" class="form-label">Fecha mínima:</label>
+                        <input type="text" id="min" name="min" class="form-control" placeholder="Seleccione una fecha" readonly>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="max" class="form-label">Fecha máxima:</label>
+                        <input type="text" id="max" name="max" class="form-control" placeholder="Seleccione una fecha" readonly>
+                    </div>
+                </div>
+
 
                 <table id="example" class="table is-striped" style="width:100%">
                     <thead>
@@ -245,89 +253,29 @@ if ($_SESSION['rol'] == 4) {
         <!--fin tabla de solicitudes-->
     </main>
 
-    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <!-- Bootstrap Bundle with Popper -->
     <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 
     <!-- Datepicker -->
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="https://cdn.datatables.net/v/bm/jszip-3.10.1/dt-1.13.6/b-2.4.2/b-colvis-2.4.2/b-html5-2.4.2/datatables.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
-    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <!-- datatable bulma -->
     <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bulma.min.js"></script>
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.2/moment.min.js"></script> -->
-    <!-- <script src="https://cdn.datatables.net/datetime/1.5.1/js/dataTables.dateTime.min.js"></script> -->
-
-
-
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/dataTables.bulma.min.css">
-    <script src="https://cdn.datatables.net/v/bs5/jszip-3.10.1/dt-1.13.6/b-2.4.2/b-html5-2.4.2/datatables.min.js"></script>
-    <!-- <script src="../script/dashboard/datatable.js"></script> -->
-
-
-    <!-- ===============Font Awesome================ -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
 
     <!-- libreraias para busqueda fecha -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.2/moment.min.js"></script>
     <script src="https://cdn.datatables.net/datetime/1.5.1/js/dataTables.dateTime.min.js"></script>
 
-    <!-- Datepicker -->
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <!-- Responsive table-->
+    <script src="https://cdn.datatables.net/rowreorder/1.4.1/js/dataTables.rowReorder.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js"></script>
 
-    <!-- DataTables -->
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
-    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
-
-
-    <script>
-        $(document).ready(function() {
-            let tabke = $('#example').DataTable({
-                language: {
-                    url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json',
-                },
-
-                "buttons": [
-                    'copy', 'csv', 'excel', 'pdf', 'print'
-                ],
-            });
-
-            let minDate, maxDate;
-
-            // Custom filtering function which will search data in column four between two values
-            DataTable.ext.search.push(function(settings, data, dataIndex) {
-                let min = minDate.val();
-                let max = maxDate.val();
-                let date = new Date(data[7]);
-
-                if (
-                    (min === null && max === null) ||
-                    (min === null && date <= max) ||
-                    (min <= date && max === null) ||
-                    (min <= date && date <= max)
-                ) {
-                    return true;
-                }
-                return false;
-            });
-
-            // Create date inputs
-            minDate = new DateTime('#min', {
-                format: 'YYYY MMMM Do'
-            });
-            maxDate = new DateTime('#max', {
-                format: 'YYYY MMMM Do'
-            });
-
-            // Refilter the table
-            document.querySelectorAll('#min, #max').forEach((el) => {
-                el.addEventListener('change', () => table.draw());
-            });
-        });
-    </script>
+    <!-- My script -->
+    <script src="../script/dashboard/datatable.js"></script>
+    <script src="../script/dashboard/validacionFormCambiarPass.js"></script>
 
 </body>
 
