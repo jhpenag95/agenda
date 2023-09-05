@@ -1,56 +1,49 @@
-// Esperar hasta que el documento esté listo antes de ejecutar el código
-$(document).ready(function() {
+// Función para calcular el lapso de tiempo
+function calcularLapso(horaInicio, horaActual) {
+  const inicio = horaInicio.split(":");
+  const actual = horaActual.split(":");
 
-  // Iterar a través de cada elemento con la clase "cronometro"
-  $(".cronometro").each(function() {
-    // Obtener el ID de orden almacenado en el atributo de datos "orden"
-    var ordenId = $(this).data("orden");
-    
-  
-    // Obtener el tiempo de inicio almacenado en el almacenamiento local o usar la hora actual si no existe
-    var startTime = localStorage.getItem(ordenId) || new Date().getTime();
+  const inicioHoras = parseInt(inicio[0]);
+  const inicioMinutos = parseInt(inicio[1]);
+  const inicioSegundos = parseInt(inicio[2]);
 
-    // Definir una función para actualizar el tiempo en el servidor
-    function updateServerTime() {
-      // Obtener el tiempo actual en milisegundos
-      var currentTime = new Date().getTime();
-      // Calcular el tiempo transcurrido en segundos desde el inicio
-      var elapsedTimeInSeconds = Math.floor((currentTime - startTime) / 1000);
+  const actualHoras = parseInt(actual[0]);
+  const actualMinutos = parseInt(actual[1]);
+  const actualSegundos = parseInt(actual[2]);
 
-      // Crear un objeto con los datos de orden y tiempo para enviar al servidor
-      var data = {
-        orden_id: ordenId,
-        tiempo: elapsedTimeInSeconds,
-      };
+  let horas = actualHoras - inicioHoras;
+  let minutos = actualMinutos - inicioMinutos;
+  let segundos = actualSegundos - inicioSegundos;
 
-      // Realizar una solicitud AJAX para actualizar el tiempo en el servidor
-      $.ajax({
-        url: "../views/tiempoProcess.php",  // URL del script PHP que procesará la solicitud
-        type: "POST",                       // Método de la solicitud
-        data: data,                         // Datos a enviar al servidor
-        success: function(response) {       // Función a ejecutar en caso de éxito
-          // Analizar la respuesta JSON del servidor
-          var responseData = JSON.parse(response);
-          // Verificar si la respuesta indica éxito
-          if (responseData.status === "success") {
-            //console.log("Tiempo actualizado en el servidor para orden " + ordenId + ".");
-          }
-        },
-        error: function(error) {            // Función a ejecutar en caso de error
-          console.log("Error al actualizar el tiempo en el servidor para orden " + ordenId + ".", error);
-        },
-      });
-    }
+  if (segundos < 0) {
+      segundos += 60;
+      minutos--;
+  }
 
-    // Ejecutar la función de actualización del servidor cada segundo (1000 milisegundos)
-    setInterval(function() {
-      updateServerTime();
-    }, 1000);
+  if (minutos < 0) {
+      minutos += 60;
+      horas--;
+  }
 
-    
-    // Guardar el tiempo de inicio en el almacenamiento local para futuras referencias
-    localStorage.setItem(ordenId, startTime);
+  if (horas < 0) {
+      horas += 24; // Se asume que el lapso no será mayor a 24 horas
+  }
 
+  return `${horas.toString().padStart(2, '0')}:${minutos.toString().padStart(2, '0')}:${segundos.toString().padStart(2, '0')}`;
+}
 
+// Función para actualizar el cronómetro
+function actualizarCronometro() {
+  const cronometros = document.querySelectorAll(".cronometro");
+  cronometros.forEach(cronometro => {
+      const horaInicio = cronometro.getAttribute("data-inicio");
+      const horaActual = new Date().toLocaleTimeString('en-US', { hour12: false });
+
+      const lapso = calcularLapso(horaInicio, horaActual);
+
+      cronometro.textContent = lapso;
   });
-});
+}
+
+// Actualiza el cronómetro cada segundo
+setInterval(actualizarCronometro, 1000);
