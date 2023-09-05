@@ -29,6 +29,7 @@ body {
     transition: all 1s;
     position: absolute;
     width: 60px;
+    z-index: 1;
 }
 
 .newContrasena:hover {
