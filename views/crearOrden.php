@@ -25,9 +25,29 @@ include '../conexion.php';
     <title>Orden</title>
 
     <!-- Estilos CSS -->
-    <?php include "../views/styles.php" ?>
-    <link rel="stylesheet" href="../style/Ordenes/crearOrdenes.css">
     <link rel="stylesheet" href="../style/global.css">
+    <link rel="stylesheet" href="../style/Ordenes/crearOrdenes.css">
+
+
+    <!-- Datepicker -->
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+    <!-- Tabla bulma -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/dataTables.bulma.min.css">
+    <link href="https://cdn.datatables.net/v/bm/jszip-3.10.1/dt-1.13.6/b-2.4.2/b-colvis-2.4.2/b-html5-2.4.2/datatables.min.css" rel="stylesheet">
+
+    <!-- Libreraias y estilos filtro fecha -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" class="css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/datetime/1.5.1/css/dataTables.dateTime.min.css" class="css">
+
+    <!-- Responsive table-->
+    <link rel="stylesheet" href="https://cdn.datatables.net/rowreorder/1.4.1/css/rowReorder.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.5.0/css/responsive.dataTables.min.css">
+
+    <!-- ===============Font Awesome================ -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 </head>
 
@@ -100,7 +120,6 @@ include '../conexion.php';
                     <?php unset($_SESSION['error']); ?>
                 <?php endif; ?>
             </form>
-
         </section>
 
         <!--Inicio tabla de solicitudes-->
@@ -108,139 +127,73 @@ include '../conexion.php';
             <div class="container my-5 cont-table">
 
                 <h1 class="mb-4">Listado de ordenes creadas</h1>
-                <form action="verOrden.php" class="contBuscar" method="post">
-                    <input name="busqueda" id="busqueda" class="contBuscar-input" type="text" placeholder="Buscar No.Orden">
-                    <button type="submit"><i class="bi bi-search"></i></button>
-                </form>
-                <!-- =========== Alertas buscar orden ===========-->
-                <div class="alertFormBuscar">
-                    <?php if (isset($_SESSION['noExist'])) : ?>
-                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                            <strong>¡Error!</strong> <?php echo $_SESSION['noExist']; ?>
-                        </div>
-                        <?php unset($_SESSION['noExist']); ?>
-                    <?php endif; ?>
-                    <?php if (isset($_SESSION['no'])) : ?>
-                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                            <strong>¡Error!</strong> <?php echo $_SESSION['no']; ?>
-                        </div>
-                        <?php unset($_SESSION['no']); ?>
-                    <?php endif; ?>
-                </div>
-                <div class="table-responsive">
-                    <table class="table table-striped table-hover">
 
-                        <!-- =========== Alertas Ordenes  ===========-->
 
-                        <?php if (isset($_SESSION['okOrden'])) : ?>
-                            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                <strong>¡Éxito!</strong> <?php echo $_SESSION['okOrden']; ?>
-                            </div>
-                            <?php unset($_SESSION['okOrden']); ?>
-                        <?php endif; ?>
+                <!-- =========== Alertas Ordenes  ===========-->
 
-                        <?php if (isset($_SESSION['notOrden'])) : ?>
-                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                <strong>¡Error!</strong> <?php echo $_SESSION['notOrden']; ?>
-                            </div>
-                            <?php unset($_SESSION['notOrden']); ?>
-                        <?php endif; ?>
+                <?php if (isset($_SESSION['okOrden'])) : ?>
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <strong>¡Éxito!</strong> <?php echo $_SESSION['okOrden']; ?>
+                    </div>
+                    <?php unset($_SESSION['okOrden']); ?>
+                <?php endif; ?>
 
-                        <!-- =========== Tabla  ===========-->
+                <?php if (isset($_SESSION['notOrden'])) : ?>
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <strong>¡Error!</strong> <?php echo $_SESSION['notOrden']; ?>
+                    </div>
+                    <?php unset($_SESSION['notOrden']); ?>
+                <?php endif; ?>
 
-                        <thead>
-                            <tr>
-                                <th>No. Orden</th>
-                                <th>Cableador</th>
-                                <th>Zona</th>
-                                <th>Fusionador</th>
-                                <th>Dirección zona</th>
-                                <th>Fecha / Hora solicitud</th>
-                                <th>Acciones</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php
+                <!-- =========== Tabla  ===========-->
 
-                            //Se inicia el Paginador
-                            $sql_register = mysqli_query($conexion, "SELECT COUNT(*) as total_registros FROM ordenes WHERE estado_orden = 1");
-                            $result_register = mysqli_fetch_array($sql_register);
-                            $total_registro = $result_register['total_registros'];
+                <table id="example" class="table is-striped" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>No. Orden</th>
+                            <th>Cableador</th>
+                            <th>Zona</th>
+                            <th>Fusionador</th>
+                            <th>Dirección zona</th>
+                            <th>Fecha / Hora solicitud</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
 
-                            /* Este código implementa la paginación para la lista de usuarios mostrada en la página. */
-                            $por_pagina = 5;
-
-                            if (empty($_GET['pagina'])) {
-                                $pagina = 1;
-                            } else {
-                                $pagina = $_GET['pagina'];
-                            }
-
-                            $desde = ($pagina - 1) * $por_pagina;
-                            $total_paginas = ceil($total_registro / $por_pagina);
-
-                            //consultar ordenes
-                            $query = "SELECT ord.id_orden, ord.N_orden, ord.direccion, ord.descripcion, ord.id_usuario_cableador, ord.id_usuario_fusionador, ord.id_zona, ord.fecha_registro, ord.estado_orden, u_cableador.id_usuario, u_cableador.nombre AS nombre_cableador, u_fusionador.id_usuario, u_fusionador.nombre AS nombre_fusionador, z.id_zona, z.nombre_zona
+                        //consultar ordenes
+                        $query = "SELECT ord.id_orden, ord.N_orden, ord.direccion, ord.descripcion, ord.id_usuario_cableador, ord.id_usuario_fusionador, ord.id_zona, ord.fecha_registro, ord.estado_orden, u_cableador.id_usuario, u_cableador.nombre AS nombre_cableador, u_fusionador.id_usuario, u_fusionador.nombre AS nombre_fusionador, z.id_zona, z.nombre_zona
                                         FROM ordenes ord
                                         LEFT JOIN usuarios u_cableador ON u_cableador.id_usuario = ord.id_usuario_cableador
                                         LEFT JOIN usuarios u_fusionador ON u_fusionador.id_usuario = ord.id_usuario_fusionador
                                         LEFT JOIN zonas z ON z.id_zona = ord.id_zona
                                         LEFT JOIN estado_tarea e ON e.id_estado_tarea = u_cableador.id_estado
                                         WHERE ord.estado_orden = 1 AND u_cableador.id_usuario = " . $_SESSION['idUser'] . "
-                                        ORDER BY ord.id_orden ASC LIMIT $desde,$por_pagina";
+                                        ORDER BY ord.id_orden ASC";
 
-                            $result = mysqli_query($conexion, $query);
+                        $result = mysqli_query($conexion, $query);
 
-                            if ($result && mysqli_num_rows($result) > 0) {
-                                while ($data = mysqli_fetch_array($result)) { ?>
+                        if ($result && mysqli_num_rows($result) > 0) {
+                            while ($data = mysqli_fetch_array($result)) { ?>
 
-                                    <tr>
-                                        <td><?php echo $data['N_orden'] ?></td>
-                                        <td><?php echo $data['nombre_cableador'] ?></td>
-                                        <td><?php echo $data['nombre_zona'] ?></td>
-                                        <td><?php echo $data['nombre_fusionador'] ?></td>
-                                        <td><?php echo $data['direccion'] ?></td>
-                                        <td><?php echo $data['fecha_registro'] ?></td>
-                                        <td><a href="#" class="btn btn-danger" onclick="setOrdenID('<?php echo $data['id_orden']; ?>', '<?php echo $data['N_orden']; ?>')" id="eliminarOrdenesLink" data-bs-toggle="modal" data-bs-target="#eliminarOrdenModal"><i class="bi bi-trash-fill"></i></a></td>
-                                    </tr>
-                            <?php
-                                }
+                                <tr>
+                                    <td><?php echo $data['N_orden'] ?></td>
+                                    <td><?php echo $data['nombre_cableador'] ?></td>
+                                    <td><?php echo $data['nombre_zona'] ?></td>
+                                    <td><?php echo $data['nombre_fusionador'] ?></td>
+                                    <td><?php echo $data['direccion'] ?></td>
+                                    <td><?php echo $data['fecha_registro'] ?></td>
+                                    <td><a href="#" class="btn btn-danger" onclick="setOrdenID('<?php echo $data['id_orden']; ?>', '<?php echo $data['N_orden']; ?>')" id="eliminarOrdenesLink" data-bs-toggle="modal" data-bs-target="#eliminarOrdenModal"><i class="bi bi-trash-fill"></i></a></td>
+                                </tr>
+                        <?php
                             }
-                            ?>
-                        </tbody>
-                    </table>
-                </div>
+                        }
+                        ?>
+                    </tbody>
 
-                <!--===============Páginador==============-->
-                <div class="pagination-container">
-                    <ul class="pagination">
-                        <li class="pagination-item <?php if ($pagina <= 1) {
-                                                        echo 'disabled';
-                                                    } ?>">
-                            <a href="<?php if ($pagina <= 1) {
-                                            echo '#';
-                                        } else {
-                                            echo '?pagina=' . ($pagina - 1);
-                                        } ?>">Anterior</a>
-                        </li>
-                        <?php for ($i = 1; $i <= $total_paginas; $i++) { ?>
-                            <li class="pagination-item <?php if ($pagina == $i) {
-                                                            echo 'active';
-                                                        } ?>">
-                                <a href="<?php echo '?pagina=' . $i; ?>"><?php echo $i; ?></a>
-                            </li>
-                        <?php } ?>
-                        <li class="pagination-item <?php if ($pagina >= $total_paginas) {
-                                                        echo 'disabled';
-                                                    } ?>">
-                            <a href="<?php if ($pagina >= $total_paginas) {
-                                            echo '#';
-                                        } else {
-                                            echo '?pagina=' . ($pagina + 1);
-                                        } ?>">Siguiente</a>
-                        </li>
-                    </ul>
-                </div>
+                </table>
+
                 <!--=====================Modal - Eliminar Orden=====================-->
                 <div class="modal fade" id="eliminarOrdenModal" tabindex="-1" aria-labelledby="eliminarOrdenModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
@@ -332,8 +285,30 @@ include '../conexion.php';
     <!-- Option 1: Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+    <!-- Datepicker -->
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="https://cdn.datatables.net/v/bm/jszip-3.10.1/dt-1.13.6/b-2.4.2/b-colvis-2.4.2/b-html5-2.4.2/datatables.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+    <!-- datatable bulma -->
+    <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bulma.min.js"></script>
+
+    <!-- libreraias para busqueda fecha -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.2/moment.min.js"></script>
+    <script src="https://cdn.datatables.net/datetime/1.5.1/js/dataTables.dateTime.min.js"></script>
+
+    <!-- Responsive table-->
+    <script src="https://cdn.datatables.net/rowreorder/1.4.1/js/dataTables.rowReorder.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js"></script>
+
+
+    <!-- ==========my script====== -->
+    <script src="../script/Orden/datatable.js"></script>
     <script src="../script/Orden/eliminarOrden.js"></script>
-    <!-- <script src="../script/Orden/ocultarFormualrio.js"></script> -->
 
 </body>
 
